@@ -24,6 +24,7 @@ public class Costo {
 
     //Constructor sin parámetros
     public Costo() {
+        super();
     }
 
     //Constructor con todos los parámetros
