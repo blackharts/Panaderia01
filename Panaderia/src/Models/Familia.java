@@ -11,6 +11,6 @@ import Idao.IFamiliaDao;
  *
  * @author kalbl
  */
-public class Familia implements IFamiliaDao{
-    
+public enum Familia {
+    Cereales, Legumbres, Tuberculos, Carnes, Lacteos, Azucares, Grasas, Frutas, Verduras, Condimentos;
 }
