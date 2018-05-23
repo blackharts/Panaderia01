@@ -16,11 +16,7 @@ public class Costo {
     private Integer id = 0;
     private Date fecha;
     private Integer valor_costo = 0;
-    private boolean actual; //Se refiere si el costo actualizado es actual o no...¿Realmente es necesario?
-    private Date fecha_creacion;
-    private Date fecha_modificacion;
-    private Date fecha_eliminacion;
-    private Producto producto;
+    private Producto producto_costo;
 
     //Constructor sin parámetros
     public Costo() {
@@ -28,17 +24,19 @@ public class Costo {
     }
 
     //Constructor con todos los parámetros
-    public Costo(Date fecha, boolean actual, Date fecha_creacion, Date fecha_modificacion, Date fecha_eliminacion, Producto producto) {
+    public Costo(Integer id, Date fecha, Integer valor_costo, Producto producto_costo) {
         this();
+        this.id = id;
         this.fecha = fecha;
-        this.actual = actual;
-        this.fecha_creacion = fecha_creacion;
-        this.fecha_modificacion = fecha_modificacion;
-        this.fecha_eliminacion = fecha_eliminacion;
-        this.producto = producto;
+        this.valor_costo = valor_costo;
+        this.producto_costo = producto_costo;
     }
-    //Setters
 
+    //Setters
+    //Poliformismo ID
+    public void setId(String id) {
+        this.id = Integer.parseInt(id);
+    }
     public void setId(Integer id) {
         this.id = id;
     }
@@ -47,28 +45,16 @@ public class Costo {
         this.fecha = fecha;
     }
 
+    //Poliformismo VALOR COSTO
+    public void setValor_costo(String valor_costo) {
+        this.valor_costo = Integer.parseInt(valor_costo);
+    }
     public void setValor_costo(Integer valor_costo) {
         this.valor_costo = valor_costo;
     }
 
-    public void setActual(boolean actual) {
-        this.actual = actual;
-    }
-
-    public void setFecha_creacion(Date fecha_creacion) {
-        this.fecha_creacion = fecha_creacion;
-    }
-
-    public void setFecha_modificacion(Date fecha_modificacion) {
-        this.fecha_modificacion = fecha_modificacion;
-    }
-
-    public void setFecha_eliminacion(Date fecha_eliminacion) {
-        this.fecha_eliminacion = fecha_eliminacion;
-    }
-
-    public void setProducto(Producto producto) {
-        this.producto = producto;
+    public void setProducto_costo(Producto producto_costo) {
+        this.producto_costo = producto_costo;
     }
 
     //Getters
@@ -84,24 +70,7 @@ public class Costo {
         return valor_costo;
     }
 
-    public boolean isActual() {
-        return actual;
+    public Producto getProducto_costo() {
+        return producto_costo;
     }
-
-    public Date getFecha_creacion() {
-        return fecha_creacion;
-    }
-
-    public Date getFecha_modificacion() {
-        return fecha_modificacion;
-    }
-
-    public Date getFecha_eliminacion() {
-        return fecha_eliminacion;
-    }
-
-    public Producto getProducto() {
-        return producto;
-    }
-
 }
