@@ -24,3 +24,6 @@ hs_err_pid*
 /JavaApplication15/nbproject/private/
 /Panaderia/nbproject/private/
 Panaderia/build.xml
+*.png
+*.properties
+Panaderia/dist/README.TXT

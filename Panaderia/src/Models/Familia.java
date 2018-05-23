@@ -6,11 +6,38 @@
 package Models;
 
 import Idao.IFamiliaDao;
-
 /**
  *
  * @author kalbl
  */
-public enum Familia {
-    Cereales, Legumbres, Tuberculos, Carnes, Lacteos, Azucares, Grasas, Frutas, Verduras, Condimentos;
+public class Familia implements IFamiliaDao{
+    private int id;
+    private String nombre;
+    private Linea lineaproducto;
+
+    public Linea getLineaproducto() {
+        return lineaproducto;
+    }
+
+    public void setLineaproducto(Linea lineaproducto) {
+        this.lineaproducto = lineaproducto;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    
+    
 }
