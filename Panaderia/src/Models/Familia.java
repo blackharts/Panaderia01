@@ -11,6 +11,6 @@ import Idao.IFamiliaDao;
  *
  * @author kalbl
  */
-public class Familia implements IFamiliaDao{
+public class Familia{
     
 }
