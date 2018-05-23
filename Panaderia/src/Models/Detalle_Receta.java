@@ -5,10 +5,12 @@
  */
 package Models;
 
+import Idao.IDetalle_RecetaDao;
+
 /**
  *
  * @author kalbl
  */
-public class Detalle_Receta {
+public class Detalle_Receta implements IDetalle_RecetaDao {
     
 }

@@ -3,16 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Models;
+package Dao;
 
 import Idao.IProductoDao;
+import Models.Producto;
 import java.util.List;
 
 /**
  *
  * @author kalbl
  */
-public class Producto implements IProductoDao{
+public class ProductoDaoImpl implements IProductoDao{
 
     @Override
     public List<Producto> obtenerCosto() {

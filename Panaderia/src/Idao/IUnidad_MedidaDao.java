@@ -3,14 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Models;
-
-import Idao.IFamiliaDao;
+package Idao;
 
 /**
  *
  * @author kalbl
  */
-public class Familia implements IFamiliaDao{
+public interface IUnidad_MedidaDao {
     
 }
