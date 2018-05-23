@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Models;
+package Dao;
 
-import Idao.IFamiliaDao;
+import Idao.IDetalle_RecetaDao;
 
 /**
  *
  * @author kalbl
  */
-public class Familia implements IFamiliaDao{
+public class Detalle_RecetaDaoImpl implements IDetalle_RecetaDao{
     
 }
