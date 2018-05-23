@@ -8,7 +8,7 @@ public class Receta {
     
     private Integer id;
     private Integer producto_id; 
-    private Producto=Producto;
+    private Producto producto;
     
     
 public Receta(){
