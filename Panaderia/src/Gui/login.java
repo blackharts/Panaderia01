@@ -150,7 +150,13 @@ public class Login extends javax.swing.JFrame {
             MenuAdmin main = new MenuAdmin();
             main.show();
             this.hide();
-        } else {
+        } 
+        else if (user.equals("Admin_bodega") && contra.equals("abc")) {
+            MenuAdminBodega main = new MenuAdminBodega();
+            main.show();
+            this.hide(); 
+        }
+        else {
             JOptionPane.showMessageDialog(this, "Error contraseña o nombre de usuarion incorrecto");
         }
     }//GEN-LAST:event_accederActionPerformed
