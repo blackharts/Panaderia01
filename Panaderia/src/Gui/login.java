@@ -156,14 +156,7 @@ public class Login extends javax.swing.JFrame {
             main.show();
             this.hide(); 
         }
-        
-        else if (user.equals("Gerente")&& contra.equals("Gerente")){
-         MenuGerente main = new MenuGerente();
-            main.show();
-            this.hide(); 
-        }
-    
-         else {
+        else {
             JOptionPane.showMessageDialog(this, "Error contraseña o nombre de usuarion incorrecto");
         }
     }//GEN-LAST:event_accederActionPerformed
