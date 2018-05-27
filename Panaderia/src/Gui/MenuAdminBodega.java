@@ -9,12 +9,12 @@ package Gui;
  *
  * @author Alex
  */
-public class AdministradorBodega extends javax.swing.JFrame {
+public class MenuAdminBodega extends javax.swing.JFrame {
 
     /**
      * Creates new form AdministradorBodega
      */
-    public AdministradorBodega() {
+    public MenuAdminBodega() {
         initComponents();
     }
 
@@ -27,6 +27,7 @@ public class AdministradorBodega extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panel = new javax.swing.JDesktopPane();
         menuBar = new javax.swing.JMenuBar();
         adbo_menu = new javax.swing.JMenu();
         adbo_menu_salir = new javax.swing.JMenuItem();
@@ -37,6 +38,17 @@ public class AdministradorBodega extends javax.swing.JFrame {
         aboutMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
+        panel.setLayout(panelLayout);
+        panelLayout.setHorizontalGroup(
+            panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        panelLayout.setVerticalGroup(
+            panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 279, Short.MAX_VALUE)
+        );
 
         adbo_menu.setMnemonic('f');
         adbo_menu.setText("Menu");
@@ -57,6 +69,11 @@ public class AdministradorBodega extends javax.swing.JFrame {
 
         adbo_articulos_ingresarcostos.setMnemonic('t');
         adbo_articulos_ingresarcostos.setText("Ingresar Costos");
+        adbo_articulos_ingresarcostos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                adbo_articulos_ingresarcostosActionPerformed(evt);
+            }
+        });
         adbo_articulos.add(adbo_articulos_ingresarcostos);
 
         menuBar.add(adbo_articulos);
@@ -80,11 +97,11 @@ public class AdministradorBodega extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(panel)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
+            .addComponent(panel)
         );
 
         pack();
@@ -93,6 +110,12 @@ public class AdministradorBodega extends javax.swing.JFrame {
     private void adbo_menu_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adbo_menu_salirActionPerformed
         System.exit(0);
     }//GEN-LAST:event_adbo_menu_salirActionPerformed
+
+    private void adbo_articulos_ingresarcostosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adbo_articulos_ingresarcostosActionPerformed
+        IngresarCostos Ing = new IngresarCostos();
+        this.panel.add(Ing);
+        Ing.show();
+    }//GEN-LAST:event_adbo_articulos_ingresarcostosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -111,20 +134,20 @@ public class AdministradorBodega extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AdministradorBodega.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuAdminBodega.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AdministradorBodega.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuAdminBodega.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AdministradorBodega.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuAdminBodega.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AdministradorBodega.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuAdminBodega.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AdministradorBodega().setVisible(true);
+                new MenuAdminBodega().setVisible(true);
             }
         });
     }
@@ -138,6 +161,7 @@ public class AdministradorBodega extends javax.swing.JFrame {
     private javax.swing.JMenuItem contentsMenuItem;
     private javax.swing.JMenu helpMenu;
     private javax.swing.JMenuBar menuBar;
+    private javax.swing.JDesktopPane panel;
     // End of variables declaration//GEN-END:variables
 
 }
