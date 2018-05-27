@@ -61,6 +61,11 @@ public class MenuGerenteProduc extends javax.swing.JFrame {
 
         copyMenuItem.setMnemonic('y');
         copyMenuItem.setText("Analisis de costo jornada laboral");
+        copyMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                copyMenuItemActionPerformed(evt);
+            }
+        });
         editMenu.add(copyMenuItem);
 
         deleteMenuItem.setMnemonic('d');
@@ -95,10 +100,16 @@ public class MenuGerenteProduc extends javax.swing.JFrame {
     }//GEN-LAST:event_deleteMenuItemActionPerformed
 
     private void cutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cutMenuItemActionPerformed
-        VisualizarCostos vis = new VisualizarCostos();
+        VisualizarCostosPan vis = new VisualizarCostosPan();
         this.panel.add(vis);
         vis.show();
     }//GEN-LAST:event_cutMenuItemActionPerformed
+
+    private void copyMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copyMenuItemActionPerformed
+     VisualizarCostosJornLabor vis = new VisualizarCostosJornLabor();
+        this.panel.add(vis);
+        vis.show();
+    }//GEN-LAST:event_copyMenuItemActionPerformed
 
     /**
      * @param args the command line arguments
