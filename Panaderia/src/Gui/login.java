@@ -158,7 +158,7 @@ public class Login extends javax.swing.JFrame {
         }
         
          else if (user.equals("Gerente") && contra.equals("Gerente")) {
-            MenuGerente main = new MenuGerente();
+            MenuGerenteProduc main = new MenuGerenteProduc();
             main.show();
             this.hide(); 
         }
