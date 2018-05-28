@@ -136,6 +136,11 @@ public class MenuAdmin extends javax.swing.JFrame {
 
         aboutMenuItem.setMnemonic('a');
         aboutMenuItem.setText("Ingreso Producción diaria");
+        aboutMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aboutMenuItemActionPerformed(evt);
+            }
+        });
         helpMenu.add(aboutMenuItem);
 
         menuBar.add(helpMenu);
@@ -183,6 +188,12 @@ public class MenuAdmin extends javax.swing.JFrame {
         this.panel.add(main);
         main.show();
     }//GEN-LAST:event_pasteMenuItemActionPerformed
+
+    private void aboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMenuItemActionPerformed
+        IngresarProdPAn main = new IngresarProdPAn();
+        this.panel.add(main);
+        main.show();
+    }//GEN-LAST:event_aboutMenuItemActionPerformed
 
     /**
      * @param args the command line arguments
