@@ -27,15 +27,118 @@ public class IngresarCostos extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        lb_codigobarra = new javax.swing.JLabel();
+        tf_codigobarra = new javax.swing.JTextField();
+        bt_buscar = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        lb_nombre = new javax.swing.JLabel();
+        tf_nombre = new javax.swing.JTextField();
+        jPanel4 = new javax.swing.JPanel();
+        lb_unimedida = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        lb_marca = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        lb_formato = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        lb_linea = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        lb_familia = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        lb_nuevocosto = new javax.swing.JLabel();
+        tf_nuevocosto = new javax.swing.JTextField();
+        bt_guardar = new javax.swing.JButton();
+        jTextField4 = new javax.swing.JTextField();
+
+        jPanel1.setLayout(new java.awt.GridLayout(1, 3, 10, 0));
+
+        lb_codigobarra.setText("Codigo de Barra");
+        jPanel1.add(lb_codigobarra);
+        jPanel1.add(tf_codigobarra);
+
+        bt_buscar.setText("Buscar");
+        jPanel1.add(bt_buscar);
+
+        jPanel2.setLayout(new java.awt.GridLayout(1, 2, 10, 0));
+
+        lb_nombre.setText("Nombre");
+        jPanel2.add(lb_nombre);
+        jPanel2.add(tf_nombre);
+
+        jPanel4.setLayout(new java.awt.GridLayout(5, 2, 10, 10));
+
+        lb_unimedida.setText("Unidad de Medida");
+        jPanel4.add(lb_unimedida);
+
+        jLabel5.setText("Desconocido");
+        jPanel4.add(jLabel5);
+
+        lb_marca.setText("Marca");
+        jPanel4.add(lb_marca);
+
+        jLabel7.setText("Desconocido");
+        jPanel4.add(jLabel7);
+
+        lb_formato.setText("Formato");
+        jPanel4.add(lb_formato);
+
+        jLabel9.setText("Desconocido");
+        jPanel4.add(jLabel9);
+
+        lb_linea.setText("Linea");
+        jPanel4.add(lb_linea);
+
+        jLabel11.setText("Desconocido");
+        jPanel4.add(jLabel11);
+
+        lb_familia.setText("Familia");
+        jPanel4.add(lb_familia);
+
+        jLabel13.setText("Desconocido");
+        jPanel4.add(jLabel13);
+
+        jPanel5.setLayout(new java.awt.GridLayout(1, 3, 10, 0));
+
+        lb_nuevocosto.setText("Nuevo Costo");
+        jPanel5.add(lb_nuevocosto);
+        jPanel5.add(tf_nuevocosto);
+
+        bt_guardar.setText("Guardar");
+        jPanel5.add(bt_guardar);
+
+        jTextField4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField4.setText("TABLA DE COSTOS(NO SE IMPLEMENTAR)");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(72, Short.MAX_VALUE)
+                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(68, 68, 68))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -43,5 +146,28 @@ public class IngresarCostos extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bt_buscar;
+    private javax.swing.JButton bt_guardar;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JLabel lb_codigobarra;
+    private javax.swing.JLabel lb_familia;
+    private javax.swing.JLabel lb_formato;
+    private javax.swing.JLabel lb_linea;
+    private javax.swing.JLabel lb_marca;
+    private javax.swing.JLabel lb_nombre;
+    private javax.swing.JLabel lb_nuevocosto;
+    private javax.swing.JLabel lb_unimedida;
+    private javax.swing.JTextField tf_codigobarra;
+    private javax.swing.JTextField tf_nombre;
+    private javax.swing.JTextField tf_nuevocosto;
     // End of variables declaration//GEN-END:variables
 }
