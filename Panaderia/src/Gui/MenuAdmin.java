@@ -38,7 +38,6 @@ public class MenuAdmin extends javax.swing.JFrame {
         cutMenuItem1 = new javax.swing.JMenuItem();
         deleteMenuItem4 = new javax.swing.JMenuItem();
         pasteMenuItem = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
         contentsMenuItem = new javax.swing.JMenuItem();
         aboutMenuItem = new javax.swing.JMenuItem();
@@ -121,9 +120,6 @@ public class MenuAdmin extends javax.swing.JFrame {
             }
         });
         fileMenu.add(pasteMenuItem);
-
-        jMenuItem2.setText("Costo");
-        fileMenu.add(jMenuItem2);
 
         menuBar.add(fileMenu);
 
@@ -244,7 +240,6 @@ public class MenuAdmin extends javax.swing.JFrame {
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem openMenuItem;
     public static javax.swing.JDesktopPane panel;
