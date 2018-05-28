@@ -40,7 +40,7 @@ public class MenuAdmin extends javax.swing.JFrame {
         pasteMenuItem = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
-        contentsMenuItem = new javax.swing.JMenuItem();
+        menu_insumos = new javax.swing.JMenuItem();
         aboutMenuItem = new javax.swing.JMenuItem();
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
@@ -115,9 +115,14 @@ public class MenuAdmin extends javax.swing.JFrame {
         helpMenu.setMnemonic('h');
         helpMenu.setText("Receta");
 
-        contentsMenuItem.setMnemonic('c');
-        contentsMenuItem.setText("Insumos");
-        helpMenu.add(contentsMenuItem);
+        menu_insumos.setMnemonic('c');
+        menu_insumos.setText("Insumos");
+        menu_insumos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_insumosActionPerformed(evt);
+            }
+        });
+        helpMenu.add(menu_insumos);
 
         aboutMenuItem.setMnemonic('a');
         aboutMenuItem.setText("Ingreso Producción diaria");
@@ -150,6 +155,12 @@ public class MenuAdmin extends javax.swing.JFrame {
     private void exitMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItem1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_exitMenuItem1ActionPerformed
+
+    private void menu_insumosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_insumosActionPerformed
+        InsumosReceta Ing = new InsumosReceta();
+        this.panel.add(Ing);
+        Ing.show();
+    }//GEN-LAST:event_menu_insumosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -191,7 +202,6 @@ public class MenuAdmin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutMenuItem;
-    private javax.swing.JMenuItem contentsMenuItem;
     private javax.swing.JMenuItem cutMenuItem1;
     private javax.swing.JMenuItem deleteMenuItem4;
     private javax.swing.JMenuItem exitMenuItem1;
@@ -202,6 +212,7 @@ public class MenuAdmin extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuBar menuBar;
+    private javax.swing.JMenuItem menu_insumos;
     private javax.swing.JMenuItem openMenuItem;
     private javax.swing.JDesktopPane panel;
     private javax.swing.JMenuItem pasteMenuItem;
