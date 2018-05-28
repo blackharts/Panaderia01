@@ -97,6 +97,11 @@ public class MenuAdmin extends javax.swing.JFrame {
 
         cutMenuItem1.setMnemonic('t');
         cutMenuItem1.setText("Unidad Medida");
+        cutMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cutMenuItem1ActionPerformed(evt);
+            }
+        });
         fileMenu.add(cutMenuItem1);
 
         deleteMenuItem4.setMnemonic('d');
@@ -150,6 +155,12 @@ public class MenuAdmin extends javax.swing.JFrame {
     private void exitMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItem1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_exitMenuItem1ActionPerformed
+
+    private void cutMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cutMenuItem1ActionPerformed
+        IngresoMedida main = new IngresoMedida();
+            main.show();
+            this.hide();
+    }//GEN-LAST:event_cutMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
