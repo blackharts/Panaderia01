@@ -128,6 +128,11 @@ public class MenuAdmin extends javax.swing.JFrame {
 
         contentsMenuItem.setMnemonic('c');
         contentsMenuItem.setText("Insumos");
+        contentsMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                contentsMenuItemActionPerformed(evt);
+            }
+        });
         helpMenu.add(contentsMenuItem);
 
         aboutMenuItem.setMnemonic('a');
@@ -190,6 +195,12 @@ public class MenuAdmin extends javax.swing.JFrame {
         this.panel.add(main);
         main.show();
     }//GEN-LAST:event_aboutMenuItemActionPerformed
+
+    private void contentsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contentsMenuItemActionPerformed
+        recetapan main = new recetapan();
+        this.panel.add(main);
+        main.show();
+    }//GEN-LAST:event_contentsMenuItemActionPerformed
 
     /**
      * @param args the command line arguments
