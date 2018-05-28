@@ -93,6 +93,11 @@ public class MenuAdmin extends javax.swing.JFrame {
         fileMenu.add(openMenuItem);
 
         jMenuItem1.setText("Linea");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         fileMenu.add(jMenuItem1);
 
         cutMenuItem1.setMnemonic('t');
@@ -110,6 +115,11 @@ public class MenuAdmin extends javax.swing.JFrame {
 
         pasteMenuItem.setMnemonic('p');
         pasteMenuItem.setText("Familia");
+        pasteMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pasteMenuItemActionPerformed(evt);
+            }
+        });
         fileMenu.add(pasteMenuItem);
 
         jMenuItem2.setText("Costo");
@@ -157,10 +167,22 @@ public class MenuAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_exitMenuItem1ActionPerformed
 
     private void cutMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cutMenuItem1ActionPerformed
-        IngresoMedida main = new IngresoMedida();
-            main.show();
-            this.hide();
+        IngresarUnidadMedida main = new IngresarUnidadMedida();
+        this.panel.add(main);
+        main.show();
     }//GEN-LAST:event_cutMenuItem1ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    DescripLinea main = new DescripLinea();
+        this.panel.add(main);
+        main.show();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void pasteMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pasteMenuItemActionPerformed
+      FamiliaArticulo main = new FamiliaArticulo();
+        this.panel.add(main);
+        main.show();
+    }//GEN-LAST:event_pasteMenuItemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -214,7 +236,7 @@ public class MenuAdmin extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem openMenuItem;
-    private javax.swing.JDesktopPane panel;
+    public static javax.swing.JDesktopPane panel;
     private javax.swing.JMenuItem pasteMenuItem;
     // End of variables declaration//GEN-END:variables
 
