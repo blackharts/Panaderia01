@@ -110,6 +110,11 @@ public class MenuAdmin extends javax.swing.JFrame {
 
         deleteMenuItem4.setMnemonic('d');
         deleteMenuItem4.setText("Precio Venta");
+        deleteMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteMenuItem4ActionPerformed(evt);
+            }
+        });
         fileMenu.add(deleteMenuItem4);
 
         pasteMenuItem.setMnemonic('p');
@@ -190,6 +195,12 @@ public class MenuAdmin extends javax.swing.JFrame {
         this.panel.add(main);
         main.show();
     }//GEN-LAST:event_aboutMenuItemActionPerformed
+
+    private void deleteMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteMenuItem4ActionPerformed
+        IngresoPrecioVenta main = new  IngresoPrecioVenta();
+        this.panel.add(main);
+        main.show();
+    }//GEN-LAST:event_deleteMenuItem4ActionPerformed
 
     /**
      * @param args the command line arguments
