@@ -52,6 +52,11 @@ public class IngresarCostos extends javax.swing.JInternalFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
 
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setTitle("Ingreso Costos");
+
         jPanel1.setLayout(new java.awt.GridLayout(1, 3, 10, 0));
 
         lb_codigobarra.setText("Codigo de Barra");

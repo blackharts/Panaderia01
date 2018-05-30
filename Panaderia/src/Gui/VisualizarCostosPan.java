@@ -38,6 +38,11 @@ public class VisualizarCostosPan extends javax.swing.JInternalFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
 
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setTitle("Costo Pan");
+
         jPanel1.setLayout(new java.awt.GridLayout(3, 2, 20, 20));
 
         jLabel1.setText("Fecha Inicial:");
