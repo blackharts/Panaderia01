@@ -13,7 +13,6 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import Model.FamiliaProducto;
-import Model.UnidadMedida;
 import Model.Costos;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -62,11 +61,6 @@ public class ProductoJpaController implements Serializable {
                 familiaProd = em.getReference(familiaProd.getClass(), familiaProd.getIdFamilia());
                 producto.setFamiliaProd(familiaProd);
             }
-            UnidadMedida medidaProducto = producto.getMedidaProducto();
-            if (medidaProducto != null) {
-                medidaProducto = em.getReference(medidaProducto.getClass(), medidaProducto.getIdMedida());
-                producto.setMedidaProducto(medidaProducto);
-            }
             Collection<Costos> attachedCostosCollection = new ArrayList<Costos>();
             for (Costos costosCollectionCostosToAttach : producto.getCostosCollection()) {
                 costosCollectionCostosToAttach = em.getReference(costosCollectionCostosToAttach.getClass(), costosCollectionCostosToAttach.getIdCosto());
@@ -95,10 +89,6 @@ public class ProductoJpaController implements Serializable {
             if (familiaProd != null) {
                 familiaProd.getProductoCollection().add(producto);
                 familiaProd = em.merge(familiaProd);
-            }
-            if (medidaProducto != null) {
-                medidaProducto.getProductoCollection().add(producto);
-                medidaProducto = em.merge(medidaProducto);
             }
             for (Costos costosCollectionCostos : producto.getCostosCollection()) {
                 Producto oldProductoCostoOfCostosCollectionCostos = costosCollectionCostos.getProductoCosto();
@@ -157,8 +147,6 @@ public class ProductoJpaController implements Serializable {
             Producto persistentProducto = em.find(Producto.class, producto.getIdProducto());
             FamiliaProducto familiaProdOld = persistentProducto.getFamiliaProd();
             FamiliaProducto familiaProdNew = producto.getFamiliaProd();
-            UnidadMedida medidaProductoOld = persistentProducto.getMedidaProducto();
-            UnidadMedida medidaProductoNew = producto.getMedidaProducto();
             Collection<Costos> costosCollectionOld = persistentProducto.getCostosCollection();
             Collection<Costos> costosCollectionNew = producto.getCostosCollection();
             Collection<Receta> recetaCollectionOld = persistentProducto.getRecetaCollection();
@@ -170,10 +158,6 @@ public class ProductoJpaController implements Serializable {
             if (familiaProdNew != null) {
                 familiaProdNew = em.getReference(familiaProdNew.getClass(), familiaProdNew.getIdFamilia());
                 producto.setFamiliaProd(familiaProdNew);
-            }
-            if (medidaProductoNew != null) {
-                medidaProductoNew = em.getReference(medidaProductoNew.getClass(), medidaProductoNew.getIdMedida());
-                producto.setMedidaProducto(medidaProductoNew);
             }
             Collection<Costos> attachedCostosCollectionNew = new ArrayList<Costos>();
             for (Costos costosCollectionNewCostosToAttach : costosCollectionNew) {
@@ -211,14 +195,6 @@ public class ProductoJpaController implements Serializable {
             if (familiaProdNew != null && !familiaProdNew.equals(familiaProdOld)) {
                 familiaProdNew.getProductoCollection().add(producto);
                 familiaProdNew = em.merge(familiaProdNew);
-            }
-            if (medidaProductoOld != null && !medidaProductoOld.equals(medidaProductoNew)) {
-                medidaProductoOld.getProductoCollection().remove(producto);
-                medidaProductoOld = em.merge(medidaProductoOld);
-            }
-            if (medidaProductoNew != null && !medidaProductoNew.equals(medidaProductoOld)) {
-                medidaProductoNew.getProductoCollection().add(producto);
-                medidaProductoNew = em.merge(medidaProductoNew);
             }
             for (Costos costosCollectionOldCostos : costosCollectionOld) {
                 if (!costosCollectionNew.contains(costosCollectionOldCostos)) {
@@ -322,11 +298,6 @@ public class ProductoJpaController implements Serializable {
                 familiaProd.getProductoCollection().remove(producto);
                 familiaProd = em.merge(familiaProd);
             }
-            UnidadMedida medidaProducto = producto.getMedidaProducto();
-            if (medidaProducto != null) {
-                medidaProducto.getProductoCollection().remove(producto);
-                medidaProducto = em.merge(medidaProducto);
-            }
             Collection<Costos> costosCollection = producto.getCostosCollection();
             for (Costos costosCollectionCostos : costosCollection) {
                 costosCollectionCostos.setProductoCosto(null);
@@ -401,5 +372,5 @@ public class ProductoJpaController implements Serializable {
             em.close();
         }
     }
-    
+  
 }
