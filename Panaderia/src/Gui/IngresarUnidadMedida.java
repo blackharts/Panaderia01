@@ -5,6 +5,10 @@
  */
 package Gui;
 
+import Control.LineaProductoJpaController;
+import Control.UnidadMedidaJpaController;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author luisa
@@ -35,6 +39,11 @@ public class IngresarUnidadMedida extends javax.swing.JInternalFrame {
         jTextField4 = new javax.swing.JTextField();
 
         jButton1.setText("Guardar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jPanel1.setLayout(new java.awt.GridLayout(2, 2, 30, 30));
 
@@ -72,6 +81,19 @@ public class IngresarUnidadMedida extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String Codigo="";
+        String descripcion="";
+       Codigo=(jTextField3.getText().toString());
+       descripcion=(jTextField4.getText().toString());
+       if(UnidadMedidaJpaController.agregar(Codigo,descripcion)){
+           JOptionPane.showMessageDialog(this,"registro Completo");
+       }
+       else{
+           JOptionPane.showMessageDialog(this,"error :C");
+       }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

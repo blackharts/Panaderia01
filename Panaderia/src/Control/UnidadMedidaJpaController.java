@@ -6,19 +6,16 @@
 package Control;
 
 import Control.exceptions.NonexistentEntityException;
-import Control.exceptions.PreexistingEntityException;
-import java.io.Serializable;
-import javax.persistence.Query;
-import javax.persistence.EntityNotFoundException;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-import Model.Producto;
 import Model.UnidadMedida;
-import java.util.ArrayList;
-import java.util.Collection;
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
+import javax.persistence.EntityNotFoundException;
+import javax.persistence.Persistence;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 /**
  *
@@ -35,36 +32,13 @@ public class UnidadMedidaJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(UnidadMedida unidadMedida) throws PreexistingEntityException, Exception {
-        if (unidadMedida.getProductoCollection() == null) {
-            unidadMedida.setProductoCollection(new ArrayList<Producto>());
-        }
+    public void create(UnidadMedida unidadMedida) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Collection<Producto> attachedProductoCollection = new ArrayList<Producto>();
-            for (Producto productoCollectionProductoToAttach : unidadMedida.getProductoCollection()) {
-                productoCollectionProductoToAttach = em.getReference(productoCollectionProductoToAttach.getClass(), productoCollectionProductoToAttach.getIdProducto());
-                attachedProductoCollection.add(productoCollectionProductoToAttach);
-            }
-            unidadMedida.setProductoCollection(attachedProductoCollection);
             em.persist(unidadMedida);
-            for (Producto productoCollectionProducto : unidadMedida.getProductoCollection()) {
-                UnidadMedida oldMedidaProductoOfProductoCollectionProducto = productoCollectionProducto.getMedidaProducto();
-                productoCollectionProducto.setMedidaProducto(unidadMedida);
-                productoCollectionProducto = em.merge(productoCollectionProducto);
-                if (oldMedidaProductoOfProductoCollectionProducto != null) {
-                    oldMedidaProductoOfProductoCollectionProducto.getProductoCollection().remove(productoCollectionProducto);
-                    oldMedidaProductoOfProductoCollectionProducto = em.merge(oldMedidaProductoOfProductoCollectionProducto);
-                }
-            }
             em.getTransaction().commit();
-        } catch (Exception ex) {
-            if (findUnidadMedida(unidadMedida.getIdMedida()) != null) {
-                throw new PreexistingEntityException("UnidadMedida " + unidadMedida + " already exists.", ex);
-            }
-            throw ex;
         } finally {
             if (em != null) {
                 em.close();
@@ -77,34 +51,7 @@ public class UnidadMedidaJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            UnidadMedida persistentUnidadMedida = em.find(UnidadMedida.class, unidadMedida.getIdMedida());
-            Collection<Producto> productoCollectionOld = persistentUnidadMedida.getProductoCollection();
-            Collection<Producto> productoCollectionNew = unidadMedida.getProductoCollection();
-            Collection<Producto> attachedProductoCollectionNew = new ArrayList<Producto>();
-            for (Producto productoCollectionNewProductoToAttach : productoCollectionNew) {
-                productoCollectionNewProductoToAttach = em.getReference(productoCollectionNewProductoToAttach.getClass(), productoCollectionNewProductoToAttach.getIdProducto());
-                attachedProductoCollectionNew.add(productoCollectionNewProductoToAttach);
-            }
-            productoCollectionNew = attachedProductoCollectionNew;
-            unidadMedida.setProductoCollection(productoCollectionNew);
             unidadMedida = em.merge(unidadMedida);
-            for (Producto productoCollectionOldProducto : productoCollectionOld) {
-                if (!productoCollectionNew.contains(productoCollectionOldProducto)) {
-                    productoCollectionOldProducto.setMedidaProducto(null);
-                    productoCollectionOldProducto = em.merge(productoCollectionOldProducto);
-                }
-            }
-            for (Producto productoCollectionNewProducto : productoCollectionNew) {
-                if (!productoCollectionOld.contains(productoCollectionNewProducto)) {
-                    UnidadMedida oldMedidaProductoOfProductoCollectionNewProducto = productoCollectionNewProducto.getMedidaProducto();
-                    productoCollectionNewProducto.setMedidaProducto(unidadMedida);
-                    productoCollectionNewProducto = em.merge(productoCollectionNewProducto);
-                    if (oldMedidaProductoOfProductoCollectionNewProducto != null && !oldMedidaProductoOfProductoCollectionNewProducto.equals(unidadMedida)) {
-                        oldMedidaProductoOfProductoCollectionNewProducto.getProductoCollection().remove(productoCollectionNewProducto);
-                        oldMedidaProductoOfProductoCollectionNewProducto = em.merge(oldMedidaProductoOfProductoCollectionNewProducto);
-                    }
-                }
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -133,11 +80,6 @@ public class UnidadMedidaJpaController implements Serializable {
                 unidadMedida.getIdMedida();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The unidadMedida with id " + id + " no longer exists.", enfe);
-            }
-            Collection<Producto> productoCollection = unidadMedida.getProductoCollection();
-            for (Producto productoCollectionProducto : productoCollection) {
-                productoCollectionProducto.setMedidaProducto(null);
-                productoCollectionProducto = em.merge(productoCollectionProducto);
             }
             em.remove(unidadMedida);
             em.getTransaction().commit();
@@ -193,5 +135,29 @@ public class UnidadMedidaJpaController implements Serializable {
             em.close();
         }
     }
+   public static boolean agregar(String Codigo,String descripcion){
+    boolean r=true;
+        UnidadMedida len= new UnidadMedida();
+        EntityManagerFactory emf=Persistence.createEntityManagerFactory("PanaderiaPU");
+        EntityManager em=emf.createEntityManager();
+        UnidadMedidaJpaController service =new UnidadMedidaJpaController (emf);
+        em.getTransaction().begin();
+        len.setCodigo(Codigo);
+        len.setDescripcion(descripcion);
+        try{
+            service.create(len);
+            em.getTransaction().commit();
+        }catch(Exception e){
+            System.out.println(e);
+            em.getTransaction().rollback();
+            r=false;
+            return r;
+        }
+        System.out.println("persisted"+len);
+        em.close();
+        emf.close();
+        return r;
+   }
     
+ 
 }

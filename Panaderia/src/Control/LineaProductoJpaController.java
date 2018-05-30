@@ -208,8 +208,7 @@ public class LineaProductoJpaController implements Serializable {
         }
     }
     
-    
-    public static boolean adicionar(String Nombre){
+       public static boolean adicionar(String Nombre){
         boolean r=true;
         LineaProducto len= new LineaProducto();
         EntityManagerFactory emf=Persistence.createEntityManagerFactory("PanaderiaPU");
@@ -229,6 +228,7 @@ public class LineaProductoJpaController implements Serializable {
         System.out.println("persisted"+len);
         em.close();
         emf.close();
-        return r; 
-      }
+        return r;
+    
+}
 }
