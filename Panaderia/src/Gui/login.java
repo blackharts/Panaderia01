@@ -44,7 +44,7 @@ public class Login extends javax.swing.JFrame {
         usuario.setBackground(new java.awt.Color(214, 217, 223));
         usuario.setForeground(new java.awt.Color(68, 73, 75));
         usuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        usuario.setText("Ingrese Usuario");
+        usuario.setText("Administrativo");
         usuario.setBorder(null);
         usuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -56,7 +56,7 @@ public class Login extends javax.swing.JFrame {
         pass.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
         pass.setForeground(new java.awt.Color(68, 73, 75));
         pass.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        pass.setText("..............");
+        pass.setText("abc");
         pass.setBorder(null);
         pass.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         pass.addActionListener(new java.awt.event.ActionListener() {

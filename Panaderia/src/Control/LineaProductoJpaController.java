@@ -20,6 +20,7 @@ import java.util.Collection;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 /**
  *
@@ -207,4 +208,27 @@ public class LineaProductoJpaController implements Serializable {
         }
     }
     
+    
+    public static boolean adicionar(String Nombre){
+        boolean r=true;
+        LineaProducto len= new LineaProducto();
+        EntityManagerFactory emf=Persistence.createEntityManagerFactory("PanaderiaPU");
+        EntityManager em=emf.createEntityManager();
+        LineaProductoJpaController service =new LineaProductoJpaController (emf);
+        em.getTransaction().begin();
+        len.setNombreLinea(Nombre);
+        try{
+            service.create(len);
+            em.getTransaction().commit();
+        }catch(Exception e){
+            System.out.println(e);
+            em.getTransaction().rollback();
+            r=false;
+            return r;
+        }
+        System.out.println("persisted"+len);
+        em.close();
+        emf.close();
+        return r; 
+      }
 }
