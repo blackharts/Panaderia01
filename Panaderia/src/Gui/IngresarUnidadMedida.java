@@ -38,6 +38,11 @@ public class IngresarUnidadMedida extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
 
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setTitle("Unidad de Medida");
+
         jButton1.setText("Guardar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

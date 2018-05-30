@@ -44,6 +44,11 @@ public class IngresarProductos extends javax.swing.JInternalFrame {
         jc_familia = new javax.swing.JComboBox();
         jButton1 = new javax.swing.JButton();
 
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setTitle("Ingresar Productos");
+
         jPanel1.setLayout(new java.awt.GridLayout(7, 2, 10, 10));
 
         jLabel1.setText("Código barra:");

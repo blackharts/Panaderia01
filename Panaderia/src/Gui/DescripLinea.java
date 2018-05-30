@@ -36,6 +36,11 @@ public class DescripLinea extends javax.swing.JInternalFrame {
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setTitle("Linea");
+
         jLabel1.setText("Descripción  Linea");
 
         jButton1.setText("Guardar");
