@@ -46,6 +46,11 @@ public class IngresarProdPAn extends javax.swing.JInternalFrame {
 
         jButton1.setText("jButton1");
 
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setTitle("Ingreso Produccion Diaria");
+
         jPanel1.setLayout(new java.awt.GridLayout(3, 3, 10, 10));
 
         jLabel1.setText("Producto Final");

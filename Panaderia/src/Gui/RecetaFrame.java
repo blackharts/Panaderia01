@@ -43,6 +43,11 @@ public class RecetaFrame extends javax.swing.JInternalFrame {
         jComboBox2 = new javax.swing.JComboBox<>();
         jButton2 = new javax.swing.JButton();
 
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setTitle("Insumos");
+
         jLabel1.setText("Receta");
 
         jLabel2.setText("ProducotFinal");
