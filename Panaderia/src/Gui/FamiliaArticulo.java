@@ -5,6 +5,9 @@
  */
 package Gui;
 
+import Model.Producto;
+import java.util.List;
+
 /**
  *
  * @author yo
@@ -16,6 +19,12 @@ public class FamiliaArticulo extends javax.swing.JInternalFrame {
      */
     public FamiliaArticulo() {
         initComponents();
+        List<Producto> productos = codigo_linea.getResultList(); // se obtienen los productos y almcenan en lista
+        jcombo_codigolinea.removeAllItems();//se limpia el combobox
+        for(Producto p: productos){// se recorre 
+            jcombo_codigolinea.addItem(p.getNombreProducto());//se muestra en el combobox
+           
+        }
     }
 
     /**
@@ -27,9 +36,11 @@ public class FamiliaArticulo extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        entityManager1 = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("PanaderiaPU").createEntityManager();
+        codigo_linea = java.beans.Beans.isDesignTime() ? null : entityManager1.createQuery("select c from LineaProducto c");
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jcombo_codigolinea = new javax.swing.JComboBox<>();
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -43,10 +54,10 @@ public class FamiliaArticulo extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Descripción Familia");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        jcombo_codigolinea.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcombo_codigolinea.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                jcombo_codigolineaActionPerformed(evt);
             }
         });
 
@@ -76,7 +87,7 @@ public class FamiliaArticulo extends javax.swing.JInternalFrame {
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(70, 70, 70)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jComboBox1, 0, 117, Short.MAX_VALUE)
+                            .addComponent(jcombo_codigolinea, 0, 117, Short.MAX_VALUE)
                             .addComponent(jTextField1)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(136, 136, 136)
@@ -91,7 +102,7 @@ public class FamiliaArticulo extends javax.swing.JInternalFrame {
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcombo_codigolinea, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -108,17 +119,19 @@ public class FamiliaArticulo extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void jcombo_codigolineaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcombo_codigolineaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_jcombo_codigolineaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.persistence.Query codigo_linea;
+    private javax.persistence.EntityManager entityManager1;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JComboBox<String> jcombo_codigolinea;
     // End of variables declaration//GEN-END:variables
 }
