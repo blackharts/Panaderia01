@@ -33,7 +33,7 @@ public class RecetaFrame extends javax.swing.JInternalFrame {
         
         
         
-        //tabla_receta.setModel(tm);
+        //tabla_receta.setModel(tm); asi deberia llamarse al tablemodel
     }
 
     /**
