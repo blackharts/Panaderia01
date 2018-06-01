@@ -5,8 +5,10 @@
  */
 package Gui;
 
+import Control.UnidadMedidaJpaController;
 import Model.Producto;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -23,10 +25,10 @@ public class RecetaFrame extends javax.swing.JInternalFrame {
         List<Producto> insumo = ingreso_insumo.getResultList();
         jcombo_prod_final.removeAllItems();//se limpia el combobox
         jcombo_insert_insumos.removeAllItems();
-        for(Producto p: productos){// se recorre 
+        for (Producto p : productos) {// se recorre 
             jcombo_prod_final.addItem(p.getNombreProducto());//se muestra en el combobox    
         }
-        for(Producto e: insumo){
+        for (Producto e : insumo) {
             jcombo_insert_insumos.addItem(e.getNombreProducto());
         }
     }
@@ -45,18 +47,18 @@ public class RecetaFrame extends javax.swing.JInternalFrame {
         ingreso_insumo = java.beans.Beans.isDesignTime() ? null : entityManager1.createQuery("select p from Producto p");
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jcombo_prod_final = new javax.swing.JComboBox<>();
+        jcombo_prod_final = new javax.swing.JComboBox<String>();
         jLabel3 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        bt_guardar = new javax.swing.JButton();
+        tf_unidad_medida = new javax.swing.JTextField();
+        tf_cantidad = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jcombo_insert_insumos = new javax.swing.JComboBox<>();
+        jcombo_insert_insumos = new javax.swing.JComboBox<String>();
         jButton2 = new javax.swing.JButton();
 
         setClosable(true);
@@ -68,7 +70,7 @@ public class RecetaFrame extends javax.swing.JInternalFrame {
 
         jLabel2.setText("ProducotFinal");
 
-        jcombo_prod_final.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcombo_prod_final.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel3.setText("Estado");
 
@@ -78,7 +80,12 @@ public class RecetaFrame extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Cantidad");
 
-        jButton1.setText("Guardar");
+        bt_guardar.setText("Guardar");
+        bt_guardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_guardarActionPerformed(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -93,7 +100,7 @@ public class RecetaFrame extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jcombo_insert_insumos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcombo_insert_insumos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jButton2.setText("Guardar Receta");
 
@@ -126,14 +133,14 @@ public class RecetaFrame extends javax.swing.JInternalFrame {
                                         .addComponent(jLabel5))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(51, 51, 51)
-                                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(tf_unidad_medida, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(56, 56, 56)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel6)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(tf_cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(45, 45, 45)
-                                        .addComponent(jButton1))))))
+                                        .addComponent(bt_guardar))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(39, 39, 39)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -163,9 +170,9 @@ public class RecetaFrame extends javax.swing.JInternalFrame {
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1)
+                    .addComponent(tf_unidad_medida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tf_cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bt_guardar)
                     .addComponent(jcombo_insert_insumos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(38, 38, 38)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -177,11 +184,16 @@ public class RecetaFrame extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void bt_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_guardarActionPerformed
+
+
+    }//GEN-LAST:event_bt_guardarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bt_guardar;
     private javax.persistence.EntityManager entityManager1;
     private javax.persistence.Query ingreso_insumo;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -192,10 +204,10 @@ public class RecetaFrame extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JComboBox<String> jcombo_insert_insumos;
     private javax.swing.JComboBox<String> jcombo_prod_final;
     private javax.persistence.Query producto_final;
+    private javax.swing.JTextField tf_cantidad;
+    private javax.swing.JTextField tf_unidad_medida;
     // End of variables declaration//GEN-END:variables
 }
