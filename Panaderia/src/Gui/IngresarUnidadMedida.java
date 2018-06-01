@@ -88,16 +88,15 @@ public class IngresarUnidadMedida extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String Codigo="";
-        String descripcion="";
-       Codigo=(jTextField3.getText().toString());
-       descripcion=(jTextField4.getText().toString());
-       if(UnidadMedidaJpaController.agregar(Codigo,descripcion)){
-           JOptionPane.showMessageDialog(this,"registro Completo");
-       }
-       else{
-           JOptionPane.showMessageDialog(this,"error :C");
-       }
+        String Codigo = "";
+        String descripcion = "";
+        Codigo = (jTextField3.getText().toString());
+        descripcion = (jTextField4.getText().toString());
+        if (UnidadMedidaJpaController.agregar(Codigo, descripcion)) {
+            JOptionPane.showMessageDialog(this, "Datos ingresados correctamente");
+        } else {
+            JOptionPane.showMessageDialog(this, "Error");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
