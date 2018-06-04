@@ -29,13 +29,10 @@ public class MenuAdminBodega extends javax.swing.JFrame {
 
         panel = new javax.swing.JDesktopPane();
         menuBar = new javax.swing.JMenuBar();
-        adbo_menu = new javax.swing.JMenu();
-        adbo_menu_salir = new javax.swing.JMenuItem();
-        adbo_articulos = new javax.swing.JMenu();
-        adbo_articulos_ingresarcostos = new javax.swing.JMenuItem();
-        helpMenu = new javax.swing.JMenu();
-        contentsMenuItem = new javax.swing.JMenuItem();
-        aboutMenuItem = new javax.swing.JMenuItem();
+        j_menu_bar_1_bodeda = new javax.swing.JMenu();
+        item_menu_salir = new javax.swing.JMenuItem();
+        j_menu_bar_2_bodega = new javax.swing.JMenu();
+        item_menu_costo = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -50,46 +47,33 @@ public class MenuAdminBodega extends javax.swing.JFrame {
             .addGap(0, 279, Short.MAX_VALUE)
         );
 
-        adbo_menu.setMnemonic('f');
-        adbo_menu.setText("Menu");
+        j_menu_bar_1_bodeda.setMnemonic('f');
+        j_menu_bar_1_bodeda.setText("Menu");
 
-        adbo_menu_salir.setMnemonic('x');
-        adbo_menu_salir.setText("Salir");
-        adbo_menu_salir.addActionListener(new java.awt.event.ActionListener() {
+        item_menu_salir.setMnemonic('x');
+        item_menu_salir.setText("Salir");
+        item_menu_salir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                adbo_menu_salirActionPerformed(evt);
+                item_menu_salirActionPerformed(evt);
             }
         });
-        adbo_menu.add(adbo_menu_salir);
+        j_menu_bar_1_bodeda.add(item_menu_salir);
 
-        menuBar.add(adbo_menu);
+        menuBar.add(j_menu_bar_1_bodeda);
 
-        adbo_articulos.setMnemonic('e');
-        adbo_articulos.setText("Articulos");
+        j_menu_bar_2_bodega.setMnemonic('e');
+        j_menu_bar_2_bodega.setText("Articulos");
 
-        adbo_articulos_ingresarcostos.setMnemonic('t');
-        adbo_articulos_ingresarcostos.setText("Ingresar Costos");
-        adbo_articulos_ingresarcostos.addActionListener(new java.awt.event.ActionListener() {
+        item_menu_costo.setMnemonic('t');
+        item_menu_costo.setText("Ingresar Costos");
+        item_menu_costo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                adbo_articulos_ingresarcostosActionPerformed(evt);
+                item_menu_costoActionPerformed(evt);
             }
         });
-        adbo_articulos.add(adbo_articulos_ingresarcostos);
+        j_menu_bar_2_bodega.add(item_menu_costo);
 
-        menuBar.add(adbo_articulos);
-
-        helpMenu.setMnemonic('h');
-        helpMenu.setText("Help");
-
-        contentsMenuItem.setMnemonic('c');
-        contentsMenuItem.setText("Contents");
-        helpMenu.add(contentsMenuItem);
-
-        aboutMenuItem.setMnemonic('a');
-        aboutMenuItem.setText("About");
-        helpMenu.add(aboutMenuItem);
-
-        menuBar.add(helpMenu);
+        menuBar.add(j_menu_bar_2_bodega);
 
         setJMenuBar(menuBar);
 
@@ -107,15 +91,15 @@ public class MenuAdminBodega extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void adbo_menu_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adbo_menu_salirActionPerformed
+    private void item_menu_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_menu_salirActionPerformed
         System.exit(0);
-    }//GEN-LAST:event_adbo_menu_salirActionPerformed
+    }//GEN-LAST:event_item_menu_salirActionPerformed
 
-    private void adbo_articulos_ingresarcostosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adbo_articulos_ingresarcostosActionPerformed
+    private void item_menu_costoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_menu_costoActionPerformed
         IngresarCostos Ing = new IngresarCostos();
         this.panel.add(Ing);
         Ing.show();
-    }//GEN-LAST:event_adbo_articulos_ingresarcostosActionPerformed
+    }//GEN-LAST:event_item_menu_costoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -153,13 +137,10 @@ public class MenuAdminBodega extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem aboutMenuItem;
-    private javax.swing.JMenu adbo_articulos;
-    private javax.swing.JMenuItem adbo_articulos_ingresarcostos;
-    private javax.swing.JMenu adbo_menu;
-    private javax.swing.JMenuItem adbo_menu_salir;
-    private javax.swing.JMenuItem contentsMenuItem;
-    private javax.swing.JMenu helpMenu;
+    private javax.swing.JMenuItem item_menu_costo;
+    private javax.swing.JMenuItem item_menu_salir;
+    private javax.swing.JMenu j_menu_bar_1_bodeda;
+    private javax.swing.JMenu j_menu_bar_2_bodega;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JDesktopPane panel;
     // End of variables declaration//GEN-END:variables

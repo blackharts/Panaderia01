@@ -28,13 +28,13 @@ public class VisualizarCostosJornLabor extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jToggleButton1 = new javax.swing.JToggleButton();
+        jl_FechaInicio = new javax.swing.JLabel();
+        jt_FechaInicio_jornada = new javax.swing.JTextField();
+        jl_FechaFinal = new javax.swing.JLabel();
+        jt_FechaFinal_jornada = new javax.swing.JTextField();
+        bt_MostrarReporte = new javax.swing.JToggleButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jt_tabla_CostosJornadaLaboral = new javax.swing.JTable();
 
         setClosable(true);
         setIconifiable(true);
@@ -43,22 +43,28 @@ public class VisualizarCostosJornLabor extends javax.swing.JInternalFrame {
 
         jPanel1.setLayout(new java.awt.GridLayout(2, 2, 20, 20));
 
-        jLabel1.setText("Fecha Inicial:");
-        jPanel1.add(jLabel1);
-        jPanel1.add(jTextField1);
+        jl_FechaInicio.setText("Fecha Inicial:");
+        jPanel1.add(jl_FechaInicio);
 
-        jLabel2.setText("Fecha Final:");
-        jPanel1.add(jLabel2);
-        jPanel1.add(jTextField2);
-
-        jToggleButton1.setText("Mostrar reporte");
-        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+        jt_FechaInicio_jornada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton1ActionPerformed(evt);
+                jt_FechaInicio_jornadaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jt_FechaInicio_jornada);
+
+        jl_FechaFinal.setText("Fecha Final:");
+        jPanel1.add(jl_FechaFinal);
+        jPanel1.add(jt_FechaFinal_jornada);
+
+        bt_MostrarReporte.setText("Mostrar reporte");
+        bt_MostrarReporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_MostrarReporteActionPerformed(evt);
             }
         });
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jt_tabla_CostosJornadaLaboral.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -77,7 +83,7 @@ public class VisualizarCostosJornLabor extends javax.swing.JInternalFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(jt_tabla_CostosJornadaLaboral);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -94,7 +100,7 @@ public class VisualizarCostosJornLabor extends javax.swing.JInternalFrame {
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(157, 157, 157)
-                        .addComponent(jToggleButton1)))
+                        .addComponent(bt_MostrarReporte)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -103,7 +109,7 @@ public class VisualizarCostosJornLabor extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16)
-                .addComponent(jToggleButton1)
+                .addComponent(bt_MostrarReporte)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(26, Short.MAX_VALUE))
@@ -112,19 +118,23 @@ public class VisualizarCostosJornLabor extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+    private void bt_MostrarReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_MostrarReporteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton1ActionPerformed
+    }//GEN-LAST:event_bt_MostrarReporteActionPerformed
+
+    private void jt_FechaInicio_jornadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jt_FechaInicio_jornadaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jt_FechaInicio_jornadaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JToggleButton bt_MostrarReporte;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JLabel jl_FechaFinal;
+    private javax.swing.JLabel jl_FechaInicio;
+    private javax.swing.JTextField jt_FechaFinal_jornada;
+    private javax.swing.JTextField jt_FechaInicio_jornada;
+    private javax.swing.JTable jt_tabla_CostosJornadaLaboral;
     // End of variables declaration//GEN-END:variables
 }

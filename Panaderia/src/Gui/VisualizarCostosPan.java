@@ -28,15 +28,15 @@ public class VisualizarCostosPan extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        jl_FechaInicio = new javax.swing.JLabel();
+        jt_FechaInicio_CostoPan = new javax.swing.JTextField();
+        jl_FechaFinal = new javax.swing.JLabel();
+        jt_FechaFinal_CostoPan = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox();
         jToggleButton1 = new javax.swing.JToggleButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jt_tabla_CostoPan = new javax.swing.JTable();
 
         setClosable(true);
         setIconifiable(true);
@@ -45,23 +45,28 @@ public class VisualizarCostosPan extends javax.swing.JInternalFrame {
 
         jPanel1.setLayout(new java.awt.GridLayout(3, 2, 20, 20));
 
-        jLabel1.setText("Fecha Inicial:");
-        jPanel1.add(jLabel1);
-        jPanel1.add(jTextField1);
+        jl_FechaInicio.setText("Fecha Inicial:");
+        jPanel1.add(jl_FechaInicio);
+        jPanel1.add(jt_FechaInicio_CostoPan);
 
-        jLabel2.setText("Fecha Final:");
-        jPanel1.add(jLabel2);
-        jPanel1.add(jTextField2);
+        jl_FechaFinal.setText("Fecha Final:");
+        jPanel1.add(jl_FechaFinal);
+        jPanel1.add(jt_FechaFinal_CostoPan);
 
         jLabel3.setText("Tipo pan:");
         jPanel1.add(jLabel3);
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jComboBox1);
 
         jToggleButton1.setText("Mostrar reporte");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jt_tabla_CostoPan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -80,7 +85,7 @@ public class VisualizarCostosPan extends javax.swing.JInternalFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(jt_tabla_CostoPan);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -114,17 +119,21 @@ public class VisualizarCostosPan extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JLabel jl_FechaFinal;
+    private javax.swing.JLabel jl_FechaInicio;
+    private javax.swing.JTextField jt_FechaFinal_CostoPan;
+    private javax.swing.JTextField jt_FechaInicio_CostoPan;
+    private javax.swing.JTable jt_tabla_CostoPan;
     // End of variables declaration//GEN-END:variables
 }

@@ -29,9 +29,9 @@ public class MenuGerenteProduc extends javax.swing.JFrame {
 
         panel = new javax.swing.JDesktopPane();
         menuBar = new javax.swing.JMenuBar();
-        editMenu = new javax.swing.JMenu();
-        cutMenuItem = new javax.swing.JMenuItem();
-        copyMenuItem = new javax.swing.JMenuItem();
+        j_menu_bar_1_gerente = new javax.swing.JMenu();
+        item_menu_costoPan = new javax.swing.JMenuItem();
+        item_menu_salir = new javax.swing.JMenuItem();
         deleteMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -47,26 +47,26 @@ public class MenuGerenteProduc extends javax.swing.JFrame {
             .addGap(0, 279, Short.MAX_VALUE)
         );
 
-        editMenu.setMnemonic('e');
-        editMenu.setText("Visualizar");
+        j_menu_bar_1_gerente.setMnemonic('e');
+        j_menu_bar_1_gerente.setText("Visualizar");
 
-        cutMenuItem.setMnemonic('t');
-        cutMenuItem.setText("Analisis de costo pan");
-        cutMenuItem.addActionListener(new java.awt.event.ActionListener() {
+        item_menu_costoPan.setMnemonic('t');
+        item_menu_costoPan.setText("Analisis de costo pan");
+        item_menu_costoPan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cutMenuItemActionPerformed(evt);
+                item_menu_costoPanActionPerformed(evt);
             }
         });
-        editMenu.add(cutMenuItem);
+        j_menu_bar_1_gerente.add(item_menu_costoPan);
 
-        copyMenuItem.setMnemonic('y');
-        copyMenuItem.setText("Analisis de costo jornada laboral");
-        copyMenuItem.addActionListener(new java.awt.event.ActionListener() {
+        item_menu_salir.setMnemonic('y');
+        item_menu_salir.setText("Analisis de costo jornada laboral");
+        item_menu_salir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                copyMenuItemActionPerformed(evt);
+                item_menu_salirActionPerformed(evt);
             }
         });
-        editMenu.add(copyMenuItem);
+        j_menu_bar_1_gerente.add(item_menu_salir);
 
         deleteMenuItem.setMnemonic('d');
         deleteMenuItem.setText("Salir");
@@ -75,9 +75,9 @@ public class MenuGerenteProduc extends javax.swing.JFrame {
                 deleteMenuItemActionPerformed(evt);
             }
         });
-        editMenu.add(deleteMenuItem);
+        j_menu_bar_1_gerente.add(deleteMenuItem);
 
-        menuBar.add(editMenu);
+        menuBar.add(j_menu_bar_1_gerente);
 
         setJMenuBar(menuBar);
 
@@ -99,17 +99,17 @@ public class MenuGerenteProduc extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_deleteMenuItemActionPerformed
 
-    private void cutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cutMenuItemActionPerformed
+    private void item_menu_costoPanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_menu_costoPanActionPerformed
         VisualizarCostosPan vis = new VisualizarCostosPan();
         this.panel.add(vis);
         vis.show();
-    }//GEN-LAST:event_cutMenuItemActionPerformed
+    }//GEN-LAST:event_item_menu_costoPanActionPerformed
 
-    private void copyMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copyMenuItemActionPerformed
+    private void item_menu_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_menu_salirActionPerformed
      VisualizarCostosJornLabor vis = new VisualizarCostosJornLabor();
         this.panel.add(vis);
         vis.show();
-    }//GEN-LAST:event_copyMenuItemActionPerformed
+    }//GEN-LAST:event_item_menu_salirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -147,10 +147,10 @@ public class MenuGerenteProduc extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem copyMenuItem;
-    private javax.swing.JMenuItem cutMenuItem;
     private javax.swing.JMenuItem deleteMenuItem;
-    private javax.swing.JMenu editMenu;
+    private javax.swing.JMenuItem item_menu_costoPan;
+    private javax.swing.JMenuItem item_menu_salir;
+    private javax.swing.JMenu j_menu_bar_1_gerente;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JDesktopPane panel;
     // End of variables declaration//GEN-END:variables
