@@ -30,15 +30,15 @@ public class MenuAdmin extends javax.swing.JFrame {
         jDesktopPane1 = new javax.swing.JDesktopPane();
         panel = new javax.swing.JDesktopPane();
         menuBar = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        exitMenuItem1 = new javax.swing.JMenuItem();
-        fileMenu = new javax.swing.JMenu();
-        openMenuItem = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        cutMenuItem1 = new javax.swing.JMenuItem();
-        deleteMenuItem4 = new javax.swing.JMenuItem();
-        pasteMenuItem = new javax.swing.JMenuItem();
-        helpMenu = new javax.swing.JMenu();
+        j_menu_bar_1_administrador = new javax.swing.JMenu();
+        item_menu_salir = new javax.swing.JMenuItem();
+        j_menu_bar_2_administrador = new javax.swing.JMenu();
+        item_menu_producto = new javax.swing.JMenuItem();
+        item_menu_linea = new javax.swing.JMenuItem();
+        item_menu_medida = new javax.swing.JMenuItem();
+        item_menu_venta = new javax.swing.JMenuItem();
+        item_menu_familia = new javax.swing.JMenuItem();
+        j_menu_bar_3_administrador = new javax.swing.JMenu();
         contentsMenuItem = new javax.swing.JMenuItem();
         aboutMenuItem = new javax.swing.JMenuItem();
 
@@ -66,70 +66,70 @@ public class MenuAdmin extends javax.swing.JFrame {
             .addGap(0, 279, Short.MAX_VALUE)
         );
 
-        jMenu1.setText("Menu");
+        j_menu_bar_1_administrador.setText("Menu");
 
-        exitMenuItem1.setMnemonic('x');
-        exitMenuItem1.setText("Exit");
-        exitMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        item_menu_salir.setMnemonic('x');
+        item_menu_salir.setText("Salir");
+        item_menu_salir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                exitMenuItem1ActionPerformed(evt);
+                item_menu_salirActionPerformed(evt);
             }
         });
-        jMenu1.add(exitMenuItem1);
+        j_menu_bar_1_administrador.add(item_menu_salir);
 
-        menuBar.add(jMenu1);
+        menuBar.add(j_menu_bar_1_administrador);
 
-        fileMenu.setMnemonic('f');
-        fileMenu.setText("Articulos");
+        j_menu_bar_2_administrador.setMnemonic('f');
+        j_menu_bar_2_administrador.setText("Articulos");
 
-        openMenuItem.setMnemonic('o');
-        openMenuItem.setText("Ingresar Producto");
-        openMenuItem.addActionListener(new java.awt.event.ActionListener() {
+        item_menu_producto.setMnemonic('o');
+        item_menu_producto.setText("Ingresar Producto");
+        item_menu_producto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                openMenuItemActionPerformed(evt);
+                item_menu_productoActionPerformed(evt);
             }
         });
-        fileMenu.add(openMenuItem);
+        j_menu_bar_2_administrador.add(item_menu_producto);
 
-        jMenuItem1.setText("Linea");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        item_menu_linea.setText("Linea");
+        item_menu_linea.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                item_menu_lineaActionPerformed(evt);
             }
         });
-        fileMenu.add(jMenuItem1);
+        j_menu_bar_2_administrador.add(item_menu_linea);
 
-        cutMenuItem1.setMnemonic('t');
-        cutMenuItem1.setText("Unidad Medida");
-        cutMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        item_menu_medida.setMnemonic('t');
+        item_menu_medida.setText("Unidad Medida");
+        item_menu_medida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cutMenuItem1ActionPerformed(evt);
+                item_menu_medidaActionPerformed(evt);
             }
         });
-        fileMenu.add(cutMenuItem1);
+        j_menu_bar_2_administrador.add(item_menu_medida);
 
-        deleteMenuItem4.setMnemonic('d');
-        deleteMenuItem4.setText("Precio Venta");
-        deleteMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        item_menu_venta.setMnemonic('d');
+        item_menu_venta.setText("Precio Venta");
+        item_menu_venta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteMenuItem4ActionPerformed(evt);
+                item_menu_ventaActionPerformed(evt);
             }
         });
-        fileMenu.add(deleteMenuItem4);
+        j_menu_bar_2_administrador.add(item_menu_venta);
 
-        pasteMenuItem.setMnemonic('p');
-        pasteMenuItem.setText("Familia");
-        pasteMenuItem.addActionListener(new java.awt.event.ActionListener() {
+        item_menu_familia.setMnemonic('p');
+        item_menu_familia.setText("Familia");
+        item_menu_familia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pasteMenuItemActionPerformed(evt);
+                item_menu_familiaActionPerformed(evt);
             }
         });
-        fileMenu.add(pasteMenuItem);
+        j_menu_bar_2_administrador.add(item_menu_familia);
 
-        menuBar.add(fileMenu);
+        menuBar.add(j_menu_bar_2_administrador);
 
-        helpMenu.setMnemonic('h');
-        helpMenu.setText("Receta");
+        j_menu_bar_3_administrador.setMnemonic('h');
+        j_menu_bar_3_administrador.setText("Receta");
 
         contentsMenuItem.setMnemonic('c');
         contentsMenuItem.setText("Insumos");
@@ -138,7 +138,7 @@ public class MenuAdmin extends javax.swing.JFrame {
                 contentsMenuItemActionPerformed(evt);
             }
         });
-        helpMenu.add(contentsMenuItem);
+        j_menu_bar_3_administrador.add(contentsMenuItem);
 
         aboutMenuItem.setMnemonic('a');
         aboutMenuItem.setText("Ingreso Producción diaria");
@@ -147,9 +147,9 @@ public class MenuAdmin extends javax.swing.JFrame {
                 aboutMenuItemActionPerformed(evt);
             }
         });
-        helpMenu.add(aboutMenuItem);
+        j_menu_bar_3_administrador.add(aboutMenuItem);
 
-        menuBar.add(helpMenu);
+        menuBar.add(j_menu_bar_3_administrador);
 
         setJMenuBar(menuBar);
 
@@ -167,33 +167,33 @@ public class MenuAdmin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void openMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openMenuItemActionPerformed
+    private void item_menu_productoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_menu_productoActionPerformed
         IngresarProductos Ing = new IngresarProductos();
         this.panel.add(Ing);
         Ing.show();
-    }//GEN-LAST:event_openMenuItemActionPerformed
+    }//GEN-LAST:event_item_menu_productoActionPerformed
 
-    private void exitMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItem1ActionPerformed
+    private void item_menu_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_menu_salirActionPerformed
        System.exit(0);
-    }//GEN-LAST:event_exitMenuItem1ActionPerformed
+    }//GEN-LAST:event_item_menu_salirActionPerformed
 
-    private void cutMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cutMenuItem1ActionPerformed
+    private void item_menu_medidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_menu_medidaActionPerformed
         IngresarUnidadMedida main = new IngresarUnidadMedida();
         this.panel.add(main);
         main.show();
-    }//GEN-LAST:event_cutMenuItem1ActionPerformed
+    }//GEN-LAST:event_item_menu_medidaActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void item_menu_lineaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_menu_lineaActionPerformed
     DescripLinea main = new DescripLinea();
         this.panel.add(main);
         main.show();
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_item_menu_lineaActionPerformed
 
-    private void pasteMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pasteMenuItemActionPerformed
+    private void item_menu_familiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_menu_familiaActionPerformed
       FamiliaArticulo main = new FamiliaArticulo();
         this.panel.add(main);
         main.show();
-    }//GEN-LAST:event_pasteMenuItemActionPerformed
+    }//GEN-LAST:event_item_menu_familiaActionPerformed
 
     private void aboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMenuItemActionPerformed
         IngresarProdPAn main = new IngresarProdPAn();
@@ -201,11 +201,11 @@ public class MenuAdmin extends javax.swing.JFrame {
         main.show();
     }//GEN-LAST:event_aboutMenuItemActionPerformed
 
-    private void deleteMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteMenuItem4ActionPerformed
+    private void item_menu_ventaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_menu_ventaActionPerformed
         IngresoPrecioVenta main = new  IngresoPrecioVenta();
         this.panel.add(main);
         main.show();
-    }//GEN-LAST:event_deleteMenuItem4ActionPerformed
+    }//GEN-LAST:event_item_menu_ventaActionPerformed
 
     private void contentsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contentsMenuItemActionPerformed
         RecetaFrame main = new RecetaFrame();
@@ -254,18 +254,18 @@ public class MenuAdmin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JMenuItem contentsMenuItem;
-    private javax.swing.JMenuItem cutMenuItem1;
-    private javax.swing.JMenuItem deleteMenuItem4;
-    private javax.swing.JMenuItem exitMenuItem1;
-    private javax.swing.JMenu fileMenu;
-    private javax.swing.JMenu helpMenu;
+    private javax.swing.JMenuItem item_menu_familia;
+    private javax.swing.JMenuItem item_menu_linea;
+    private javax.swing.JMenuItem item_menu_medida;
+    private javax.swing.JMenuItem item_menu_producto;
+    private javax.swing.JMenuItem item_menu_salir;
+    private javax.swing.JMenuItem item_menu_venta;
     private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenu j_menu_bar_1_administrador;
+    private javax.swing.JMenu j_menu_bar_2_administrador;
+    private javax.swing.JMenu j_menu_bar_3_administrador;
     private javax.swing.JMenuBar menuBar;
-    private javax.swing.JMenuItem openMenuItem;
     public static javax.swing.JDesktopPane panel;
-    private javax.swing.JMenuItem pasteMenuItem;
     // End of variables declaration//GEN-END:variables
 
 }
