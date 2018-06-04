@@ -33,7 +33,7 @@ public class DescripLinea extends javax.swing.JInternalFrame {
         entityManager1 = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("PanaderiaPU").createEntityManager();
         jLabel1 = new javax.swing.JLabel();
         tf_descrip = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        bt_Guardar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setClosable(true);
@@ -43,10 +43,10 @@ public class DescripLinea extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Descripción  Linea");
 
-        jButton1.setText("Guardar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        bt_Guardar.setText("Guardar");
+        bt_Guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                bt_GuardarActionPerformed(evt);
             }
         });
 
@@ -61,7 +61,7 @@ public class DescripLinea extends javax.swing.JInternalFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
+                    .addComponent(bt_Guardar)
                     .addComponent(tf_descrip, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(93, Short.MAX_VALUE))
@@ -76,14 +76,14 @@ public class DescripLinea extends javax.swing.JInternalFrame {
                     .addComponent(jLabel1)
                     .addComponent(tf_descrip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
-                .addComponent(jButton1)
+                .addComponent(bt_Guardar)
                 .addContainerGap(128, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void bt_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_GuardarActionPerformed
        
         String nombre="";
         nombre=(tf_descrip.getText().toString());
@@ -93,12 +93,12 @@ public class DescripLinea extends javax.swing.JInternalFrame {
        else{
           JOptionPane.showMessageDialog(this,"error :C");
        }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_bt_GuardarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bt_Guardar;
     private javax.persistence.EntityManager entityManager1;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField tf_descrip;

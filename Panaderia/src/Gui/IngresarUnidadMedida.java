@@ -31,34 +31,34 @@ public class IngresarUnidadMedida extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        bt_Guardar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        jl_Codigo = new javax.swing.JLabel();
+        jt_Codigo = new javax.swing.JTextField();
+        jl_Descripcion = new javax.swing.JLabel();
+        jt_Descripcion = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setTitle("Unidad de Medida");
 
-        jButton1.setText("Guardar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        bt_Guardar.setText("Guardar");
+        bt_Guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                bt_GuardarActionPerformed(evt);
             }
         });
 
         jPanel1.setLayout(new java.awt.GridLayout(2, 2, 30, 30));
 
-        jLabel4.setText("Código:");
-        jPanel1.add(jLabel4);
-        jPanel1.add(jTextField3);
+        jl_Codigo.setText("Código:");
+        jPanel1.add(jl_Codigo);
+        jPanel1.add(jt_Codigo);
 
-        jLabel5.setText("descripción:");
-        jPanel1.add(jLabel5);
-        jPanel1.add(jTextField4);
+        jl_Descripcion.setText("descripción:");
+        jPanel1.add(jl_Descripcion);
+        jPanel1.add(jt_Descripcion);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -71,7 +71,7 @@ public class IngresarUnidadMedida extends javax.swing.JInternalFrame {
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(47, 47, 47))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(bt_Guardar)
                         .addGap(122, 122, 122))))
         );
         layout.setVerticalGroup(
@@ -80,32 +80,32 @@ public class IngresarUnidadMedida extends javax.swing.JInternalFrame {
                 .addGap(40, 40, 40)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
-                .addComponent(jButton1)
+                .addComponent(bt_Guardar)
                 .addGap(0, 60, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void bt_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_GuardarActionPerformed
         String Codigo = "";
         String descripcion = "";
-        Codigo = (jTextField3.getText().toString());
-        descripcion = (jTextField4.getText().toString());
+        Codigo = (jt_Codigo.getText().toString());
+        descripcion = (jt_Descripcion.getText().toString());
         if (UnidadMedidaJpaController.agregar(Codigo, descripcion)) {
             JOptionPane.showMessageDialog(this, "Datos ingresados correctamente");
         } else {
             JOptionPane.showMessageDialog(this, "Error");
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_bt_GuardarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JButton bt_Guardar;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JLabel jl_Codigo;
+    private javax.swing.JLabel jl_Descripcion;
+    private javax.swing.JTextField jt_Codigo;
+    private javax.swing.JTextField jt_Descripcion;
     // End of variables declaration//GEN-END:variables
 }

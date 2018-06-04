@@ -44,8 +44,8 @@ public class FamiliaArticulo extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jcombo_codigolinea = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jt_DescripcionFamilia = new javax.swing.JTextField();
+        bt_Guardar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
         setClosable(true);
@@ -64,13 +64,13 @@ public class FamiliaArticulo extends javax.swing.JInternalFrame {
             }
         });
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        jt_DescripcionFamilia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                jt_DescripcionFamiliaActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Guardar");
+        bt_Guardar.setText("Guardar");
 
         jLabel3.setText("Familia Articulo");
 
@@ -82,7 +82,7 @@ public class FamiliaArticulo extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(146, 146, 146)
-                        .addComponent(jButton1))
+                        .addComponent(bt_Guardar))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(71, 71, 71)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -91,7 +91,7 @@ public class FamiliaArticulo extends javax.swing.JInternalFrame {
                         .addGap(70, 70, 70)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jcombo_codigolinea, 0, 117, Short.MAX_VALUE)
-                            .addComponent(jTextField1)))
+                            .addComponent(jt_DescripcionFamilia)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(136, 136, 136)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -109,18 +109,18 @@ public class FamiliaArticulo extends javax.swing.JInternalFrame {
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jt_DescripcionFamilia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
-                .addComponent(jButton1)
+                .addComponent(bt_Guardar)
                 .addContainerGap(104, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void jt_DescripcionFamiliaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jt_DescripcionFamiliaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_jt_DescripcionFamiliaActionPerformed
 
     private void jcombo_codigolineaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcombo_codigolineaActionPerformed
         // TODO add your handling code here:
@@ -128,13 +128,13 @@ public class FamiliaArticulo extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bt_Guardar;
     private javax.persistence.Query codigo_linea;
     private javax.persistence.EntityManager entityManager1;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JComboBox<String> jcombo_codigolinea;
+    private javax.swing.JTextField jt_DescripcionFamilia;
     // End of variables declaration//GEN-END:variables
 }
