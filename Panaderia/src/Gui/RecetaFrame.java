@@ -59,7 +59,7 @@ public class RecetaFrame extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jcombo_insert_insumos = new javax.swing.JComboBox<>();
-        jButton2 = new javax.swing.JButton();
+        bt_GuardarReceta = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -118,7 +118,12 @@ public class RecetaFrame extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton2.setText("Guardar Receta");
+        bt_GuardarReceta.setText("Guardar Receta");
+        bt_GuardarReceta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_GuardarRecetaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -163,7 +168,7 @@ public class RecetaFrame extends javax.swing.JInternalFrame {
                 .addContainerGap(47, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(bt_GuardarReceta)
                 .addGap(57, 57, 57))
         );
         layout.setVerticalGroup(
@@ -193,7 +198,7 @@ public class RecetaFrame extends javax.swing.JInternalFrame {
                 .addGap(38, 38, 38)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
+                .addComponent(bt_GuardarReceta)
                 .addContainerGap(47, Short.MAX_VALUE))
         );
 
@@ -217,12 +222,16 @@ public class RecetaFrame extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jcombo_insert_insumosActionPerformed
 
+    private void bt_GuardarRecetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_GuardarRecetaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bt_GuardarRecetaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bt_GuardarReceta;
     private javax.swing.JButton bt_guardar;
     private javax.persistence.EntityManager entityManager1;
     private javax.persistence.Query ingreso_insumo;
-    private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
