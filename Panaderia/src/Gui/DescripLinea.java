@@ -5,7 +5,7 @@
  */
 package Gui;
 
-import Control.LineaProductoJpaController;
+import Data.Linea;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,9 +14,10 @@ import javax.swing.JOptionPane;
  */
 public class DescripLinea extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form DescripLinea
-     */
+    public void limpiar() {
+        tf_descrip.setText("");
+    }
+
     public DescripLinea() {
         initComponents();
     }
@@ -84,7 +85,8 @@ public class DescripLinea extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bt_guardadrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_guardadrActionPerformed
-       
+
+        
         String nombre="";
         nombre=(tf_descrip.getText().toString());
        if(LineaProductoJpaController.adicionar(nombre)){
@@ -93,6 +95,8 @@ public class DescripLinea extends javax.swing.JInternalFrame {
        else{
           JOptionPane.showMessageDialog(this,"error :C");
        }
+        this.limpiar();
+
     }//GEN-LAST:event_bt_guardadrActionPerformed
 
 

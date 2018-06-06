@@ -5,9 +5,8 @@
  */
 package Gui;
 
-import Model.Producto;
+import Data.Linea;
 import java.util.List;
-import Model.LineaProducto;
 import java.util.Iterator;
 /**
  *
@@ -20,12 +19,12 @@ public class FamiliaArticulo extends javax.swing.JInternalFrame {
      */
     public FamiliaArticulo() {
         initComponents();
-    List<LineaProducto> productos = codigo_linea.getResultList(); // se obtienen los productos y almcenan en lista
+    List<Linea> productos = codigo_linea.getResultList(); // se obtienen los productos y almcenan en lista
         jcombo_codigolinea.removeAllItems();//se limpia el combobox
-        for (Iterator<LineaProducto> it = productos.iterator(); it.hasNext();) {
-            LineaProducto p = it.next();
+        for (Iterator<Linea> it = productos.iterator(); it.hasNext();) {
+            Linea p = it.next();
             // se recorre
-            jcombo_codigolinea.addItem(p.getNombreLinea());//se muestra en el combobox  
+            jcombo_codigolinea.addItem(p.getLineNombre());//se muestra en el combobox  
         } 
              
     }

@@ -5,6 +5,12 @@
  */
 package Gui;
 
+import Data.Familia;
+import Data.Linea;
+import Data.UnidadMedida;
+import java.util.Iterator;
+import java.util.List;
+
 /**
  *
  * @author luisa
@@ -16,6 +22,28 @@ public class IngresarProductos extends javax.swing.JInternalFrame {
      */
     public IngresarProductos() {
         initComponents();
+        initComponents();
+        List<UnidadMedida> u = query_unidad_medida.getResultList();
+        List<Familia> f = query_familia.getResultList();
+        List<Linea> l = query_linea.getResultList();
+        jc_familia.removeAllItems();//se limpia el combobox
+        jc_linea.removeAllItems();//se limpia el combobox
+        jc_umedida.removeAllItems();//se limpia el combobox
+        for (Iterator<UnidadMedida> it = u.iterator(); it.hasNext();) {
+            UnidadMedida uni = it.next();
+            // se recorre
+            jc_umedida.addItem(uni.getUnidCodigo());//se muestra en el combobox  
+        }
+        for (Iterator<Familia> it = f.iterator(); it.hasNext();) {
+            Familia fam = it.next();
+            // se recorre
+            jc_familia.addItem(fam.getFamiNombre());//se muestra en el combobox  
+        }
+        for (Iterator<Linea> it = l.iterator(); it.hasNext();) {
+            Linea lin = it.next();
+            // se recorre
+            jc_linea.addItem(lin.getLineNombre());//se muestra en el combobox  
+        }
     }
 
     /**
@@ -27,6 +55,10 @@ public class IngresarProductos extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("Panaderia").createEntityManager();
+        query_unidad_medida = java.beans.Beans.isDesignTime() ? null : ((javax.persistence.EntityManager)null).createQuery("SELECT u FROM Unidadmedida u");
+        query_linea = java.beans.Beans.isDesignTime() ? null : ((javax.persistence.EntityManager)null).createQuery("SELECT l FROM Linea l");
+        query_familia = java.beans.Beans.isDesignTime() ? null : ((javax.persistence.EntityManager)null).createQuery("SELECT f FROM Familia f");
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jt_codbarra = new javax.swing.JTextField();
@@ -125,6 +157,7 @@ public class IngresarProductos extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Guardar;
+    private javax.persistence.EntityManager entityManager;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -140,5 +173,8 @@ public class IngresarProductos extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jt_formato;
     private javax.swing.JTextField jt_marca;
     private javax.swing.JTextField jt_nombre;
+    private javax.persistence.Query query_familia;
+    private javax.persistence.Query query_linea;
+    private javax.persistence.Query query_unidad_medida;
     // End of variables declaration//GEN-END:variables
 }

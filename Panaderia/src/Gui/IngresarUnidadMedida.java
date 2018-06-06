@@ -5,8 +5,7 @@
  */
 package Gui;
 
-import Control.LineaProductoJpaController;
-import Control.UnidadMedidaJpaController;
+
 import javax.swing.JOptionPane;
 
 /**
