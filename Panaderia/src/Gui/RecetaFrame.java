@@ -5,8 +5,8 @@
  */
 package Gui;
 
-import Control.UnidadMedidaJpaController;
-import Model.Producto;
+
+import Data.Producto;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -26,10 +26,10 @@ public class RecetaFrame extends javax.swing.JInternalFrame {
         jcombo_prod_final.removeAllItems();//se limpia el combobox
         jcombo_insert_insumos.removeAllItems();
         for (Producto p : productos) {// se recorre 
-            jcombo_prod_final.addItem(p.getNombreProducto());//se muestra en el combobox    
+            jcombo_prod_final.addItem(p.getProdNombre());//se muestra en el combobox    
         }
         for (Producto e : insumo) {
-            jcombo_insert_insumos.addItem(e.getNombreProducto());
+            jcombo_insert_insumos.addItem(e.getProdNombre());
         }
     }
 
