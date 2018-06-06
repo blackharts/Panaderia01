@@ -4,7 +4,7 @@
   <NonVisualComponents>
     <Component class="javax.persistence.EntityManager" name="entityManager1">
       <Properties>
-        <Property name="persistenceUnit" type="java.lang.String" value="pu"/>
+        <Property name="persistenceUnit" type="java.lang.String" value="PanaderiaPU"/>
       </Properties>
     </Component>
   </NonVisualComponents>

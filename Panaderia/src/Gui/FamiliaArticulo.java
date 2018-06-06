@@ -39,7 +39,7 @@ public class FamiliaArticulo extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         entityManager1 = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("PanaderiaPU").createEntityManager();
-        codigo_linea = java.beans.Beans.isDesignTime() ? null : entityManager1.createQuery("select c from LineaProducto c");
+        codigo_linea = java.beans.Beans.isDesignTime() ? null : entityManager1.createQuery("select c from Linea c");
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jcombo_codigolinea = new javax.swing.JComboBox<>();

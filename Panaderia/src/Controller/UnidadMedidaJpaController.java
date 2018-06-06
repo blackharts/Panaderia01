@@ -19,6 +19,7 @@ import java.util.Collection;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 /**
  *
@@ -200,5 +201,29 @@ public class UnidadMedidaJpaController implements Serializable {
             em.close();
         }
     }
+    
+    public static boolean agregar(String Codigo,String descripcion){
+    boolean r=true;
+        UnidadMedida len= new UnidadMedida();
+        EntityManagerFactory emf=Persistence.createEntityManagerFactory("PanaderiaPU");
+        EntityManager em=emf.createEntityManager();
+        UnidadMedidaJpaController service =new UnidadMedidaJpaController (emf);
+        em.getTransaction().begin();
+        len.setUnidCodigo(Codigo);
+        len.setUnidDescripcion(descripcion);
+        try{
+            service.create(len);
+            em.getTransaction().commit();
+        }catch(Exception e){
+            System.out.println(e);
+            em.getTransaction().rollback();
+            r=false;
+            return r;
+        }
+        System.out.println("persisted"+len);
+        em.close();
+        emf.close();
+        return r;
+   }
     
 }
