@@ -31,22 +31,22 @@ public class IngresarUnidadMedida extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        Bton_Guardar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        tf_codigo = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        tf_decripcion = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setTitle("Unidad de Medida");
 
-        jButton1.setText("Guardar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Bton_Guardar.setText("Guardar");
+        Bton_Guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                Bton_GuardarActionPerformed(evt);
             }
         });
 
@@ -54,11 +54,11 @@ public class IngresarUnidadMedida extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Código:");
         jPanel1.add(jLabel4);
-        jPanel1.add(jTextField3);
+        jPanel1.add(tf_codigo);
 
         jLabel5.setText("descripción:");
         jPanel1.add(jLabel5);
-        jPanel1.add(jTextField4);
+        jPanel1.add(tf_decripcion);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -71,7 +71,7 @@ public class IngresarUnidadMedida extends javax.swing.JInternalFrame {
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(47, 47, 47))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(Bton_Guardar)
                         .addGap(122, 122, 122))))
         );
         layout.setVerticalGroup(
@@ -80,32 +80,32 @@ public class IngresarUnidadMedida extends javax.swing.JInternalFrame {
                 .addGap(40, 40, 40)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
-                .addComponent(jButton1)
+                .addComponent(Bton_Guardar)
                 .addGap(0, 60, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void Bton_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bton_GuardarActionPerformed
         String Codigo = "";
         String descripcion = "";
-        Codigo = (jTextField3.getText().toString());
-        descripcion = (jTextField4.getText().toString());
+        Codigo = (tf_codigo.getText().toString());
+        descripcion = (tf_decripcion.getText().toString());
         if (UnidadMedidaJpaController.agregar(Codigo, descripcion)) {
             JOptionPane.showMessageDialog(this, "Datos ingresados correctamente");
         } else {
             JOptionPane.showMessageDialog(this, "Error");
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_Bton_GuardarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton Bton_Guardar;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField tf_codigo;
+    private javax.swing.JTextField tf_decripcion;
     // End of variables declaration//GEN-END:variables
 }

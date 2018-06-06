@@ -42,7 +42,7 @@ public class IngresarProductos extends javax.swing.JInternalFrame {
         jc_linea = new javax.swing.JComboBox();
         jLabel7 = new javax.swing.JLabel();
         jc_familia = new javax.swing.JComboBox();
-        jButton1 = new javax.swing.JButton();
+        Guardar = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -90,7 +90,7 @@ public class IngresarProductos extends javax.swing.JInternalFrame {
         jc_familia.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jPanel1.add(jc_familia);
 
-        jButton1.setText("Guardar");
+        Guardar.setText("Guardar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -102,7 +102,7 @@ public class IngresarProductos extends javax.swing.JInternalFrame {
                 .addGap(81, 81, 81))
             .addGroup(layout.createSequentialGroup()
                 .addGap(159, 159, 159)
-                .addComponent(jButton1)
+                .addComponent(Guardar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -111,7 +111,7 @@ public class IngresarProductos extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(Guardar)
                 .addContainerGap())
         );
 
@@ -124,7 +124,7 @@ public class IngresarProductos extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton Guardar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
