@@ -33,7 +33,7 @@ public class VisualizarCostosPan extends javax.swing.JInternalFrame {
         jl_FechaFinal = new javax.swing.JLabel();
         jt_FechaFinal_CostoPan = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        combo_tipopan = new javax.swing.JComboBox();
         jToggleButton1 = new javax.swing.JToggleButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jt_tabla_CostoPan = new javax.swing.JTable();
@@ -56,13 +56,13 @@ public class VisualizarCostosPan extends javax.swing.JInternalFrame {
         jLabel3.setText("Tipo pan:");
         jPanel1.add(jLabel3);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        combo_tipopan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        combo_tipopan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                combo_tipopanActionPerformed(evt);
             }
         });
-        jPanel1.add(jComboBox1);
+        jPanel1.add(combo_tipopan);
 
         jToggleButton1.setText("Mostrar reporte");
 
@@ -119,13 +119,13 @@ public class VisualizarCostosPan extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void combo_tipopanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_tipopanActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_combo_tipopanActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JComboBox combo_tipopan;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;

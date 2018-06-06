@@ -50,7 +50,7 @@ public class IngresarCostos extends javax.swing.JInternalFrame {
         tf_nuevocosto = new javax.swing.JTextField();
         bt_guardar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tablaPrecio = new javax.swing.JTable();
 
         setClosable(true);
         setIconifiable(true);
@@ -113,7 +113,7 @@ public class IngresarCostos extends javax.swing.JInternalFrame {
         bt_guardar.setText("Guardar");
         jPanel5.add(bt_guardar);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tablaPrecio.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -139,7 +139,7 @@ public class IngresarCostos extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tablaPrecio);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -185,7 +185,6 @@ public class IngresarCostos extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
     private javax.swing.JLabel lb_codigobarra;
     private javax.swing.JLabel lb_familia;
     private javax.swing.JLabel lb_formato;
@@ -194,6 +193,7 @@ public class IngresarCostos extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lb_nombre;
     private javax.swing.JLabel lb_nuevocosto;
     private javax.swing.JLabel lb_unimedida;
+    private javax.swing.JTable tablaPrecio;
     private javax.swing.JTextField tf_codigobarra;
     private javax.swing.JTextField tf_nombre;
     private javax.swing.JTextField tf_nuevocosto;

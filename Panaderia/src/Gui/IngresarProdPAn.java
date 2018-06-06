@@ -33,14 +33,14 @@ public class IngresarProdPAn extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        combo_producto = new javax.swing.JComboBox();
+        tf_unidadMedida = new javax.swing.JTextField();
+        tf_produccion = new javax.swing.JTextField();
+        Boton_Ingresa = new javax.swing.JButton();
+        BotonModificar = new javax.swing.JButton();
+        Boton_Eliminar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        Tabla_produccionDiaria = new javax.swing.JTable();
 
         jTextField1.setText("jTextField1");
 
@@ -62,21 +62,21 @@ public class IngresarProdPAn extends javax.swing.JInternalFrame {
         jLabel3.setText("Producción");
         jPanel1.add(jLabel3);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(jComboBox1);
-        jPanel1.add(jTextField2);
-        jPanel1.add(jTextField3);
+        combo_producto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel1.add(combo_producto);
+        jPanel1.add(tf_unidadMedida);
+        jPanel1.add(tf_produccion);
 
-        jButton2.setText("Ingresar");
-        jPanel1.add(jButton2);
+        Boton_Ingresa.setText("Ingresar");
+        jPanel1.add(Boton_Ingresa);
 
-        jButton3.setText("Modificar");
-        jPanel1.add(jButton3);
+        BotonModificar.setText("Modificar");
+        jPanel1.add(BotonModificar);
 
-        jButton4.setText("Eliminar");
-        jPanel1.add(jButton4);
+        Boton_Eliminar.setText("Eliminar");
+        jPanel1.add(Boton_Eliminar);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        Tabla_produccionDiaria.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -95,7 +95,7 @@ public class IngresarProdPAn extends javax.swing.JInternalFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(Tabla_produccionDiaria);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -123,19 +123,19 @@ public class IngresarProdPAn extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BotonModificar;
+    private javax.swing.JButton Boton_Eliminar;
+    private javax.swing.JButton Boton_Ingresa;
+    private javax.swing.JTable Tabla_produccionDiaria;
+    private javax.swing.JComboBox combo_producto;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField tf_produccion;
+    private javax.swing.JTextField tf_unidadMedida;
     // End of variables declaration//GEN-END:variables
 }
