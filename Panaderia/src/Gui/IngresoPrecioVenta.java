@@ -40,16 +40,17 @@ public class IngresoPrecioVenta extends javax.swing.JInternalFrame {
         bt_guardar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabla_PrecioVenta = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        unidad = new javax.swing.JTextField();
-        marca = new javax.swing.JTextField();
-        formato = new javax.swing.JTextField();
-        Linea = new javax.swing.JTextField();
-        Familia = new javax.swing.JTextField();
+        jPanel4 = new javax.swing.JPanel();
+        lb_unimedida = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        lb_marca = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        lb_formato = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        lb_linea = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        lb_familia = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -108,15 +109,27 @@ public class IngresoPrecioVenta extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(tabla_PrecioVenta);
 
-        jLabel2.setText("Unidad Medida");
+        jPanel4.setLayout(new java.awt.GridLayout(5, 2, 20, 20));
 
-        jLabel3.setText("Marca");
+        lb_unimedida.setText("Unidad de Medida");
+        jPanel4.add(lb_unimedida);
+        jPanel4.add(jLabel5);
 
-        jLabel4.setText("Formato");
+        lb_marca.setText("Marca");
+        jPanel4.add(lb_marca);
+        jPanel4.add(jLabel7);
 
-        jLabel6.setText("Linea");
+        lb_formato.setText("Formato");
+        jPanel4.add(lb_formato);
+        jPanel4.add(jLabel9);
 
-        jLabel8.setText("Familia");
+        lb_linea.setText("Linea");
+        jPanel4.add(lb_linea);
+        jPanel4.add(jLabel11);
+
+        lb_familia.setText("Familia");
+        jPanel4.add(lb_familia);
+        jPanel4.add(jLabel13);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -127,23 +140,9 @@ public class IngresoPrecioVenta extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel4)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel3))
-                            .addGap(84, 84, 84)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(unidad, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
-                                .addComponent(marca)
-                                .addComponent(formato)
-                                .addComponent(Linea)
-                                .addComponent(Familia)))))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,31 +151,13 @@ public class IngresoPrecioVenta extends javax.swing.JInternalFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(unidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(marca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(formato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(Linea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(Familia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         pack();
@@ -184,28 +165,29 @@ public class IngresoPrecioVenta extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField Familia;
-    private javax.swing.JTextField Linea;
     private javax.swing.JButton bt_buscar;
     private javax.swing.JButton bt_guardar;
-    private javax.swing.JTextField formato;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lb_codigobarra;
+    private javax.swing.JLabel lb_familia;
+    private javax.swing.JLabel lb_formato;
+    private javax.swing.JLabel lb_linea;
+    private javax.swing.JLabel lb_marca;
     private javax.swing.JLabel lb_nombre;
     private javax.swing.JLabel lb_nuevocosto;
-    private javax.swing.JTextField marca;
+    private javax.swing.JLabel lb_unimedida;
     private javax.swing.JTable tabla_PrecioVenta;
     private javax.swing.JTextField tf_codigobarra;
     private javax.swing.JTextField tf_nombre;
     private javax.swing.JTextField tf_nuevocosto;
-    private javax.swing.JTextField unidad;
     // End of variables declaration//GEN-END:variables
 }
