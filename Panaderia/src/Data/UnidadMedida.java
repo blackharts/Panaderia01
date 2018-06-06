@@ -23,17 +23,18 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author luisa
+ * @author yo
  */
 @Entity
 @Table(name = "unidad_medida")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "UnidadMedida.findAll", query = "SELECT u FROM UnidadMedida u"),
-    @NamedQuery(name = "UnidadMedida.findByUnidId", query = "SELECT u FROM UnidadMedida u WHERE u.unidId = :unidId"),
-    @NamedQuery(name = "UnidadMedida.findByUnidCodigo", query = "SELECT u FROM UnidadMedida u WHERE u.unidCodigo = :unidCodigo"),
-    @NamedQuery(name = "UnidadMedida.findByUnidDescripcion", query = "SELECT u FROM UnidadMedida u WHERE u.unidDescripcion = :unidDescripcion")})
+    @NamedQuery(name = "UnidadMedida.findAll", query = "SELECT u FROM UnidadMedida u")
+    , @NamedQuery(name = "UnidadMedida.findByUnidId", query = "SELECT u FROM UnidadMedida u WHERE u.unidId = :unidId")
+    , @NamedQuery(name = "UnidadMedida.findByUnidCodigo", query = "SELECT u FROM UnidadMedida u WHERE u.unidCodigo = :unidCodigo")
+    , @NamedQuery(name = "UnidadMedida.findByUnidDescripcion", query = "SELECT u FROM UnidadMedida u WHERE u.unidDescripcion = :unidDescripcion")})
 public class UnidadMedida implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

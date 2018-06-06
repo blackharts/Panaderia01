@@ -24,18 +24,19 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author luisa
+ * @author yo
  */
 @Entity
 @Table(name = "produccion_pan")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "ProduccionPan.findAll", query = "SELECT p FROM ProduccionPan p"),
-    @NamedQuery(name = "ProduccionPan.findByPpanId", query = "SELECT p FROM ProduccionPan p WHERE p.ppanId = :ppanId"),
-    @NamedQuery(name = "ProduccionPan.findByPpanUnidadMedida", query = "SELECT p FROM ProduccionPan p WHERE p.ppanUnidadMedida = :ppanUnidadMedida"),
-    @NamedQuery(name = "ProduccionPan.findByPpanProduccion", query = "SELECT p FROM ProduccionPan p WHERE p.ppanProduccion = :ppanProduccion"),
-    @NamedQuery(name = "ProduccionPan.findByPpanFechaIngreso", query = "SELECT p FROM ProduccionPan p WHERE p.ppanFechaIngreso = :ppanFechaIngreso")})
+    @NamedQuery(name = "ProduccionPan.findAll", query = "SELECT p FROM ProduccionPan p")
+    , @NamedQuery(name = "ProduccionPan.findByPpanId", query = "SELECT p FROM ProduccionPan p WHERE p.ppanId = :ppanId")
+    , @NamedQuery(name = "ProduccionPan.findByPpanUnidadMedida", query = "SELECT p FROM ProduccionPan p WHERE p.ppanUnidadMedida = :ppanUnidadMedida")
+    , @NamedQuery(name = "ProduccionPan.findByPpanProduccion", query = "SELECT p FROM ProduccionPan p WHERE p.ppanProduccion = :ppanProduccion")
+    , @NamedQuery(name = "ProduccionPan.findByPpanFechaIngreso", query = "SELECT p FROM ProduccionPan p WHERE p.ppanFechaIngreso = :ppanFechaIngreso")})
 public class ProduccionPan implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
