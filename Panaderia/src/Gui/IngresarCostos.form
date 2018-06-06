@@ -106,20 +106,14 @@
             <Property name="text" type="java.lang.String" value="Unidad de Medida"/>
           </Properties>
         </Component>
+        <Component class="javax.swing.JLabel" name="jLabel5">
+        </Component>
         <Component class="javax.swing.JLabel" name="lb_marca">
           <Properties>
             <Property name="text" type="java.lang.String" value="Marca"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel5">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Desconocido"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JLabel" name="jLabel7">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Desconocido"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lb_formato">
           <Properties>
@@ -127,9 +121,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel9">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Desconocido"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lb_linea">
           <Properties>
@@ -137,9 +128,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel11">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Desconocido"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lb_familia">
           <Properties>
@@ -147,9 +135,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel13">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Desconocido"/>
-          </Properties>
         </Component>
       </SubComponents>
     </Container>

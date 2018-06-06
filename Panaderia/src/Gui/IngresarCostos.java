@@ -36,8 +36,8 @@ public class IngresarCostos extends javax.swing.JInternalFrame {
         tf_nombre = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         lb_unimedida = new javax.swing.JLabel();
-        lb_marca = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        lb_marca = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         lb_formato = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -76,32 +76,22 @@ public class IngresarCostos extends javax.swing.JInternalFrame {
 
         lb_unimedida.setText("Unidad de Medida");
         jPanel4.add(lb_unimedida);
+        jPanel4.add(jLabel5);
 
         lb_marca.setText("Marca");
         jPanel4.add(lb_marca);
-
-        jLabel5.setText("Desconocido");
-        jPanel4.add(jLabel5);
-
-        jLabel7.setText("Desconocido");
         jPanel4.add(jLabel7);
 
         lb_formato.setText("Formato");
         jPanel4.add(lb_formato);
-
-        jLabel9.setText("Desconocido");
         jPanel4.add(jLabel9);
 
         lb_linea.setText("Linea");
         jPanel4.add(lb_linea);
-
-        jLabel11.setText("Desconocido");
         jPanel4.add(jLabel11);
 
         lb_familia.setText("Familia");
         jPanel4.add(lb_familia);
-
-        jLabel13.setText("Desconocido");
         jPanel4.add(jLabel13);
 
         jPanel5.setLayout(new java.awt.GridLayout(1, 3, 10, 0));
