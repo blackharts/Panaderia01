@@ -4,22 +4,7 @@
   <NonVisualComponents>
     <Component class="javax.persistence.EntityManager" name="entityManager">
       <Properties>
-        <Property name="persistenceUnit" type="java.lang.String" value="pu"/>
-      </Properties>
-    </Component>
-    <Component class="javax.persistence.Query" name="query_unidad_medida">
-      <Properties>
-        <Property name="query" type="java.lang.String" value="SELECT u FROM Unidadmedida u"/>
-      </Properties>
-    </Component>
-    <Component class="javax.persistence.Query" name="query_linea">
-      <Properties>
-        <Property name="query" type="java.lang.String" value="SELECT l FROM Linea l"/>
-      </Properties>
-    </Component>
-    <Component class="javax.persistence.Query" name="query_familia">
-      <Properties>
-        <Property name="query" type="java.lang.String" value="SELECT f FROM Familia f"/>
+        <Property name="persistenceUnit" type="java.lang.String" value="PanaderiaPU"/>
       </Properties>
     </Component>
   </NonVisualComponents>

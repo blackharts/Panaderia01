@@ -25,18 +25,19 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author luisa
+ * @author yo
  */
 @Entity
 @Table(name = "producto")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Producto.findAll", query = "SELECT p FROM Producto p"),
-    @NamedQuery(name = "Producto.findByProdId", query = "SELECT p FROM Producto p WHERE p.prodId = :prodId"),
-    @NamedQuery(name = "Producto.findByProdNombre", query = "SELECT p FROM Producto p WHERE p.prodNombre = :prodNombre"),
-    @NamedQuery(name = "Producto.findByProdMarca", query = "SELECT p FROM Producto p WHERE p.prodMarca = :prodMarca"),
-    @NamedQuery(name = "Producto.findByProdFormato", query = "SELECT p FROM Producto p WHERE p.prodFormato = :prodFormato")})
+    @NamedQuery(name = "Producto.findAll", query = "SELECT p FROM Producto p")
+    , @NamedQuery(name = "Producto.findByProdId", query = "SELECT p FROM Producto p WHERE p.prodId = :prodId")
+    , @NamedQuery(name = "Producto.findByProdNombre", query = "SELECT p FROM Producto p WHERE p.prodNombre = :prodNombre")
+    , @NamedQuery(name = "Producto.findByProdMarca", query = "SELECT p FROM Producto p WHERE p.prodMarca = :prodMarca")
+    , @NamedQuery(name = "Producto.findByProdFormato", query = "SELECT p FROM Producto p WHERE p.prodFormato = :prodFormato")})
 public class Producto implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
