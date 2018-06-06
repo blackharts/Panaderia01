@@ -22,6 +22,27 @@ public class IngresarProductos extends javax.swing.JInternalFrame {
      */
     public IngresarProductos() {
         initComponents();
+        List<UnidadMedida> u = query_unidad_medida.getResultList();
+        List<Familia> f = query_familia.getResultList();
+        List<Linea> l = query_linea.getResultList();
+        jc_familia.removeAllItems();//se limpia el combobox
+        jc_linea.removeAllItems();//se limpia el combobox
+        jc_umedida.removeAllItems();//se limpia el combobox
+        for (Iterator<UnidadMedida> it = u.iterator(); it.hasNext();) {
+            UnidadMedida uni = it.next();
+            // se recorre
+            jc_umedida.addItem(uni.getUnidCodigo());//se muestra en el combobox  
+        }
+        for (Iterator<Familia> it = f.iterator(); it.hasNext();) {
+            Familia fam = it.next();
+            // se recorre
+            jc_familia.addItem(fam.getFamiNombre());//se muestra en el combobox  
+        }
+        for (Iterator<Linea> it = l.iterator(); it.hasNext();) {
+            Linea lin = it.next();
+            // se recorre
+            jc_linea.addItem(lin.getLineNombre());//se muestra en el combobox  
+        }
        
     }
 
@@ -35,6 +56,9 @@ public class IngresarProductos extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("PanaderiaPU").createEntityManager();
+        query_linea = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT l FROM Linea l");
+        query_unidad_medida = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT u FROM UnidadMedida u");
+        query_familia = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT f FROM Familia f");
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jt_codbarra = new javax.swing.JTextField();
@@ -70,7 +94,6 @@ public class IngresarProductos extends javax.swing.JInternalFrame {
         jLabel3.setText(" Unidad de Medida:");
         jPanel1.add(jLabel3);
 
-        jc_umedida.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jc_umedida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jc_umedidaActionPerformed(evt);
@@ -89,13 +112,11 @@ public class IngresarProductos extends javax.swing.JInternalFrame {
         jLabel6.setText("Linea:");
         jPanel1.add(jLabel6);
 
-        jc_linea.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jPanel1.add(jc_linea);
 
         jLabel7.setText("Familia:");
         jPanel1.add(jLabel7);
 
-        jc_familia.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jPanel1.add(jc_familia);
 
         Guardar.setText("Guardar");
@@ -149,5 +170,8 @@ public class IngresarProductos extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jt_formato;
     private javax.swing.JTextField jt_marca;
     private javax.swing.JTextField jt_nombre;
+    private javax.persistence.Query query_familia;
+    private javax.persistence.Query query_linea;
+    private javax.persistence.Query query_unidad_medida;
     // End of variables declaration//GEN-END:variables
 }
