@@ -6,6 +6,7 @@
 package Gui;
 
 
+import Controller.UnidadMedidaJpaController;
 import javax.swing.JOptionPane;
 
 /**
@@ -53,6 +54,12 @@ public class IngresarUnidadMedida extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Código:");
         jPanel1.add(jLabel4);
+
+        tf_codigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_codigoActionPerformed(evt);
+            }
+        });
         jPanel1.add(tf_codigo);
 
         jLabel5.setText("descripción:");
@@ -97,6 +104,10 @@ public class IngresarUnidadMedida extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Error");
         }
     }//GEN-LAST:event_Bton_GuardarActionPerformed
+
+    private void tf_codigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_codigoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_codigoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

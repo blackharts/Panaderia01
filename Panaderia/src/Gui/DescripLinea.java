@@ -5,6 +5,7 @@
  */
 package Gui;
 
+import Controller.LineaJpaController;
 import Data.Linea;
 import javax.swing.JOptionPane;
 
@@ -89,7 +90,7 @@ public class DescripLinea extends javax.swing.JInternalFrame {
         
         String nombre="";
         nombre=(tf_descrip.getText().toString());
-       if(LineaProductoJpaController.adicionar(nombre)){
+       if(LineaJpaController.agregar(nombre)){
            JOptionPane.showMessageDialog(this,"registro Completo");
        }
        else{
