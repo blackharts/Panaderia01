@@ -6,7 +6,8 @@
 package Controller;
 
 import Controller.exceptions.NonexistentEntityException;
-import Data.PrecioCosto;
+import Data.Costo;
+import Data.Linea;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
@@ -16,14 +17,15 @@ import Data.Producto;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 /**
  *
  * @author yo
  */
-public class PrecioCostoJpaController implements Serializable {
+public class CostoJpaController implements Serializable {
 
-    public PrecioCostoJpaController(EntityManagerFactory emf) {
+    public CostoJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
@@ -32,20 +34,44 @@ public class PrecioCostoJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(PrecioCosto precioCosto) {
+    public static boolean agregar(int valor, Producto producto){
+        boolean r = true;
+        Costo costo = new Costo();
+        EntityManagerFactory emf=Persistence.createEntityManagerFactory("PanaderiaPU");
+        EntityManager em=emf.createEntityManager();
+        CostoJpaController service =new CostoJpaController (emf);
+        em.getTransaction().begin();
+        costo.setCostValor(valor);
+        costo.setCostProducto(producto);
+        try{
+            service.create(costo);
+            em.getTransaction().commit();
+        }catch(Exception e){
+            System.out.println(e);
+            em.getTransaction().rollback();
+            r=false;
+            return r;
+        }
+        System.out.println("persisted"+costo);
+        em.close();
+        emf.close();
+        return r;
+   }
+    
+    public void create(Costo costo) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Producto costProducto = precioCosto.getCostProducto();
-            if (costProducto != null) {
-                costProducto = em.getReference(costProducto.getClass(), costProducto.getProdId());
-                precioCosto.setCostProducto(costProducto);
+            Producto costoProducto = costo.getCostProducto();
+            if (costoProducto != null) {
+                costoProducto = em.getReference(costoProducto.getClass(), costoProducto.getProdId());
+                costo.setCostProducto(costoProducto);
             }
-            em.persist(precioCosto);
-            if (costProducto != null) {
-                costProducto.getPrecioCostoCollection().add(precioCosto);
-                costProducto = em.merge(costProducto);
+            em.persist(costo);
+            if (costoProducto != null) {
+                costoProducto.getPrecioCostoCollection().add(costo);
+                costoProducto = em.merge(costoProducto);
             }
             em.getTransaction().commit();
         } finally {
@@ -55,12 +81,12 @@ public class PrecioCostoJpaController implements Serializable {
         }
     }
 
-    public void edit(PrecioCosto precioCosto) throws NonexistentEntityException, Exception {
+    public void edit(Costo precioCosto) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            PrecioCosto persistentPrecioCosto = em.find(PrecioCosto.class, precioCosto.getCostId());
+            Costo persistentPrecioCosto = em.find(Costo.class, precioCosto.getCostId());
             Producto costProductoOld = persistentPrecioCosto.getCostProducto();
             Producto costProductoNew = precioCosto.getCostProducto();
             if (costProductoNew != null) {
@@ -98,9 +124,9 @@ public class PrecioCostoJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            PrecioCosto precioCosto;
+            Costo precioCosto;
             try {
-                precioCosto = em.getReference(PrecioCosto.class, id);
+                precioCosto = em.getReference(Costo.class, id);
                 precioCosto.getCostId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The precioCosto with id " + id + " no longer exists.", enfe);
@@ -119,19 +145,19 @@ public class PrecioCostoJpaController implements Serializable {
         }
     }
 
-    public List<PrecioCosto> findPrecioCostoEntities() {
+    public List<Costo> findPrecioCostoEntities() {
         return findPrecioCostoEntities(true, -1, -1);
     }
 
-    public List<PrecioCosto> findPrecioCostoEntities(int maxResults, int firstResult) {
+    public List<Costo> findPrecioCostoEntities(int maxResults, int firstResult) {
         return findPrecioCostoEntities(false, maxResults, firstResult);
     }
 
-    private List<PrecioCosto> findPrecioCostoEntities(boolean all, int maxResults, int firstResult) {
+    private List<Costo> findPrecioCostoEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(PrecioCosto.class));
+            cq.select(cq.from(Costo.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -143,10 +169,10 @@ public class PrecioCostoJpaController implements Serializable {
         }
     }
 
-    public PrecioCosto findPrecioCosto(Integer id) {
+    public Costo findPrecioCosto(Integer id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(PrecioCosto.class, id);
+            return em.find(Costo.class, id);
         } finally {
             em.close();
         }
@@ -156,7 +182,7 @@ public class PrecioCostoJpaController implements Serializable {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<PrecioCosto> rt = cq.from(PrecioCosto.class);
+            Root<Costo> rt = cq.from(Costo.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

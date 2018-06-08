@@ -62,7 +62,7 @@ public class Producto implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "precvProducto")
     private Collection<PrecioVenta> precioVentaCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "costProducto")
-    private Collection<PrecioCosto> precioCostoCollection;
+    private Collection<Costo> precioCostoCollection;
     @JoinColumn(name = "prod_familia", referencedColumnName = "fami_id")
     @ManyToOne(optional = false)
     private Familia prodFamilia;
@@ -156,11 +156,11 @@ public class Producto implements Serializable {
     }
 
     @XmlTransient
-    public Collection<PrecioCosto> getPrecioCostoCollection() {
+    public Collection<Costo> getPrecioCostoCollection() {
         return precioCostoCollection;
     }
 
-    public void setPrecioCostoCollection(Collection<PrecioCosto> precioCostoCollection) {
+    public void setPrecioCostoCollection(Collection<Costo> precioCostoCollection) {
         this.precioCostoCollection = precioCostoCollection;
     }
 

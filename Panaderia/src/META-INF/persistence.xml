@@ -5,13 +5,13 @@
     <class>Data.Familia</class>
     <class>Data.DetalleReceta</class>
     <class>Data.Linea</class>
-    <class>Data.PrecioCosto</class>
     <class>Data.PrecioVenta</class>
     <class>Data.ProduccionPan</class>
     <class>Data.Producto</class>
     <class>Data.Receta</class>
     <class>Data.UnidadMedida</class>
     <class>Data.Usuario</class>
+    <class>Data.Costo</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/db_panaderia?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

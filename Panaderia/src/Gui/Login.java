@@ -58,7 +58,7 @@ public class Login extends javax.swing.JFrame {
         usuario.setBackground(new java.awt.Color(214, 217, 223));
         usuario.setForeground(new java.awt.Color(68, 73, 75));
         usuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        usuario.setText("Administrativo");
+        usuario.setText("Admin_bodega");
         usuario.setBorder(null);
         usuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -212,7 +212,7 @@ public class Login extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
