@@ -9,12 +9,12 @@ package Gui;
  *
  * @author Alex
  */
-public class IngresoPrecioVenta extends javax.swing.JInternalFrame {
+public class IngresarCostos extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form IngresarCostos
      */
-    public IngresoPrecioVenta() {
+    public IngresarCostos() {
         initComponents();
     }
 
@@ -36,7 +36,7 @@ public class IngresoPrecioVenta extends javax.swing.JInternalFrame {
         tf_nombre = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         lb_unimedida = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        lb_marca = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         lb_formato = new javax.swing.JLabel();
@@ -50,12 +50,12 @@ public class IngresoPrecioVenta extends javax.swing.JInternalFrame {
         tf_nuevocosto = new javax.swing.JTextField();
         bt_guardar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tabla_PrecioVenta = new javax.swing.JTable();
+        tablaPrecio = new javax.swing.JTable();
 
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
-        setTitle("Precio Venta");
+        setTitle("Ingreso Costos");
 
         jPanel1.setLayout(new java.awt.GridLayout(1, 3, 10, 0));
 
@@ -76,22 +76,32 @@ public class IngresoPrecioVenta extends javax.swing.JInternalFrame {
 
         lb_unimedida.setText("Unidad de Medida");
         jPanel4.add(lb_unimedida);
-        jPanel4.add(jLabel1);
 
-        jLabel5.setText("Marca");
+        lb_marca.setText("Marca");
+        jPanel4.add(lb_marca);
+
+        jLabel5.setText("Desconocido");
         jPanel4.add(jLabel5);
+
+        jLabel7.setText("Desconocido");
         jPanel4.add(jLabel7);
 
         lb_formato.setText("Formato");
         jPanel4.add(lb_formato);
+
+        jLabel9.setText("Desconocido");
         jPanel4.add(jLabel9);
 
         lb_linea.setText("Linea");
         jPanel4.add(lb_linea);
+
+        jLabel11.setText("Desconocido");
         jPanel4.add(jLabel11);
 
         lb_familia.setText("Familia");
         jPanel4.add(lb_familia);
+
+        jLabel13.setText("Desconocido");
         jPanel4.add(jLabel13);
 
         jPanel5.setLayout(new java.awt.GridLayout(1, 3, 10, 0));
@@ -103,7 +113,7 @@ public class IngresoPrecioVenta extends javax.swing.JInternalFrame {
         bt_guardar.setText("Guardar");
         jPanel5.add(bt_guardar);
 
-        tabla_PrecioVenta.setModel(new javax.swing.table.DefaultTableModel(
+        tablaPrecio.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -129,7 +139,7 @@ public class IngresoPrecioVenta extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(tabla_PrecioVenta);
+        jScrollPane2.setViewportView(tablaPrecio);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -165,7 +175,6 @@ public class IngresoPrecioVenta extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bt_buscar;
     private javax.swing.JButton bt_guardar;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel5;
@@ -180,10 +189,11 @@ public class IngresoPrecioVenta extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lb_familia;
     private javax.swing.JLabel lb_formato;
     private javax.swing.JLabel lb_linea;
+    private javax.swing.JLabel lb_marca;
     private javax.swing.JLabel lb_nombre;
     private javax.swing.JLabel lb_nuevocosto;
     private javax.swing.JLabel lb_unimedida;
-    private javax.swing.JTable tabla_PrecioVenta;
+    private javax.swing.JTable tablaPrecio;
     private javax.swing.JTextField tf_codigobarra;
     private javax.swing.JTextField tf_nombre;
     private javax.swing.JTextField tf_nuevocosto;
