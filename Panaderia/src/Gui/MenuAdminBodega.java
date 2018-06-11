@@ -5,10 +5,6 @@
  */
 package Gui;
 
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  *
  * @author Alex
@@ -44,11 +40,11 @@ public class MenuAdminBodega extends javax.swing.JFrame {
         panel.setLayout(panelLayout);
         panelLayout.setHorizontalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 795, Short.MAX_VALUE)
+            .addGap(0, 400, Short.MAX_VALUE)
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 499, Short.MAX_VALUE)
+            .addGap(0, 279, Short.MAX_VALUE)
         );
 
         j_menu_bar_1_bodeda.setMnemonic('f');
@@ -69,7 +65,7 @@ public class MenuAdminBodega extends javax.swing.JFrame {
         j_menu_bar_2_bodega.setText("Articulos");
 
         item_menu_costo.setMnemonic('t');
-        item_menu_costo.setText("Ingresar costo");
+        item_menu_costo.setText("Ingresar Costos");
         item_menu_costo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 item_menu_costoActionPerformed(evt);
@@ -100,18 +96,9 @@ public class MenuAdminBodega extends javax.swing.JFrame {
     }//GEN-LAST:event_item_menu_salirActionPerformed
 
     private void item_menu_costoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_menu_costoActionPerformed
-        IngresarCosto Ing = new IngresarCosto();
+        IngresarCostos Ing = new IngresarCostos();
         this.panel.add(Ing);
         Ing.show();
-        try {
-            Ing.cbUnidadMedida();
-            Ing.cbFamilia();
-            Ing.cbLinea();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MenuAdminBodega.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(MenuAdminBodega.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }//GEN-LAST:event_item_menu_costoActionPerformed
 
     /**
@@ -125,7 +112,7 @@ public class MenuAdminBodega extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows".equals(info.getName())) {
+                if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
