@@ -24,94 +24,108 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
+<<<<<<< HEAD:Panaderia/src/Data/PrecioCosto.java
  * @author luisa
+=======
+ * @author Carlos
+>>>>>>> develop:Panaderia/src/Data/Costo.java
  */
 @Entity
 @Table(name = "precio_costo")
 @XmlRootElement
 @NamedQueries({
+<<<<<<< HEAD:Panaderia/src/Data/PrecioCosto.java
     @NamedQuery(name = "PrecioCosto.findAll", query = "SELECT p FROM PrecioCosto p"),
     @NamedQuery(name = "PrecioCosto.findByCostId", query = "SELECT p FROM PrecioCosto p WHERE p.costId = :costId"),
     @NamedQuery(name = "PrecioCosto.findByCostValor", query = "SELECT p FROM PrecioCosto p WHERE p.costValor = :costValor"),
     @NamedQuery(name = "PrecioCosto.findByCostFechaIngreso", query = "SELECT p FROM PrecioCosto p WHERE p.costFechaIngreso = :costFechaIngreso")})
 public class PrecioCosto implements Serializable {
+=======
+    @NamedQuery(name = "PrecioCosto.findAll", query = "SELECT p FROM PrecioCosto p")
+    , @NamedQuery(name = "PrecioCosto.findByCostId", query = "SELECT p FROM PrecioCosto p WHERE p.costId = :costId")
+    , @NamedQuery(name = "PrecioCosto.findByCostValor", query = "SELECT p FROM PrecioCosto p WHERE p.costValor = :costValor")
+    , @NamedQuery(name = "PrecioCosto.findByCostFechaIngreso", query = "SELECT p FROM PrecioCosto p WHERE p.costFechaIngreso = :costFechaIngreso")})
+public class Costo implements Serializable {
+
+>>>>>>> develop:Panaderia/src/Data/Costo.java
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "cost_id")
-    private Integer costId;
+    private Integer costoId;
     @Basic(optional = false)
     @Column(name = "cost_valor")
-    private int costValor;
+    private int costoValor;
     @Basic(optional = false)
     @Column(name = "cost_fecha_ingreso")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date costFechaIngreso;
+    private Date costoFechaIngreso;
     @JoinColumn(name = "cost_producto", referencedColumnName = "prod_id")
     @ManyToOne(optional = false)
-    private Producto costProducto;
+    private Producto costoProducto;
 
-    public PrecioCosto() {
+    public Costo() {
     }
 
-    public PrecioCosto(Integer costId) {
-        this.costId = costId;
+    public Costo(Integer costId) {
+        this.costoId = costId;
     }
 
-    public PrecioCosto(Integer costId, int costValor, Date costFechaIngreso) {
-        this.costId = costId;
-        this.costValor = costValor;
-        this.costFechaIngreso = costFechaIngreso;
+    public Costo(Integer costoId, int costoValor, Date costoFechaIngreso, Producto costoProducto) {
+        this.costoId = costoId;
+        this.costoValor = costoValor;
+        this.costoFechaIngreso = costoFechaIngreso;
+        this.costoProducto = costoProducto;
     }
 
     public Integer getCostId() {
-        return costId;
+        return costoId;
     }
 
     public void setCostId(Integer costId) {
-        this.costId = costId;
+        this.costoId = costId;
     }
 
     public int getCostValor() {
-        return costValor;
+        return costoValor;
     }
 
     public void setCostValor(int costValor) {
-        this.costValor = costValor;
+        this.costoValor = costValor;
     }
 
     public Date getCostFechaIngreso() {
-        return costFechaIngreso;
+        return costoFechaIngreso;
     }
 
     public void setCostFechaIngreso(Date costFechaIngreso) {
-        this.costFechaIngreso = costFechaIngreso;
+        this.costoFechaIngreso = costFechaIngreso;
     }
 
     public Producto getCostProducto() {
-        return costProducto;
+        return costoProducto;
     }
 
     public void setCostProducto(Producto costProducto) {
-        this.costProducto = costProducto;
+        this.costoProducto = costProducto;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (costId != null ? costId.hashCode() : 0);
+        hash += (costoId != null ? costoId.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof PrecioCosto)) {
+        if (!(object instanceof Costo)) {
             return false;
         }
-        PrecioCosto other = (PrecioCosto) object;
-        if ((this.costId == null && other.costId != null) || (this.costId != null && !this.costId.equals(other.costId))) {
+        Costo other = (Costo) object;
+        if ((this.costoId == null && other.costoId != null) || (this.costoId != null && !this.costoId.equals(other.costoId))) {
             return false;
         }
         return true;
@@ -119,7 +133,7 @@ public class PrecioCosto implements Serializable {
 
     @Override
     public String toString() {
-        return "Data.PrecioCosto[ costId=" + costId + " ]";
+        return "Data.PrecioCosto[ costId=" + costoId + " ]";
     }
     
 }
