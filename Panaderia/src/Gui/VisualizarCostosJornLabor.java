@@ -12,7 +12,7 @@ package Gui;
 public class VisualizarCostosJornLabor extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form VisualizarCostos
+     * Creates new form VisualizarCostossjdhkjahsdkjahsdkjas
      */
     public VisualizarCostosJornLabor() {
         initComponents();
@@ -29,9 +29,9 @@ public class VisualizarCostosJornLabor extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jl_FechaInicio = new javax.swing.JLabel();
-        jt_FechaInicio_jornada = new javax.swing.JTextField();
+        jXDatePicker1 = new org.jdesktop.swingx.JXDatePicker();
         jl_FechaFinal = new javax.swing.JLabel();
-        jt_FechaFinal_jornada = new javax.swing.JTextField();
+        jXDatePicker2 = new org.jdesktop.swingx.JXDatePicker();
         bt_MostrarReporte = new javax.swing.JToggleButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jt_tabla_CostosJornadaLaboral = new javax.swing.JTable();
@@ -45,17 +45,11 @@ public class VisualizarCostosJornLabor extends javax.swing.JInternalFrame {
 
         jl_FechaInicio.setText("Fecha Inicial:");
         jPanel1.add(jl_FechaInicio);
-
-        jt_FechaInicio_jornada.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jt_FechaInicio_jornadaActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jt_FechaInicio_jornada);
+        jPanel1.add(jXDatePicker1);
 
         jl_FechaFinal.setText("Fecha Final:");
         jPanel1.add(jl_FechaFinal);
-        jPanel1.add(jt_FechaFinal_jornada);
+        jPanel1.add(jXDatePicker2);
 
         bt_MostrarReporte.setText("Mostrar reporte");
         bt_MostrarReporte.addActionListener(new java.awt.event.ActionListener() {
@@ -122,19 +116,15 @@ public class VisualizarCostosJornLabor extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_bt_MostrarReporteActionPerformed
 
-    private void jt_FechaInicio_jornadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jt_FechaInicio_jornadaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jt_FechaInicio_jornadaActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton bt_MostrarReporte;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
+    private org.jdesktop.swingx.JXDatePicker jXDatePicker1;
+    private org.jdesktop.swingx.JXDatePicker jXDatePicker2;
     private javax.swing.JLabel jl_FechaFinal;
     private javax.swing.JLabel jl_FechaInicio;
-    private javax.swing.JTextField jt_FechaFinal_jornada;
-    private javax.swing.JTextField jt_FechaInicio_jornada;
     private javax.swing.JTable jt_tabla_CostosJornadaLaboral;
     // End of variables declaration//GEN-END:variables
 }
