@@ -127,16 +127,16 @@ public class IngresarProductos extends javax.swing.JInternalFrame {
 
         jPanel2.setLayout(new java.awt.GridLayout(4, 1, 20, 20));
 
-        jButton1.setText("insertar");
+        jButton1.setText("Insertar");
         jPanel2.add(jButton1);
 
-        jButton2.setText("buscar");
+        jButton2.setText("Buscar");
         jPanel2.add(jButton2);
 
-        jButton3.setText("modificar");
+        jButton3.setText("Modificar");
         jPanel2.add(jButton3);
 
-        jButton4.setText("eliminar");
+        jButton4.setText("Eliminar");
         jPanel2.add(jButton4);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
