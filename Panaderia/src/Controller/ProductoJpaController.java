@@ -21,7 +21,7 @@ import java.util.Collection;
 import Data.Receta;
 import Data.DetalleReceta;
 import Data.PrecioVenta;
-import Data.Costo;
+import Data.PrecioCosto;
 import Data.Producto;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -29,7 +29,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author yo
+ * @author luisa
  */
 public class ProductoJpaController implements Serializable {
 
@@ -56,7 +56,7 @@ public class ProductoJpaController implements Serializable {
             producto.setPrecioVentaCollection(new ArrayList<PrecioVenta>());
         }
         if (producto.getPrecioCostoCollection() == null) {
-            producto.setPrecioCostoCollection(new ArrayList<Costo>());
+            producto.setPrecioCostoCollection(new ArrayList<PrecioCosto>());
         }
         EntityManager em = null;
         try {
@@ -101,8 +101,8 @@ public class ProductoJpaController implements Serializable {
                 attachedPrecioVentaCollection.add(precioVentaCollectionPrecioVentaToAttach);
             }
             producto.setPrecioVentaCollection(attachedPrecioVentaCollection);
-            Collection<Costo> attachedPrecioCostoCollection = new ArrayList<Costo>();
-            for (Costo precioCostoCollectionPrecioCostoToAttach : producto.getPrecioCostoCollection()) {
+            Collection<PrecioCosto> attachedPrecioCostoCollection = new ArrayList<PrecioCosto>();
+            for (PrecioCosto precioCostoCollectionPrecioCostoToAttach : producto.getPrecioCostoCollection()) {
                 precioCostoCollectionPrecioCostoToAttach = em.getReference(precioCostoCollectionPrecioCostoToAttach.getClass(), precioCostoCollectionPrecioCostoToAttach.getCostId());
                 attachedPrecioCostoCollection.add(precioCostoCollectionPrecioCostoToAttach);
             }
@@ -156,7 +156,7 @@ public class ProductoJpaController implements Serializable {
                     oldPrecvProductoOfPrecioVentaCollectionPrecioVenta = em.merge(oldPrecvProductoOfPrecioVentaCollectionPrecioVenta);
                 }
             }
-            for (Costo precioCostoCollectionPrecioCosto : producto.getPrecioCostoCollection()) {
+            for (PrecioCosto precioCostoCollectionPrecioCosto : producto.getPrecioCostoCollection()) {
                 Producto oldCostProductoOfPrecioCostoCollectionPrecioCosto = precioCostoCollectionPrecioCosto.getCostProducto();
                 precioCostoCollectionPrecioCosto.setCostProducto(producto);
                 precioCostoCollectionPrecioCosto = em.merge(precioCostoCollectionPrecioCosto);
@@ -193,8 +193,8 @@ public class ProductoJpaController implements Serializable {
             Collection<DetalleReceta> detalleRecetaCollectionNew = producto.getDetalleRecetaCollection();
             Collection<PrecioVenta> precioVentaCollectionOld = persistentProducto.getPrecioVentaCollection();
             Collection<PrecioVenta> precioVentaCollectionNew = producto.getPrecioVentaCollection();
-            Collection<Costo> precioCostoCollectionOld = persistentProducto.getPrecioCostoCollection();
-            Collection<Costo> precioCostoCollectionNew = producto.getPrecioCostoCollection();
+            Collection<PrecioCosto> precioCostoCollectionOld = persistentProducto.getPrecioCostoCollection();
+            Collection<PrecioCosto> precioCostoCollectionNew = producto.getPrecioCostoCollection();
             List<String> illegalOrphanMessages = null;
             for (ProduccionPan produccionPanCollectionOldProduccionPan : produccionPanCollectionOld) {
                 if (!produccionPanCollectionNew.contains(produccionPanCollectionOldProduccionPan)) {
@@ -228,7 +228,7 @@ public class ProductoJpaController implements Serializable {
                     illegalOrphanMessages.add("You must retain PrecioVenta " + precioVentaCollectionOldPrecioVenta + " since its precvProducto field is not nullable.");
                 }
             }
-            for (Costo precioCostoCollectionOldPrecioCosto : precioCostoCollectionOld) {
+            for (PrecioCosto precioCostoCollectionOldPrecioCosto : precioCostoCollectionOld) {
                 if (!precioCostoCollectionNew.contains(precioCostoCollectionOldPrecioCosto)) {
                     if (illegalOrphanMessages == null) {
                         illegalOrphanMessages = new ArrayList<String>();
@@ -279,8 +279,8 @@ public class ProductoJpaController implements Serializable {
             }
             precioVentaCollectionNew = attachedPrecioVentaCollectionNew;
             producto.setPrecioVentaCollection(precioVentaCollectionNew);
-            Collection<Costo> attachedPrecioCostoCollectionNew = new ArrayList<Costo>();
-            for (Costo precioCostoCollectionNewPrecioCostoToAttach : precioCostoCollectionNew) {
+            Collection<PrecioCosto> attachedPrecioCostoCollectionNew = new ArrayList<PrecioCosto>();
+            for (PrecioCosto precioCostoCollectionNewPrecioCostoToAttach : precioCostoCollectionNew) {
                 precioCostoCollectionNewPrecioCostoToAttach = em.getReference(precioCostoCollectionNewPrecioCostoToAttach.getClass(), precioCostoCollectionNewPrecioCostoToAttach.getCostId());
                 attachedPrecioCostoCollectionNew.add(precioCostoCollectionNewPrecioCostoToAttach);
             }
@@ -355,7 +355,7 @@ public class ProductoJpaController implements Serializable {
                     }
                 }
             }
-            for (Costo precioCostoCollectionNewPrecioCosto : precioCostoCollectionNew) {
+            for (PrecioCosto precioCostoCollectionNewPrecioCosto : precioCostoCollectionNew) {
                 if (!precioCostoCollectionOld.contains(precioCostoCollectionNewPrecioCosto)) {
                     Producto oldCostProductoOfPrecioCostoCollectionNewPrecioCosto = precioCostoCollectionNewPrecioCosto.getCostProducto();
                     precioCostoCollectionNewPrecioCosto.setCostProducto(producto);
@@ -424,8 +424,8 @@ public class ProductoJpaController implements Serializable {
                 }
                 illegalOrphanMessages.add("This Producto (" + producto + ") cannot be destroyed since the PrecioVenta " + precioVentaCollectionOrphanCheckPrecioVenta + " in its precioVentaCollection field has a non-nullable precvProducto field.");
             }
-            Collection<Costo> precioCostoCollectionOrphanCheck = producto.getPrecioCostoCollection();
-            for (Costo precioCostoCollectionOrphanCheckPrecioCosto : precioCostoCollectionOrphanCheck) {
+            Collection<PrecioCosto> precioCostoCollectionOrphanCheck = producto.getPrecioCostoCollection();
+            for (PrecioCosto precioCostoCollectionOrphanCheckPrecioCosto : precioCostoCollectionOrphanCheck) {
                 if (illegalOrphanMessages == null) {
                     illegalOrphanMessages = new ArrayList<String>();
                 }

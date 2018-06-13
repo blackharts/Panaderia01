@@ -5,7 +5,7 @@
  */
 package Gui;
 
-import Controller.CostoJpaController;
+
 import Data.*;
 import Data.Producto;
 import com.mysql.jdbc.*;
@@ -228,12 +228,12 @@ public class IngresarCosto extends javax.swing.JInternalFrame {
         uni.setUnidId(cb_unidadmedida.getSelectedIndex());
         prod.setProdUnidadmedida(uni);
         int valor = Integer.parseInt(tf_nuevocosto.getText());
-        if(CostoJpaController.agregar(valor,prod)){
+        /*if(CostoJpaController.agregar(valor,prod)){
            JOptionPane.showMessageDialog(this,"registro Completo");
        }
        else{
           JOptionPane.showMessageDialog(this,"error :C");
-       }
+       }*/
         this.limpiar();
 
     }//GEN-LAST:event_bt_guardarActionPerformed

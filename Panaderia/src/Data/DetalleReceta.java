@@ -21,17 +21,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author yo
+ * @author luisa
  */
 @Entity
 @Table(name = "detalle_receta")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "DetalleReceta.findAll", query = "SELECT d FROM DetalleReceta d")
-    , @NamedQuery(name = "DetalleReceta.findByDrecId", query = "SELECT d FROM DetalleReceta d WHERE d.drecId = :drecId")
-    , @NamedQuery(name = "DetalleReceta.findByDrecCantidad", query = "SELECT d FROM DetalleReceta d WHERE d.drecCantidad = :drecCantidad")})
+    @NamedQuery(name = "DetalleReceta.findAll", query = "SELECT d FROM DetalleReceta d"),
+    @NamedQuery(name = "DetalleReceta.findByDrecId", query = "SELECT d FROM DetalleReceta d WHERE d.drecId = :drecId"),
+    @NamedQuery(name = "DetalleReceta.findByDrecCantidad", query = "SELECT d FROM DetalleReceta d WHERE d.drecCantidad = :drecCantidad")})
 public class DetalleReceta implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

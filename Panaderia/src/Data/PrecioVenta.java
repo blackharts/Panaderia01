@@ -24,18 +24,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author yo
+ * @author luisa
  */
 @Entity
 @Table(name = "precio_venta")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "PrecioVenta.findAll", query = "SELECT p FROM PrecioVenta p")
-    , @NamedQuery(name = "PrecioVenta.findByPrecvId", query = "SELECT p FROM PrecioVenta p WHERE p.precvId = :precvId")
-    , @NamedQuery(name = "PrecioVenta.findByPrecvValor", query = "SELECT p FROM PrecioVenta p WHERE p.precvValor = :precvValor")
-    , @NamedQuery(name = "PrecioVenta.findByPrecvFechaIngreso", query = "SELECT p FROM PrecioVenta p WHERE p.precvFechaIngreso = :precvFechaIngreso")})
+    @NamedQuery(name = "PrecioVenta.findAll", query = "SELECT p FROM PrecioVenta p"),
+    @NamedQuery(name = "PrecioVenta.findByPrecvId", query = "SELECT p FROM PrecioVenta p WHERE p.precvId = :precvId"),
+    @NamedQuery(name = "PrecioVenta.findByPrecvValor", query = "SELECT p FROM PrecioVenta p WHERE p.precvValor = :precvValor"),
+    @NamedQuery(name = "PrecioVenta.findByPrecvFechaIngreso", query = "SELECT p FROM PrecioVenta p WHERE p.precvFechaIngreso = :precvFechaIngreso")})
 public class PrecioVenta implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -19,7 +19,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author yo
+ * @author luisa
  */
 public class ProduccionPanJpaController implements Serializable {
 
