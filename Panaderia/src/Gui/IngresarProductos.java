@@ -5,11 +5,15 @@
  */
 package Gui;
 
+import Controller.LineaJpaController;
+import Controller.ProductoJpaController;
 import Data.Familia;
 import Data.Linea;
+import Data.Producto;
 import Data.UnidadMedida;
 import java.util.Iterator;
 import java.util.List;
+
 
 /**
  *
@@ -17,9 +21,15 @@ import java.util.List;
  */
 public class IngresarProductos extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form NewJInternalFrame
-     */
+    void limpiar() {
+        jt_nombre.setText("");
+        jc_umedida.setSelectedIndex(0);
+        jt_marca.setText("");
+        jt_formato.setText("");
+        jc_linea.setSelectedIndex(0);
+        jc_familia.setSelectedIndex(0);
+    }
+
     public IngresarProductos() {
         initComponents();
         List<UnidadMedida> u = query_unidad_medida.getResultList();
@@ -43,7 +53,7 @@ public class IngresarProductos extends javax.swing.JInternalFrame {
             // se recorre
             jc_linea.addItem(lin.getLineNombre());//se muestra en el combobox  
         }
-       
+
     }
 
     /**
@@ -60,8 +70,6 @@ public class IngresarProductos extends javax.swing.JInternalFrame {
         query_unidad_medida = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT u FROM UnidadMedida u");
         query_familia = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT f FROM Familia f");
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jt_codbarra = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jt_nombre = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -75,7 +83,7 @@ public class IngresarProductos extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         jc_familia = new javax.swing.JComboBox();
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        bt_insertar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
@@ -88,10 +96,6 @@ public class IngresarProductos extends javax.swing.JInternalFrame {
         setTitle("Ingresar Productos");
 
         jPanel1.setLayout(new java.awt.GridLayout(7, 2, 10, 10));
-
-        jLabel1.setText("Código barra:");
-        jPanel1.add(jLabel1);
-        jPanel1.add(jt_codbarra);
 
         jLabel2.setText("Nombre:");
         jPanel1.add(jLabel2);
@@ -127,8 +131,13 @@ public class IngresarProductos extends javax.swing.JInternalFrame {
 
         jPanel2.setLayout(new java.awt.GridLayout(4, 1, 20, 20));
 
-        jButton1.setText("insertar");
-        jPanel2.add(jButton1);
+        bt_insertar.setText("insertar");
+        bt_insertar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_insertarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(bt_insertar);
 
         jButton2.setText("buscar");
         jPanel2.add(jButton2);
@@ -186,14 +195,37 @@ public class IngresarProductos extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jc_umedidaActionPerformed
 
+    private void bt_insertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_insertarActionPerformed
+        ProductoJpaController prd = new ProductoJpaController(entityManager.getEntityManagerFactory());
+        LineaJpaController lin = new LineaJpaController(entityManager.getEntityManagerFactory());
+        Producto prod = new Producto();
+        Linea l = new Linea();
+        
+        l.setLineId(jc_linea.getSelectedIndex()+1);
+        
+        UnidadMedida u = new UnidadMedida();
+        u.setUnidId(jc_umedida.getSelectedIndex()+1);
+
+        Familia f = new Familia();
+        f.setFamiId(jc_familia.getSelectedIndex()+1);
+        
+        prod.setProdNombre(jt_nombre.getText().toString());
+        prod.setProdUnidadmedida(u);
+        prod.setProdMarca(jt_marca.getText().toString());
+        prod.setProdFormato(jt_formato.getText().toString());
+        prod.setProdLinea(l);
+        prod.setProdFamilia(f);
+        prd.create(prod);
+        this.limpiar();
+    }//GEN-LAST:event_bt_insertarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bt_insertar;
     private javax.persistence.EntityManager entityManager;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -207,7 +239,6 @@ public class IngresarProductos extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox jc_familia;
     private javax.swing.JComboBox jc_linea;
     private javax.swing.JComboBox jc_umedida;
-    private javax.swing.JTextField jt_codbarra;
     private javax.swing.JTextField jt_formato;
     private javax.swing.JTextField jt_marca;
     private javax.swing.JTextField jt_nombre;
