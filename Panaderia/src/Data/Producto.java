@@ -25,19 +25,18 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author yo
+ * @author luisa
  */
 @Entity
 @Table(name = "producto")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Producto.findAll", query = "SELECT p FROM Producto p")
-    , @NamedQuery(name = "Producto.findByProdId", query = "SELECT p FROM Producto p WHERE p.prodId = :prodId")
-    , @NamedQuery(name = "Producto.findByProdNombre", query = "SELECT p FROM Producto p WHERE p.prodNombre = :prodNombre")
-    , @NamedQuery(name = "Producto.findByProdMarca", query = "SELECT p FROM Producto p WHERE p.prodMarca = :prodMarca")
-    , @NamedQuery(name = "Producto.findByProdFormato", query = "SELECT p FROM Producto p WHERE p.prodFormato = :prodFormato")})
+    @NamedQuery(name = "Producto.findAll", query = "SELECT p FROM Producto p"),
+    @NamedQuery(name = "Producto.findByProdId", query = "SELECT p FROM Producto p WHERE p.prodId = :prodId"),
+    @NamedQuery(name = "Producto.findByProdNombre", query = "SELECT p FROM Producto p WHERE p.prodNombre = :prodNombre"),
+    @NamedQuery(name = "Producto.findByProdMarca", query = "SELECT p FROM Producto p WHERE p.prodMarca = :prodMarca"),
+    @NamedQuery(name = "Producto.findByProdFormato", query = "SELECT p FROM Producto p WHERE p.prodFormato = :prodFormato")})
 public class Producto implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -62,7 +61,7 @@ public class Producto implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "precvProducto")
     private Collection<PrecioVenta> precioVentaCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "costProducto")
-    private Collection<Costo> precioCostoCollection;
+    private Collection<PrecioCosto> precioCostoCollection;
     @JoinColumn(name = "prod_familia", referencedColumnName = "fami_id")
     @ManyToOne(optional = false)
     private Familia prodFamilia;
@@ -156,11 +155,11 @@ public class Producto implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Costo> getPrecioCostoCollection() {
+    public Collection<PrecioCosto> getPrecioCostoCollection() {
         return precioCostoCollection;
     }
 
-    public void setPrecioCostoCollection(Collection<Costo> precioCostoCollection) {
+    public void setPrecioCostoCollection(Collection<PrecioCosto> precioCostoCollection) {
         this.precioCostoCollection = precioCostoCollection;
     }
 

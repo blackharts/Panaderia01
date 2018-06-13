@@ -90,12 +90,12 @@ public class DescripLinea extends javax.swing.JInternalFrame {
         
         String nombre="";
         nombre=(tf_descrip.getText().toString());
-       if(LineaJpaController.agregar(nombre)){
+       /*if(LineaJpaController.agregar(nombre)){
            JOptionPane.showMessageDialog(this,"registro Completo");
        }
        else{
           JOptionPane.showMessageDialog(this,"error :C");
-       }
+       }*/
         this.limpiar();
 
     }//GEN-LAST:event_bt_guardadrActionPerformed

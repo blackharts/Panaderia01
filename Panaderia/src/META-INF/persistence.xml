@@ -11,7 +11,7 @@
     <class>Data.Receta</class>
     <class>Data.UnidadMedida</class>
     <class>Data.Usuario</class>
-    <class>Data.Costo</class>
+    <class>Data.PrecioCosto</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/db_panaderia?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

@@ -98,11 +98,11 @@ public class IngresarUnidadMedida extends javax.swing.JInternalFrame {
         String descripcion = "";
         Codigo = (tf_codigo.getText().toString());
         descripcion = (tf_decripcion.getText().toString());
-        if (UnidadMedidaJpaController.agregar(Codigo, descripcion)) {
+        /*if (UnidadMedidaJpaController.agregar(Codigo, descripcion)) {
             JOptionPane.showMessageDialog(this, "Datos ingresados correctamente");
         } else {
             JOptionPane.showMessageDialog(this, "Error");
-        }
+        }*/
     }//GEN-LAST:event_Bton_GuardarActionPerformed
 
     private void tf_codigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_codigoActionPerformed
