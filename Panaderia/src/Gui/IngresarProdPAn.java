@@ -5,17 +5,46 @@
  */
 package Gui;
 
+import Controller.ProduccionPanJpaController;
+import Controller.UnidadMedidaJpaController;
+import Data.Familia;
+import Data.ProduccionPan;
+import Data.Producto;
+import Data.UnidadMedida;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author luisa
  */
 public class IngresarProdPAn extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form IngresarProdPAn
-     */
+   void limpiar()
+   {
+   tf_produccion.setText("");
+   cb_umedida.setSelectedIndex(0);
+   cb_producto.setSelectedIndex(0);
+   }
     public IngresarProdPAn() {
         initComponents();
+        List<Producto> p = query_producto.getResultList();
+        List<UnidadMedida> u = query_unidadmedida.getResultList();
+
+        cb_producto.removeAllItems();//se limpia el combobox
+        cb_umedida.removeAllItems();//se limpia el combobox
+
+        for (Iterator<UnidadMedida> it = u.iterator(); it.hasNext();) {
+            UnidadMedida uni = it.next();
+            cb_umedida.addItem(uni.getUnidDescripcion());//se muestra en el combobox  
+        }
+        for (Iterator<Producto> it = p.iterator(); it.hasNext();) {
+            Producto pro = it.next();
+            // se recorre
+            cb_producto.addItem(pro.getProdNombre());//se muestra en el combobox  
+        }
     }
 
     /**
@@ -27,24 +56,21 @@ public class IngresarProdPAn extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        entityManager1 = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("PanaderiaPU").createEntityManager();
+        query_producto = java.beans.Beans.isDesignTime() ? null : entityManager1.createQuery("SELECT p FROM Producto p");
+        query_unidadmedida = java.beans.Beans.isDesignTime() ? null : entityManager1.createQuery("SELECT u FROM UnidadMedida u");
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        combo_producto = new javax.swing.JComboBox();
-        tf_unidadMedida = new javax.swing.JTextField();
+        txt_producto = new javax.swing.JLabel();
+        txt_unidadmedida = new javax.swing.JLabel();
+        txt_cantidad = new javax.swing.JLabel();
+        cb_producto = new javax.swing.JComboBox();
+        cb_umedida = new javax.swing.JComboBox<>();
         tf_produccion = new javax.swing.JTextField();
-        Boton_Ingresa = new javax.swing.JButton();
-        BotonModificar = new javax.swing.JButton();
-        Boton_Eliminar = new javax.swing.JButton();
+        bt_guardar = new javax.swing.JButton();
+        bt_modificar = new javax.swing.JButton();
+        bt_eliminar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        Tabla_produccionDiaria = new javax.swing.JTable();
-
-        jTextField1.setText("jTextField1");
-
-        jButton1.setText("jButton1");
+        tb_produccionppan = new javax.swing.JTable();
 
         setClosable(true);
         setIconifiable(true);
@@ -53,30 +79,40 @@ public class IngresarProdPAn extends javax.swing.JInternalFrame {
 
         jPanel1.setLayout(new java.awt.GridLayout(3, 3, 10, 10));
 
-        jLabel1.setText("Producto Final");
-        jPanel1.add(jLabel1);
+        txt_producto.setText("Producto ");
+        jPanel1.add(txt_producto);
 
-        jLabel2.setText("Unidad Medida");
-        jPanel1.add(jLabel2);
+        txt_unidadmedida.setText("Unidad Medida");
+        jPanel1.add(txt_unidadmedida);
 
-        jLabel3.setText("Producción");
-        jPanel1.add(jLabel3);
+        txt_cantidad.setText("Cantidad");
+        jPanel1.add(txt_cantidad);
 
-        combo_producto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(combo_producto);
-        jPanel1.add(tf_unidadMedida);
+        cb_producto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_productoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cb_producto);
+
+        jPanel1.add(cb_umedida);
         jPanel1.add(tf_produccion);
 
-        Boton_Ingresa.setText("Ingresar");
-        jPanel1.add(Boton_Ingresa);
+        bt_guardar.setText("Guardar");
+        bt_guardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_guardarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(bt_guardar);
 
-        BotonModificar.setText("Modificar");
-        jPanel1.add(BotonModificar);
+        bt_modificar.setText("Modificar");
+        jPanel1.add(bt_modificar);
 
-        Boton_Eliminar.setText("Eliminar");
-        jPanel1.add(Boton_Eliminar);
+        bt_eliminar.setText("Eliminar");
+        jPanel1.add(bt_eliminar);
 
-        Tabla_produccionDiaria.setModel(new javax.swing.table.DefaultTableModel(
+        tb_produccionppan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -95,7 +131,7 @@ public class IngresarProdPAn extends javax.swing.JInternalFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(Tabla_produccionDiaria);
+        jScrollPane1.setViewportView(tb_produccionppan);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -121,21 +157,56 @@ public class IngresarProdPAn extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cb_productoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_productoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cb_productoActionPerformed
+
+    private void bt_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_guardarActionPerformed
+
+        ProduccionPanJpaController pruduccion = new ProduccionPanJpaController(entityManager1.getEntityManagerFactory());
+       
+
+        ProduccionPan pp = new ProduccionPan();
+        Producto p = new Producto();
+        p.setProdId(cb_producto.getSelectedIndex() + 1);
+
+        
+        UnidadMedida u = new UnidadMedida();
+        u.setUnidId(cb_umedida.getSelectedIndex() + 1);
+
+        
+
+        
+        
+        Date fecha = new Date();
+        pp.setPpanFechaIngreso(fecha);
+        pp.setPpanProducto(p);
+        pp.setPpanUnidadMedida(u);
+        pp.setPpanProduccion(Double.parseDouble(tf_produccion.getText()));
+  
+        pruduccion.create(pp);
+        JOptionPane.showMessageDialog(null,"Se ha insertado datos");
+        this.limpiar();
+
+
+    }//GEN-LAST:event_bt_guardarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BotonModificar;
-    private javax.swing.JButton Boton_Eliminar;
-    private javax.swing.JButton Boton_Ingresa;
-    private javax.swing.JTable Tabla_produccionDiaria;
-    private javax.swing.JComboBox combo_producto;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JButton bt_eliminar;
+    private javax.swing.JButton bt_guardar;
+    private javax.swing.JButton bt_modificar;
+    private javax.swing.JComboBox cb_producto;
+    private javax.swing.JComboBox<String> cb_umedida;
+    private javax.persistence.EntityManager entityManager1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
+    private javax.persistence.Query query_producto;
+    private javax.persistence.Query query_unidadmedida;
+    private javax.swing.JTable tb_produccionppan;
     private javax.swing.JTextField tf_produccion;
-    private javax.swing.JTextField tf_unidadMedida;
+    private javax.swing.JLabel txt_cantidad;
+    private javax.swing.JLabel txt_producto;
+    private javax.swing.JLabel txt_unidadmedida;
     // End of variables declaration//GEN-END:variables
 }

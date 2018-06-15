@@ -12,17 +12,18 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import Data.Producto;
-import Data.UnidadMedida;
+import Data.ProduccionPan;
 import java.util.ArrayList;
 import java.util.Collection;
+import Data.Producto;
+import Data.UnidadMedida;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author luisa
+ * @author KevinRoss
  */
 public class UnidadMedidaJpaController implements Serializable {
 
@@ -36,6 +37,9 @@ public class UnidadMedidaJpaController implements Serializable {
     }
 
     public void create(UnidadMedida unidadMedida) {
+        if (unidadMedida.getProduccionPanCollection() == null) {
+            unidadMedida.setProduccionPanCollection(new ArrayList<ProduccionPan>());
+        }
         if (unidadMedida.getProductoCollection() == null) {
             unidadMedida.setProductoCollection(new ArrayList<Producto>());
         }
@@ -43,6 +47,12 @@ public class UnidadMedidaJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            Collection<ProduccionPan> attachedProduccionPanCollection = new ArrayList<ProduccionPan>();
+            for (ProduccionPan produccionPanCollectionProduccionPanToAttach : unidadMedida.getProduccionPanCollection()) {
+                produccionPanCollectionProduccionPanToAttach = em.getReference(produccionPanCollectionProduccionPanToAttach.getClass(), produccionPanCollectionProduccionPanToAttach.getPpanId());
+                attachedProduccionPanCollection.add(produccionPanCollectionProduccionPanToAttach);
+            }
+            unidadMedida.setProduccionPanCollection(attachedProduccionPanCollection);
             Collection<Producto> attachedProductoCollection = new ArrayList<Producto>();
             for (Producto productoCollectionProductoToAttach : unidadMedida.getProductoCollection()) {
                 productoCollectionProductoToAttach = em.getReference(productoCollectionProductoToAttach.getClass(), productoCollectionProductoToAttach.getProdId());
@@ -50,6 +60,15 @@ public class UnidadMedidaJpaController implements Serializable {
             }
             unidadMedida.setProductoCollection(attachedProductoCollection);
             em.persist(unidadMedida);
+            for (ProduccionPan produccionPanCollectionProduccionPan : unidadMedida.getProduccionPanCollection()) {
+                UnidadMedida oldPpanUnidadMedidaOfProduccionPanCollectionProduccionPan = produccionPanCollectionProduccionPan.getPpanUnidadMedida();
+                produccionPanCollectionProduccionPan.setPpanUnidadMedida(unidadMedida);
+                produccionPanCollectionProduccionPan = em.merge(produccionPanCollectionProduccionPan);
+                if (oldPpanUnidadMedidaOfProduccionPanCollectionProduccionPan != null) {
+                    oldPpanUnidadMedidaOfProduccionPanCollectionProduccionPan.getProduccionPanCollection().remove(produccionPanCollectionProduccionPan);
+                    oldPpanUnidadMedidaOfProduccionPanCollectionProduccionPan = em.merge(oldPpanUnidadMedidaOfProduccionPanCollectionProduccionPan);
+                }
+            }
             for (Producto productoCollectionProducto : unidadMedida.getProductoCollection()) {
                 UnidadMedida oldProdUnidadmedidaOfProductoCollectionProducto = productoCollectionProducto.getProdUnidadmedida();
                 productoCollectionProducto.setProdUnidadmedida(unidadMedida);
@@ -73,9 +92,19 @@ public class UnidadMedidaJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             UnidadMedida persistentUnidadMedida = em.find(UnidadMedida.class, unidadMedida.getUnidId());
+            Collection<ProduccionPan> produccionPanCollectionOld = persistentUnidadMedida.getProduccionPanCollection();
+            Collection<ProduccionPan> produccionPanCollectionNew = unidadMedida.getProduccionPanCollection();
             Collection<Producto> productoCollectionOld = persistentUnidadMedida.getProductoCollection();
             Collection<Producto> productoCollectionNew = unidadMedida.getProductoCollection();
             List<String> illegalOrphanMessages = null;
+            for (ProduccionPan produccionPanCollectionOldProduccionPan : produccionPanCollectionOld) {
+                if (!produccionPanCollectionNew.contains(produccionPanCollectionOldProduccionPan)) {
+                    if (illegalOrphanMessages == null) {
+                        illegalOrphanMessages = new ArrayList<String>();
+                    }
+                    illegalOrphanMessages.add("You must retain ProduccionPan " + produccionPanCollectionOldProduccionPan + " since its ppanUnidadMedida field is not nullable.");
+                }
+            }
             for (Producto productoCollectionOldProducto : productoCollectionOld) {
                 if (!productoCollectionNew.contains(productoCollectionOldProducto)) {
                     if (illegalOrphanMessages == null) {
@@ -87,6 +116,13 @@ public class UnidadMedidaJpaController implements Serializable {
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
             }
+            Collection<ProduccionPan> attachedProduccionPanCollectionNew = new ArrayList<ProduccionPan>();
+            for (ProduccionPan produccionPanCollectionNewProduccionPanToAttach : produccionPanCollectionNew) {
+                produccionPanCollectionNewProduccionPanToAttach = em.getReference(produccionPanCollectionNewProduccionPanToAttach.getClass(), produccionPanCollectionNewProduccionPanToAttach.getPpanId());
+                attachedProduccionPanCollectionNew.add(produccionPanCollectionNewProduccionPanToAttach);
+            }
+            produccionPanCollectionNew = attachedProduccionPanCollectionNew;
+            unidadMedida.setProduccionPanCollection(produccionPanCollectionNew);
             Collection<Producto> attachedProductoCollectionNew = new ArrayList<Producto>();
             for (Producto productoCollectionNewProductoToAttach : productoCollectionNew) {
                 productoCollectionNewProductoToAttach = em.getReference(productoCollectionNewProductoToAttach.getClass(), productoCollectionNewProductoToAttach.getProdId());
@@ -95,6 +131,17 @@ public class UnidadMedidaJpaController implements Serializable {
             productoCollectionNew = attachedProductoCollectionNew;
             unidadMedida.setProductoCollection(productoCollectionNew);
             unidadMedida = em.merge(unidadMedida);
+            for (ProduccionPan produccionPanCollectionNewProduccionPan : produccionPanCollectionNew) {
+                if (!produccionPanCollectionOld.contains(produccionPanCollectionNewProduccionPan)) {
+                    UnidadMedida oldPpanUnidadMedidaOfProduccionPanCollectionNewProduccionPan = produccionPanCollectionNewProduccionPan.getPpanUnidadMedida();
+                    produccionPanCollectionNewProduccionPan.setPpanUnidadMedida(unidadMedida);
+                    produccionPanCollectionNewProduccionPan = em.merge(produccionPanCollectionNewProduccionPan);
+                    if (oldPpanUnidadMedidaOfProduccionPanCollectionNewProduccionPan != null && !oldPpanUnidadMedidaOfProduccionPanCollectionNewProduccionPan.equals(unidadMedida)) {
+                        oldPpanUnidadMedidaOfProduccionPanCollectionNewProduccionPan.getProduccionPanCollection().remove(produccionPanCollectionNewProduccionPan);
+                        oldPpanUnidadMedidaOfProduccionPanCollectionNewProduccionPan = em.merge(oldPpanUnidadMedidaOfProduccionPanCollectionNewProduccionPan);
+                    }
+                }
+            }
             for (Producto productoCollectionNewProducto : productoCollectionNew) {
                 if (!productoCollectionOld.contains(productoCollectionNewProducto)) {
                     UnidadMedida oldProdUnidadmedidaOfProductoCollectionNewProducto = productoCollectionNewProducto.getProdUnidadmedida();
@@ -136,6 +183,13 @@ public class UnidadMedidaJpaController implements Serializable {
                 throw new NonexistentEntityException("The unidadMedida with id " + id + " no longer exists.", enfe);
             }
             List<String> illegalOrphanMessages = null;
+            Collection<ProduccionPan> produccionPanCollectionOrphanCheck = unidadMedida.getProduccionPanCollection();
+            for (ProduccionPan produccionPanCollectionOrphanCheckProduccionPan : produccionPanCollectionOrphanCheck) {
+                if (illegalOrphanMessages == null) {
+                    illegalOrphanMessages = new ArrayList<String>();
+                }
+                illegalOrphanMessages.add("This UnidadMedida (" + unidadMedida + ") cannot be destroyed since the ProduccionPan " + produccionPanCollectionOrphanCheckProduccionPan + " in its produccionPanCollection field has a non-nullable ppanUnidadMedida field.");
+            }
             Collection<Producto> productoCollectionOrphanCheck = unidadMedida.getProductoCollection();
             for (Producto productoCollectionOrphanCheckProducto : productoCollectionOrphanCheck) {
                 if (illegalOrphanMessages == null) {
