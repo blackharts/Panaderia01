@@ -15,12 +15,15 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author luisa
  */
 public class IngresarProdPAn extends javax.swing.JInternalFrame {
+    
+
 
    void limpiar()
    {
@@ -29,6 +32,7 @@ public class IngresarProdPAn extends javax.swing.JInternalFrame {
    cb_producto.setSelectedIndex(0);
    }
     public IngresarProdPAn() {
+    
         initComponents();
         List<Producto> p = query_producto.getResultList();
         List<UnidadMedida> u = query_unidadmedida.getResultList();
@@ -45,6 +49,30 @@ public class IngresarProdPAn extends javax.swing.JInternalFrame {
             // se recorre
             cb_producto.addItem(pro.getProdNombre());//se muestra en el combobox  
         }
+    }
+    
+    
+    public void mostrarProducto() {
+        
+        String[] columnas = {"Id", "Nombre", "U.Medida", "Marca", "Formato", "Linea", "Familia"};
+        Object[] obj = new Object[7];
+        DefaultTableModel tabla = new DefaultTableModel(null, columnas);
+        Producto p = new Producto();
+
+        List<Producto> prd = query_producto.getResultList();
+        for (int i = 0; i < prd.size(); i++) {
+             p = (Producto) prd.get(i);
+            obj[0] = p.getProdId();
+            obj[1] = p.getProdNombre();
+            obj[2] = p.getProdUnidadmedida();
+            obj[3] = p.getProdMarca();
+            obj[4] = p.getProdFormato();
+            obj[5] = p.getProdLinea();
+            obj[6] = p.getProdFamilia();
+            tabla.addRow(obj);
+        }
+        tb_produccionppan.setModel(tabla);
+
     }
 
     /**
@@ -169,15 +197,10 @@ public class IngresarProdPAn extends javax.swing.JInternalFrame {
         ProduccionPan pp = new ProduccionPan();
         Producto p = new Producto();
         p.setProdId(cb_producto.getSelectedIndex() + 1);
-
-        
+      
         UnidadMedida u = new UnidadMedida();
         u.setUnidId(cb_umedida.getSelectedIndex() + 1);
 
-        
-
-        
-        
         Date fecha = new Date();
         pp.setPpanFechaIngreso(fecha);
         pp.setPpanProducto(p);
