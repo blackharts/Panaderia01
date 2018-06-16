@@ -24,10 +24,18 @@ import javax.persistence.EntityManagerFactory;
  */
 public class ProduccionPanJpaController implements Serializable {
 
+    public static void destroy(ProduccionPan p) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public ProduccionPanJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
+
+    public ProduccionPanJpaController() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
