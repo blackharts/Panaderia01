@@ -235,9 +235,14 @@ public class IngresarProdPAn extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_bt_guardarActionPerformed
 
     private void bt_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_eliminarActionPerformed
-        int row = tb_produccion.getSelectedRow();
-        int opc = JOptionPane.showConfirmDialog(this, "¿ESTAS SEGURO QUE DESEA ELIMINAR ESTE REGISTRO?", "Pregunta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-       
+        try {
+            ProduccionPan p = (ProduccionPan) tb_produccion.getValueAt(tb_produccion.getSelectedRow(), 0);
+            ProduccionPanJpaController.destroy(p.get());
+            JOptionPane.showMessageDialog(null, "Datos Eliminado Correctamente");
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
     }//GEN-LAST:event_bt_eliminarActionPerformed
 
 
