@@ -32,20 +32,28 @@ public class IngresarProdPAn extends javax.swing.JInternalFrame {
     public IngresarProdPAn() {
 
         initComponents();
-        List<Producto> p = query_producto.getResultList();
-        List<UnidadMedida> u = query_unidadmedida.getResultList();
+        this.mostrarProducto();
 
-        cb_producto.removeAllItems();//se limpia el combobox
-        cb_umedida.removeAllItems();//se limpia el combobox
+        try {
 
-        for (Iterator<UnidadMedida> it = u.iterator(); it.hasNext();) {
-            UnidadMedida uni = it.next();
-            cb_umedida.addItem(uni.getUnidDescripcion());//se muestra en el combobox  
-        }
-        for (Iterator<Producto> it = p.iterator(); it.hasNext();) {
-            Producto pro = it.next();
-            // se recorre
-            cb_producto.addItem(pro.getProdNombre());//se muestra en el combobox  
+            List<Producto> p = query_producto.getResultList();
+            List<UnidadMedida> u = query_unidadmedida.getResultList();
+
+            cb_producto.removeAllItems();//se limpia el combobox
+            cb_umedida.removeAllItems();//se limpia el combobox
+
+            for (Iterator<UnidadMedida> it = u.iterator(); it.hasNext();) {
+                UnidadMedida uni = it.next();
+                cb_umedida.addItem(uni.getUnidDescripcion());//se muestra en el combobox  
+            }
+            for (Iterator<Producto> it = p.iterator(); it.hasNext();) {
+                Producto pro = it.next();
+                // se recorre
+                cb_producto.addItem(pro.getProdNombre());//se muestra en el combobox  
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
 
@@ -56,7 +64,7 @@ public class IngresarProdPAn extends javax.swing.JInternalFrame {
         DefaultTableModel tabla = new DefaultTableModel(null, columnas);
         ProduccionPan p = new ProduccionPan();
 
-        List<ProduccionPan> pro = query_tabla.getResultList();
+        List<ProduccionPan> pro = query1.getResultList();
         for (int i = 0; i < pro.size(); i++) {
             p = (ProduccionPan) pro.get(i);
             obj[0] = p.getPpanId();
@@ -64,11 +72,13 @@ public class IngresarProdPAn extends javax.swing.JInternalFrame {
             obj[2] = p.getPpanUnidadMedida().getUnidDescripcion();
             obj[3] = p.getPpanProduccion();
             obj[4] = p.getPpanFechaIngreso();
+
             tabla.addRow(obj);
         }
         tb_produccionppan.setModel(tabla);
     }
 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -81,7 +91,7 @@ public class IngresarProdPAn extends javax.swing.JInternalFrame {
         entityManager1 = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("PanaderiaPU").createEntityManager();
         query_producto = java.beans.Beans.isDesignTime() ? null : entityManager1.createQuery("SELECT p FROM Producto p");
         query_unidadmedida = java.beans.Beans.isDesignTime() ? null : entityManager1.createQuery("SELECT u FROM UnidadMedida u");
-        query_tabla = java.beans.Beans.isDesignTime() ? null : entityManager1.createQuery("SELECT t FROM ProduccionPan t");
+        query1 = java.beans.Beans.isDesignTime() ? null : entityManager1.createQuery("SELECT T FROM ProduccionPan T");
         jPanel1 = new javax.swing.JPanel();
         txt_producto = new javax.swing.JLabel();
         txt_unidadmedida = new javax.swing.JLabel();
@@ -137,23 +147,16 @@ public class IngresarProdPAn extends javax.swing.JInternalFrame {
 
         tb_produccionppan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Producto", "Unidad Medida", "Producción", "Fecha"
+                "Título 1", "Título 2", "Título 3", "Título 4", "Título 5"
             }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
+        ));
         tb_produccionppan.setToolTipText("");
         jScrollPane1.setViewportView(tb_produccionppan);
 
@@ -219,8 +222,8 @@ public class IngresarProdPAn extends javax.swing.JInternalFrame {
     private javax.persistence.EntityManager entityManager1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.persistence.Query query1;
     private javax.persistence.Query query_producto;
-    private javax.persistence.Query query_tabla;
     private javax.persistence.Query query_unidadmedida;
     private javax.swing.JTable tb_produccionppan;
     private javax.swing.JTextField tf_produccion;
