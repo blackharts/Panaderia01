@@ -7,9 +7,9 @@
         <Property name="persistenceUnit" type="java.lang.String" value="pu"/>
       </Properties>
     </Component>
-    <Component class="javax.persistence.Query" name="query1">
+    <Component class="javax.persistence.Query" name="query2">
       <Properties>
-        <Property name="query" type="java.lang.String" value="SELECT u UnidadMedida From u"/>
+        <Property name="query" type="java.lang.String" value="SELECT U  FROM UnidadMedida U"/>
         <Property name="entityManager" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$EMProperty$EntityManagerEditor">
           <ComponentRef name="entityManager1"/>
         </Property>
@@ -127,12 +127,12 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bt_modificarActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="bt_buscar">
+        <Component class="javax.swing.JButton" name="bt_eliminar">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Buscar"/>
+            <Property name="text" type="java.lang.String" value="Elimnar"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bt_buscarActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bt_eliminarActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
