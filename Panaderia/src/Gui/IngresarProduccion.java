@@ -24,7 +24,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author luisa
  */
-public class IngresarProdPAn extends javax.swing.JInternalFrame {
+public class IngresarProduccion extends javax.swing.JInternalFrame {
 
     DefaultTableModel tt = new DefaultTableModel();
 
@@ -35,9 +35,9 @@ public class IngresarProdPAn extends javax.swing.JInternalFrame {
     }
 
     /*se utilizar para borar info una vez guardada */
-    public IngresarProdPAn() {
+    public IngresarProduccion() {
         initComponents();
-        this.mostrarProduccion();
+        this.mostrarTabla();
 
         try {
             List<Producto> p = query_producto.getResultList();
@@ -59,7 +59,7 @@ public class IngresarProdPAn extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
-    }
+        this.mostrarTabla();    }
 
     void modificarProducto() {
         ProduccionPanJpaController pruduccion = new ProduccionPanJpaController(entityManager1.getEntityManagerFactory());
@@ -85,8 +85,10 @@ public class IngresarProdPAn extends javax.swing.JInternalFrame {
             int SioNo = JOptionPane.showConfirmDialog(this, "Desea modificar?", "Confirmacion", JOptionPane.YES_NO_OPTION);
             if (SioNo == 0) {
                 pruduccion.edit(pp);
+
                 JOptionPane.showMessageDialog(this, "Datos modificados");
-                this.mostrarProduccion();
+                this.mostrarTabla();
+
             } else {
                 limpiar();
             }
@@ -94,7 +96,7 @@ public class IngresarProdPAn extends javax.swing.JInternalFrame {
             e.printStackTrace();
         }
         limpiar();
-        this.mostrarProduccion();
+        this.mostrarTabla();
 
     }
 
@@ -106,7 +108,7 @@ public class IngresarProdPAn extends javax.swing.JInternalFrame {
             if (SioNo == 0) {
                 if (id != null) {
                     prd.destroy(id);
-                    this.mostrarProduccion();
+                    this.mostrarTabla();
                     JOptionPane.showMessageDialog(null, "Se ha eliminado el id: " + id);
 
                 } else {
@@ -120,11 +122,11 @@ public class IngresarProdPAn extends javax.swing.JInternalFrame {
             e.printStackTrace();
         }
         limpiar();
-        mostrarProduccion();
+        mostrarTabla();
 
     }
 
-    public void mostrarProduccion() {
+    public void mostrarTabla() {
         /* hace referencia a mostrar los ingreso diario en la tabla */
         try {
 
@@ -153,6 +155,38 @@ public class IngresarProdPAn extends javax.swing.JInternalFrame {
 
     }
 
+    void guardar() {
+
+        ProduccionPanJpaController pruduccion = new ProduccionPanJpaController(entityManager1.getEntityManagerFactory());
+
+        ProduccionPan pp = new ProduccionPan();
+        Producto p = new Producto();
+        Date fecha = new Date();
+        try {
+
+            p.setProdId(cb_producto.getSelectedIndex() + 1);
+            /*combobox de producto*/
+
+            UnidadMedida u = new UnidadMedida();
+            u.setUnidId(cb_umedida.getSelectedIndex() + 1);
+            /*combobox de unidad medida */
+
+            pp.setPpanProduccion(Integer.parseInt(tf_produccion.getText()));
+            pp.setPpanFechaIngreso(fecha);
+
+            pp.setPpanProducto(p);
+            pp.setPpanUnidadMedida(u);
+
+            pruduccion.create(pp);
+            JOptionPane.showMessageDialog(null, "Datos Insertados");
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        limpiar();
+
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -178,9 +212,8 @@ public class IngresarProdPAn extends javax.swing.JInternalFrame {
         tf_produccion = new javax.swing.JTextField();
         jPanel6 = new javax.swing.JPanel();
         bt_guardar = new javax.swing.JButton();
-        bt_eliminar = new javax.swing.JButton();
         bt_modificar = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        bt_eliminar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_produccion = new javax.swing.JTable();
 
@@ -207,13 +240,13 @@ public class IngresarProdPAn extends javax.swing.JInternalFrame {
 
         jPanel3.add(cb_umedida);
 
-        Cantidad.setText("CANTIDAD");
+        Cantidad.setText("Cantidad");
         jPanel3.add(Cantidad);
         jPanel3.add(tf_produccion);
 
-        jPanel6.setLayout(new java.awt.GridLayout(3, 1, 20, 20));
+        jPanel6.setLayout(new java.awt.GridLayout(3, 1, 10, 10));
 
-        bt_guardar.setText("Guardar");
+        bt_guardar.setText("Insertar");
         bt_guardar.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
         bt_guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -222,16 +255,7 @@ public class IngresarProdPAn extends javax.swing.JInternalFrame {
         });
         jPanel6.add(bt_guardar);
 
-        bt_eliminar.setText("Eliminar Seleccionado");
-        bt_eliminar.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
-        bt_eliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_eliminarActionPerformed(evt);
-            }
-        });
-        jPanel6.add(bt_eliminar);
-
-        bt_modificar.setText("Actualizar");
+        bt_modificar.setText("Modificar");
         bt_modificar.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
         bt_modificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -240,7 +264,14 @@ public class IngresarProdPAn extends javax.swing.JInternalFrame {
         });
         jPanel6.add(bt_modificar);
 
-        jPanel1.setLayout(new java.awt.GridLayout());
+        bt_eliminar.setText("Eliminar");
+        bt_eliminar.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
+        bt_eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_eliminarActionPerformed(evt);
+            }
+        });
+        jPanel6.add(bt_eliminar);
 
         tb_produccion.setBorder(new javax.swing.border.MatteBorder(null));
         tb_produccion.setModel(new javax.swing.table.DefaultTableModel(
@@ -261,37 +292,31 @@ public class IngresarProdPAn extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tb_produccion);
 
-        jPanel1.add(jScrollPane1);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 575, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(18, 18, 18)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 511, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
-                .addGap(5, 5, 5))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void bt_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_guardarActionPerformed
-
+        this.guardar();
     }//GEN-LAST:event_bt_guardarActionPerformed
 
     private void bt_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_eliminarActionPerformed
@@ -323,7 +348,6 @@ public class IngresarProdPAn extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;

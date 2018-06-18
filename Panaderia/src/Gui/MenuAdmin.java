@@ -196,7 +196,7 @@ public class MenuAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_item_menu_familiaActionPerformed
 
     private void aboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMenuItemActionPerformed
-        IngresarProdPAn main = new IngresarProdPAn();
+        IngresarProduccion main = new IngresarProduccion();
         this.panel.add(main);
         main.show();
     }//GEN-LAST:event_aboutMenuItemActionPerformed
