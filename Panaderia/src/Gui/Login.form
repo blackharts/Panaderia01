@@ -17,6 +17,19 @@
         </DimensionLayout>
       </Layout>
     </Container>
+    <Component class="javax.persistence.EntityManager" name="entityManager1">
+      <Properties>
+        <Property name="persistenceUnit" type="java.lang.String" value="pu"/>
+      </Properties>
+    </Component>
+    <Component class="javax.persistence.Query" name="query1">
+      <Properties>
+        <Property name="query" type="java.lang.String" value="SELECT u FROM Usuario u"/>
+        <Property name="entityManager" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$EMProperty$EntityManagerEditor">
+          <ComponentRef name="entityManager1"/>
+        </Property>
+      </Properties>
+    </Component>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>

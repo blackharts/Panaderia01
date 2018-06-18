@@ -5,6 +5,9 @@
  */
 package Gui;
 
+import Controller.UsuarioJpaController;
+import Data.Usuario;
+import java.util.ArrayList;
 import javax.swing.*;
 
 /**
@@ -33,17 +36,19 @@ public class NuevoUsuario extends javax.swing.JFrame {
 
         jToggleButton1 = new javax.swing.JToggleButton();
         jComboBox2 = new javax.swing.JComboBox<>();
+        entityManager1 = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("PanaderiaPU").createEntityManager();
+        listadousuarios = java.beans.Beans.isDesignTime() ? null : entityManager1.createQuery("SELECT u FROM Usuario u");
         jLabel1 = new javax.swing.JLabel();
-        jb_guardar = new javax.swing.JButton();
+        btn_guardar = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        tf_usuario = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbox_tipo_usuario = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        tf_pass_usuario = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
+        pf_pass_admin = new javax.swing.JPasswordField();
 
         jToggleButton1.setText("jToggleButton1");
 
@@ -53,35 +58,47 @@ public class NuevoUsuario extends javax.swing.JFrame {
 
         jLabel1.setText("Crear usuario nuevo");
 
-        jb_guardar.setText("Guardar");
-        jb_guardar.addActionListener(new java.awt.event.ActionListener() {
+        btn_guardar.setText("Guardar");
+        btn_guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jb_guardarActionPerformed(evt);
+                btn_guardarActionPerformed(evt);
             }
         });
 
         jLabel5.setText("Nombre de Usuario");
 
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        tf_usuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                tf_usuarioActionPerformed(evt);
             }
         });
 
         jLabel2.setText("Tipo de Usuario");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrativo", "Bodegero", "Gerente" }));
-        jComboBox1.setToolTipText("");
-        jComboBox1.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        cbox_tipo_usuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrativo", "Bodegero", "Gerente" }));
+        cbox_tipo_usuario.setToolTipText("");
+        cbox_tipo_usuario.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
+        cbox_tipo_usuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                cbox_tipo_usuarioActionPerformed(evt);
             }
         });
 
         jLabel3.setText("Contraseña");
 
+        tf_pass_usuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_pass_usuarioActionPerformed(evt);
+            }
+        });
+
         jLabel4.setText("Contraseña de Administrador");
+
+        pf_pass_admin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pf_pass_adminActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -89,85 +106,141 @@ public class NuevoUsuario extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(23, 23, 23)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel5)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel2)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jSeparator1))
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel4))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(0, 0, 0)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jTextField4)
-                                        .addComponent(jComboBox1, 0, 152, Short.MAX_VALUE)
-                                        .addComponent(jTextField1)))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(165, 165, 165)
-                            .addComponent(jLabel1)))
-                    .addComponent(jb_guardar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jSeparator1))
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tf_usuario)
+                            .addComponent(cbox_tipo_usuario, 0, 152, Short.MAX_VALUE)
+                            .addComponent(tf_pass_usuario)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(pf_pass_admin)))
+                        .addGap(6, 6, 6))
+                    .addComponent(btn_guardar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(119, 119, 119)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(20, 20, 20)
                 .addComponent(jLabel1)
-                .addGap(43, 43, 43)
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tf_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(45, 45, 45)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(cbox_tipo_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(53, 53, 53)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(44, 44, 44)
+                    .addComponent(tf_pass_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
-                .addComponent(jb_guardar)
+                    .addComponent(pf_pass_admin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39)
+                .addComponent(btn_guardar)
                 .addContainerGap(68, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jb_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_guardarActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_jb_guardarActionPerformed
+    private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
+       Guardar();
+    }//GEN-LAST:event_btn_guardarActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void tf_usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_usuarioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_tf_usuarioActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void cbox_tipo_usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbox_tipo_usuarioActionPerformed
+                                       
+    }//GEN-LAST:event_cbox_tipo_usuarioActionPerformed
+
+    private void tf_pass_usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_pass_usuarioActionPerformed
         // TODO add your handling code here:
-             JComboBox combo = new JComboBox();
-             String gerente="Gerente";
-             combo.addItem(gerente);
-        
-        
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_tf_pass_usuarioActionPerformed
 
+    private void pf_pass_adminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pf_pass_adminActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pf_pass_adminActionPerformed
+    
+    public void Guardar(){     
+        Usuario usuario_registrado = new Usuario();
+        Usuario usuario_admin = new Usuario(); 
+        ArrayList<Usuario> usuarios = new ArrayList(listadousuarios.getResultList());  
+        if(tf_usuario.getText().equals("") || tf_pass_usuario.getText().equals("") || pf_pass_admin.getText().equals("")){
+            JOptionPane.showMessageDialog(null,"Campos vacios"); 
+        }
+        else{          
+            for(Usuario a:usuarios){            
+                if(a.getUsuContraseña().equals(pf_pass_admin.getText()) && a.getTipoUsuario().equals("Administrativo")){
+                    usuario_admin.setUsuId(a.getUsuId());
+                    usuario_admin.setUsuNombre(a.getUsuNombre());
+                    usuario_admin.setUsuContraseña(a.getUsuContraseña());
+                    usuario_admin.setTipoUsuario(a.getTipoUsuario());
+                }
+            } 
+            try{
+                if (usuario_admin.getUsuContraseña().equals(pf_pass_admin.getText())){
+                    UsuarioJpaController ujc;            
+                    ujc = new UsuarioJpaController(entityManager1.getEntityManagerFactory());
+                    Usuario usu = new Usuario();                               
+                    usu.setUsuNombre(tf_usuario.getText());
+                    usu.setUsuContraseña(tf_pass_usuario.getText());
+                    String tipo_usu = (String)cbox_tipo_usuario.getSelectedItem();                
+                    usu.setTipoUsuario(tipo_usu);
+                    for(Usuario a:usuarios){            
+                        if(a.getUsuNombre().equals(tf_usuario.getText())){
+                            usuario_registrado.setUsuId(a.getUsuId());
+                            usuario_registrado.setUsuNombre(a.getUsuNombre());
+                            usuario_registrado.setUsuContraseña(a.getUsuContraseña());
+                            usuario_registrado.setTipoUsuario(a.getTipoUsuario()); 
+                        }
+                    } 
+                    if (tf_usuario.getText().equals(usuario_registrado.getUsuNombre())){
+                        JOptionPane.showMessageDialog(null,"Usuario ya existe"); 
+                        tf_usuario.setText("");
+                    }
+                    else if (!tf_usuario.getText().equals(usuario_registrado.getUsuNombre())){
+                        ujc.create(usu);
+                        JOptionPane.showMessageDialog(null,"Usuario Creado Exitosamente");
+                        tf_usuario.setText("");
+                        tf_pass_usuario.setText("");
+                        pf_pass_admin.setText("");                    
+                    }
+                }
+                else if (!usuario_registrado.getUsuContraseña().equals(pf_pass_admin.getText())){
+                    JOptionPane.showMessageDialog(null,"Vuelva a Ingresar la Contraseña de Administrador"); 
+                    pf_pass_admin.setText("");  
+                }
+            }
+            catch(NullPointerException e){
+                JOptionPane.showMessageDialog(null,"Vuelva a Ingresar la Contraseña de Administrador");                                                            
+                pf_pass_admin.setText("");  
+            }
+        }            
+    }
     /**
      * @param args the command line arguments
      */
@@ -211,7 +284,9 @@ public class NuevoUsuario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton btn_guardar;
+    private javax.swing.JComboBox<String> cbox_tipo_usuario;
+    private javax.persistence.EntityManager entityManager1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -219,10 +294,10 @@ public class NuevoUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JToggleButton jToggleButton1;
-    private javax.swing.JButton jb_guardar;
+    private javax.persistence.Query listadousuarios;
+    private javax.swing.JPasswordField pf_pass_admin;
+    private javax.swing.JTextField tf_pass_usuario;
+    private javax.swing.JTextField tf_usuario;
     // End of variables declaration//GEN-END:variables
 }
