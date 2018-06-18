@@ -15,7 +15,6 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.swing.JComboBox;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -31,7 +30,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Usuario.findByUsuNombre", query = "SELECT u FROM Usuario u WHERE u.usuNombre = :usuNombre")
     , @NamedQuery(name = "Usuario.findByUsuContrase\u00f1a", query = "SELECT u FROM Usuario u WHERE u.usuContrase\u00f1a = :usuContrase\u00f1a")})
 public class Usuario implements Serializable {
-
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -106,18 +104,6 @@ public class Usuario implements Serializable {
     @Override
     public String toString() {
         return "Data.Usuario[ usuId=" + usuId + " ]";
-    }
-
-    public String getTipoUsuario() {
-        return tipoUsuario;
-    }
-
-    public void setTipoUsuario(String tipoUsuario) {
-        this.tipoUsuario = tipoUsuario;
-    }
-
-    public void setTipoUsuario(JComboBox<String> cbox_tipo_usuario) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
