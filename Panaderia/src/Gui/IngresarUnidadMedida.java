@@ -5,9 +5,14 @@
  */
 package Gui;
 
-
 import Controller.UnidadMedidaJpaController;
+import Controller.exceptions.NonexistentEntityException;
+import Data.UnidadMedida;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -22,6 +27,57 @@ public class IngresarUnidadMedida extends javax.swing.JInternalFrame {
         initComponents();
     }
 
+    void limpiar() {
+        jt_codigo.setText("");
+        jt_descripcion.setText("");
+    }
+
+    void guardar() {
+
+        UnidadMedidaJpaController unid = new UnidadMedidaJpaController(entityManager1.getEntityManagerFactory());
+        UnidadMedida uni = new UnidadMedida();
+
+        try {
+
+            uni.setUnidCodigo(jt_codigo.getText());
+            uni.setUnidDescripcion(jt_descripcion.getText());
+
+            unid.create(uni);
+            JOptionPane.showMessageDialog(null, "Datos Insertados");
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        limpiar();
+    }
+
+    public void mostrarTabla() {
+        /* hace referencia a mostrar los ingreso diario en la tabla */
+        try {
+
+            String[] columnas = {"Id", "Codigo", "Descripcion"};
+            Object[] obj = new Object[3];
+            DefaultTableModel tabla = new DefaultTableModel(null, columnas);
+            UnidadMedida u = new UnidadMedida();
+
+            List<UnidadMedida> uni = query1.getResultList();
+
+            for (int i = 0; i < uni.size(); i++) {
+                u = (UnidadMedida) uni.get(i);
+
+                obj[0] = u.getUnidId();
+                obj[1] = u.getUnidCodigo();
+                obj[2] = u.getUnidDescripcion();
+
+                tabla.addRow(obj);
+            }
+            tb_unidadmedida.setModel(tabla);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -31,91 +87,156 @@ public class IngresarUnidadMedida extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Bton_Guardar = new javax.swing.JButton();
+        entityManager1 = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("PanaderiaPU").createEntityManager();
+        query1 = java.beans.Beans.isDesignTime() ? null : entityManager1.createQuery("SELECT u UnidadMedida From u");
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jt_id = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jt_codigo = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jt_descripcion = new javax.swing.JTextField();
+        jPanel3 = new javax.swing.JPanel();
+        bt_insertar = new javax.swing.JButton();
+        bt_modificar = new javax.swing.JButton();
+        bt_buscar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        tf_codigo = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        tf_decripcion = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tb_unidadmedida = new javax.swing.JTable();
 
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setTitle("Unidad de Medida");
 
-        Bton_Guardar.setText("Guardar");
-        Bton_Guardar.addActionListener(new java.awt.event.ActionListener() {
+        jPanel2.setLayout(new java.awt.GridLayout(4, 2, 20, 30));
+
+        jLabel1.setText("ID:");
+        jPanel2.add(jLabel1);
+        jPanel2.add(jt_id);
+
+        jLabel2.setText("Codigo:");
+        jPanel2.add(jLabel2);
+        jPanel2.add(jt_codigo);
+
+        jLabel3.setText("Descripcion:");
+        jPanel2.add(jLabel3);
+        jPanel2.add(jt_descripcion);
+
+        jPanel3.setLayout(new java.awt.GridLayout(3, 1, 30, 10));
+
+        bt_insertar.setText("Insertar");
+        bt_insertar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Bton_GuardarActionPerformed(evt);
+                bt_insertarActionPerformed(evt);
             }
         });
+        jPanel3.add(bt_insertar);
 
-        jPanel1.setLayout(new java.awt.GridLayout(2, 2, 30, 30));
-
-        jLabel4.setText("Código:");
-        jPanel1.add(jLabel4);
-
-        tf_codigo.addActionListener(new java.awt.event.ActionListener() {
+        bt_modificar.setText("Modificar");
+        bt_modificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_codigoActionPerformed(evt);
+                bt_modificarActionPerformed(evt);
             }
         });
-        jPanel1.add(tf_codigo);
+        jPanel3.add(bt_modificar);
 
-        jLabel5.setText("descripción:");
-        jPanel1.add(jLabel5);
-        jPanel1.add(tf_decripcion);
+        bt_buscar.setText("Buscar");
+        bt_buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_buscarActionPerformed(evt);
+            }
+        });
+        jPanel3.add(bt_buscar);
+
+        jPanel1.setLayout(new java.awt.GridLayout());
+
+        tb_unidadmedida.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tb_unidadmedida.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tb_unidadmedidaMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tb_unidadmedida);
+
+        jPanel1.add(jScrollPane1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(50, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(47, 47, 47))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(Bton_Guardar)
-                        .addGap(122, 122, 122))))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
-                .addComponent(Bton_Guardar)
-                .addGap(0, 60, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void Bton_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bton_GuardarActionPerformed
-        String Codigo = "";
-        String descripcion = "";
-        Codigo = (tf_codigo.getText().toString());
-        descripcion = (tf_decripcion.getText().toString());
-        /*if (UnidadMedidaJpaController.agregar(Codigo, descripcion)) {
-            JOptionPane.showMessageDialog(this, "Datos ingresados correctamente");
-        } else {
-            JOptionPane.showMessageDialog(this, "Error");
-        }*/
-    }//GEN-LAST:event_Bton_GuardarActionPerformed
-
-    private void tf_codigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_codigoActionPerformed
+    private void bt_insertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_insertarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tf_codigoActionPerformed
+
+        this.guardar();
+    }//GEN-LAST:event_bt_insertarActionPerformed
+
+    private void bt_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_modificarActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_bt_modificarActionPerformed
+
+    private void bt_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_buscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bt_buscarActionPerformed
+
+    private void tb_unidadmedidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_unidadmedidaMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tb_unidadmedidaMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Bton_Guardar;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JButton bt_buscar;
+    private javax.swing.JButton bt_insertar;
+    private javax.swing.JButton bt_modificar;
+    private javax.persistence.EntityManager entityManager1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField tf_codigo;
-    private javax.swing.JTextField tf_decripcion;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jt_codigo;
+    private javax.swing.JTextField jt_descripcion;
+    private javax.swing.JTextField jt_id;
+    private javax.persistence.Query query1;
+    private javax.swing.JTable tb_unidadmedida;
     // End of variables declaration//GEN-END:variables
+
 }
