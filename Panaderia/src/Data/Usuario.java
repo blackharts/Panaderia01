@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author KevinRoss
+ * @author ESTEBAN
  */
 @Entity
 @Table(name = "usuario")
@@ -28,7 +28,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")
     , @NamedQuery(name = "Usuario.findByUsuId", query = "SELECT u FROM Usuario u WHERE u.usuId = :usuId")
     , @NamedQuery(name = "Usuario.findByUsuNombre", query = "SELECT u FROM Usuario u WHERE u.usuNombre = :usuNombre")
-    , @NamedQuery(name = "Usuario.findByUsuContrase\u00f1a", query = "SELECT u FROM Usuario u WHERE u.usuContrase\u00f1a = :usuContrase\u00f1a")})
+    , @NamedQuery(name = "Usuario.findByUsuContrase\u00f1a", query = "SELECT u FROM Usuario u WHERE u.usuContrase\u00f1a = :usuContrase\u00f1a")
+    , @NamedQuery(name = "Usuario.findByTipoUsuario", query = "SELECT u FROM Usuario u WHERE u.tipoUsuario = :tipoUsuario")})
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -43,6 +44,9 @@ public class Usuario implements Serializable {
     @Basic(optional = false)
     @Column(name = "usu_contrase\u00f1a")
     private String usuContraseña;
+    @Basic(optional = false)
+    @Column(name = "tipo_usuario")
+    private String tipoUsuario;
 
     public Usuario() {
     }
@@ -51,10 +55,11 @@ public class Usuario implements Serializable {
         this.usuId = usuId;
     }
 
-    public Usuario(Integer usuId, String usuNombre, String usuContraseña) {
+    public Usuario(Integer usuId, String usuNombre, String usuContraseña, String tipoUsuario) {
         this.usuId = usuId;
         this.usuNombre = usuNombre;
         this.usuContraseña = usuContraseña;
+        this.tipoUsuario = tipoUsuario;
     }
 
     public Integer getUsuId() {
@@ -79,6 +84,14 @@ public class Usuario implements Serializable {
 
     public void setUsuContraseña(String usuContraseña) {
         this.usuContraseña = usuContraseña;
+    }
+
+    public String getTipoUsuario() {
+        return tipoUsuario;
+    }
+
+    public void setTipoUsuario(String tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
     }
 
     @Override
