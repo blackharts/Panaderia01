@@ -35,7 +35,8 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-
+        entityManager1 = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("PanaderiaPU").createEntityManager();
+        query2 = java.beans.Beans.isDesignTime() ? null : entityManager1.createQuery("SELECT u FROM Usuario u");
         jPanel1 = new javax.swing.JPanel();
         usuario = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
@@ -164,7 +165,7 @@ public class Login extends javax.swing.JFrame {
         String tipo2 = "Gerente";
         String tipo3 = "Bodegero";
         
-        ArrayList<Usuario> usuarios = new ArrayList(query1.getResultList());   
+        ArrayList<Usuario> usuarios = new ArrayList(query2.getResultList());   
         for(Usuario a:usuarios){
             if (a.getTipoUsuario().equals(usuario.getText()) && a.getUsuContraseña().equals(pass.getText())){            
                 usu_logueado.setUsuId(a.getUsuId());
@@ -252,7 +253,7 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton acceder;
-
+    private javax.persistence.EntityManager entityManager1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -260,7 +261,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JButton nuevoU;
     private javax.swing.JPasswordField pass;
-    private javax.persistence.Query query1;
+    private javax.persistence.Query query2;
     private javax.swing.JToggleButton salir;
     private javax.swing.JTextField usuario;
     // End of variables declaration//GEN-END:variables
