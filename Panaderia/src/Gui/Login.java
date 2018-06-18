@@ -35,6 +35,7 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+
         jPanel1 = new javax.swing.JPanel();
         usuario = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
