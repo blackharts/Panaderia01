@@ -19,7 +19,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author luisa
+ * @author KevinRoss
  */
 public class PrecioCostoJpaController implements Serializable {
 

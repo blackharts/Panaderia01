@@ -23,7 +23,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author luisa
+ * @author KevinRoss
  */
 public class RecetaJpaController implements Serializable {
 
