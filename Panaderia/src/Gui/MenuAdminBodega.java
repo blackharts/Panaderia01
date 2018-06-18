@@ -39,6 +39,7 @@ public class MenuAdminBodega extends javax.swing.JFrame {
         item_menu_costo = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1080, 720));
 
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
@@ -103,15 +104,6 @@ public class MenuAdminBodega extends javax.swing.JFrame {
         IngresarCosto Ing = new IngresarCosto();
         this.panel.add(Ing);
         Ing.show();
-        try {
-            Ing.cbUnidadMedida();
-            Ing.cbFamilia();
-            Ing.cbLinea();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MenuAdminBodega.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(MenuAdminBodega.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }//GEN-LAST:event_item_menu_costoActionPerformed
 
     /**
