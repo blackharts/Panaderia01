@@ -32,6 +32,13 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Usuario.findByUsuContrase\u00f1a", query = "SELECT u FROM Usuario u WHERE u.usuContrase\u00f1a = :usuContrase\u00f1a")})
 public class Usuario implements Serializable {
 
+    @Basic(optional = false)
+    @Column(name = "usu_contrasena")
+    private String usuContrasena;
+    @Basic(optional = false)
+    @Column(name = "tipo_usuario")
+    private String tipoUsuario;
+
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -119,5 +126,14 @@ public class Usuario implements Serializable {
     public void setTipoUsuario(JComboBox<String> cbox_tipo_usuario) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    public String getUsuContrasena() {
+        return usuContrasena;
+    }
+
+    public void setUsuContrasena(String usuContrasena) {
+        this.usuContrasena = usuContrasena;
+    }
+
     
 }
