@@ -5,13 +5,8 @@
  */
 package Gui;
 
-import Controller.UsuarioJpaController;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import jdk.nashorn.internal.codegen.CompilerConstants;
-import Data.Usuario;
-import java.util.ArrayList;
-
 
 /**
  *
@@ -160,6 +155,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_salirActionPerformed
 
     private void accederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accederActionPerformed
+
         Usuario usu_logueado = new Usuario();
         String tipo1 = "Administrativo";
         String tipo2 = "Gerente";
@@ -173,33 +169,18 @@ public class Login extends javax.swing.JFrame {
                 usu_logueado.setUsuContraseña(a.getUsuContraseña());
                 usu_logueado.setTipoUsuario(a.getTipoUsuario());
             }
+           else if (user.equals("Gerente") && contra.equals("Gerente")) {
+            MenuGerenteProduc main = new MenuGerenteProduc();
+            main.show();
+            this.hide(); 
         }
-        try{        
-            if (usu_logueado.getTipoUsuario().equals(tipo1)){
-                MenuAdmin main = new MenuAdmin();
-                main.show();
-                this.hide();   
-                JOptionPane.showMessageDialog(this,"Bienvenid@ "+usu_logueado.getUsuNombre());
-            }               
-            else if (usu_logueado.getTipoUsuario().equals(tipo2)){
-                MenuAdminBodega main = new MenuAdminBodega();
-                main.show();
-                this.hide();                    
-                JOptionPane.showMessageDialog(this,"Bienvenid@ "+usu_logueado.getUsuNombre());
-            }
-            else if(usu_logueado.getTipoUsuario().equals(tipo3)){
-                MenuGerenteProduc main = new MenuGerenteProduc();
-                main.show();
-                this.hide(); 
-                JOptionPane.showMessageDialog(this,"Bienvenid@ "+usu_logueado.getUsuNombre());                    
-            }
-            else{
-                JOptionPane.showMessageDialog(this,"Error de contraseña o usuario");
-            }
+        else {
+            JOptionPane.showMessageDialog(this, "Error contraseña o nombre de usuarion incorrecto");
         }
-        catch(NullPointerException e){
-            JOptionPane.showMessageDialog(this,"Error de contraseña o usuario");
+
         }
+        
+        
     }//GEN-LAST:event_accederActionPerformed
 
     private void passActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passActionPerformed
@@ -253,7 +234,9 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton acceder;
+
     private javax.persistence.EntityManager entityManager1;
+
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -261,7 +244,9 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JButton nuevoU;
     private javax.swing.JPasswordField pass;
+
     private javax.persistence.Query query2;
+
     private javax.swing.JToggleButton salir;
     private javax.swing.JTextField usuario;
     // End of variables declaration//GEN-END:variables
