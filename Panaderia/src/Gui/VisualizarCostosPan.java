@@ -5,6 +5,19 @@
  */
 package Gui;
 
+import Controller.PrecioCostoJpaController;
+import Controller.PrecioVentaJpaController;
+import Controller.ProduccionPanJpaController;
+import Data.PrecioCosto;
+import Data.PrecioVenta;
+import Data.ProduccionPan;
+import Data.Producto;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author luisa
@@ -16,6 +29,25 @@ public class VisualizarCostosPan extends javax.swing.JInternalFrame {
      */
     public VisualizarCostosPan() {
         initComponents();
+        
+        cargar_Combo();
+
+        bt_mostrar_reporte.setEnabled(false);
+        
+        Calendar min = Calendar.getInstance();  
+            min.set(Calendar.YEAR,2015);  
+            min.set(Calendar.MONTH,12);  
+            min.set(Calendar.DATE,12); 
+            JX_fecha_inicial.setMinSelectableDate(min.getTime());
+            JX_fecha_final.setMinSelectableDate(min.getTime());
+            
+        Calendar max = Calendar.getInstance();  
+        max.set(Calendar.YEAR,2020);    
+        max.set(Calendar.MONTH,12);    
+        max.set(Calendar.DATE,31);    
+        JX_fecha_final.setMaxSelectableDate(new Date());
+        JX_fecha_inicial.setMaxSelectableDate(new Date());
+
     }
 
     /**
@@ -27,65 +59,81 @@ public class VisualizarCostosPan extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        entityManager1 = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("PanaderiaPU").createEntityManager();
+        query1 = java.beans.Beans.isDesignTime() ? null : entityManager1.createQuery("select e  from Producto e");
         jPanel1 = new javax.swing.JPanel();
         jl_FechaInicio = new javax.swing.JLabel();
-        jt_FechaInicio_CostoPan = new javax.swing.JTextField();
+        JX_fecha_inicial = new com.toedter.calendar.JDateChooser();
         jl_FechaFinal = new javax.swing.JLabel();
-        jt_FechaFinal_CostoPan = new javax.swing.JTextField();
+        JX_fecha_final = new com.toedter.calendar.JDateChooser();
         jLabel3 = new javax.swing.JLabel();
-        combo_tipopan = new javax.swing.JComboBox();
-        jToggleButton1 = new javax.swing.JToggleButton();
+        combo_tipo_pan = new javax.swing.JComboBox();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jt_tabla_CostoPan = new javax.swing.JTable();
+        jt_tabla_reportes_pan = new javax.swing.JTable();
+        bt_mostrar_reporte = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
-        setTitle("Costo Pan");
+        setTitle("Reportes de Rentablidad Pan");
 
         jPanel1.setLayout(new java.awt.GridLayout(3, 2, 20, 20));
 
         jl_FechaInicio.setText("Fecha Inicial:");
         jPanel1.add(jl_FechaInicio);
-        jPanel1.add(jt_FechaInicio_CostoPan);
+        jPanel1.add(JX_fecha_inicial);
 
         jl_FechaFinal.setText("Fecha Final:");
         jPanel1.add(jl_FechaFinal);
-        jPanel1.add(jt_FechaFinal_CostoPan);
+        jPanel1.add(JX_fecha_final);
 
         jLabel3.setText("Tipo pan:");
         jPanel1.add(jLabel3);
 
-        combo_tipopan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        combo_tipopan.addActionListener(new java.awt.event.ActionListener() {
+        combo_tipo_pan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        combo_tipo_pan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                combo_tipopanActionPerformed(evt);
+                combo_tipo_panActionPerformed(evt);
             }
         });
-        jPanel1.add(combo_tipopan);
+        jPanel1.add(combo_tipo_pan);
 
-        jToggleButton1.setText("Mostrar reporte");
-
-        jt_tabla_CostoPan.setModel(new javax.swing.table.DefaultTableModel(
+        jt_tabla_reportes_pan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Fecha", "Precio Costo", "Precio venta", "Ren.Porcentaje", "Ren.Moneda"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Float.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jt_tabla_CostoPan);
+        jScrollPane2.setViewportView(jt_tabla_reportes_pan);
+        if (jt_tabla_reportes_pan.getColumnModel().getColumnCount() > 0) {
+            jt_tabla_reportes_pan.getColumnModel().getColumn(0).setResizable(false);
+            jt_tabla_reportes_pan.getColumnModel().getColumn(3).setResizable(false);
+        }
+
+        bt_mostrar_reporte.setText("Mostrar Reporte");
+        bt_mostrar_reporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_mostrar_reporteActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Eliminar Reportes");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -97,11 +145,13 @@ public class VisualizarCostosPan extends javax.swing.JInternalFrame {
                         .addGap(78, 78, 78)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(140, 140, 140)
-                        .addComponent(jToggleButton1))
-                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(97, 97, 97)
+                        .addComponent(bt_mostrar_reporte)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -110,30 +160,96 @@ public class VisualizarCostosPan extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jToggleButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bt_mostrar_reporte)
+                    .addComponent(jButton2))
                 .addGap(28, 28, 28)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void combo_tipopanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_tipopanActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_combo_tipopanActionPerformed
+    private void combo_tipo_panActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_tipo_panActionPerformed
+                 bt_mostrar_reporte.setEnabled(true);
+    }//GEN-LAST:event_combo_tipo_panActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        Clear_Table1();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void bt_mostrar_reporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_mostrar_reporteActionPerformed
+        datos();
+    }//GEN-LAST:event_bt_mostrar_reporteActionPerformed
+    public void datos() {
+DefaultTableModel mode = (DefaultTableModel) jt_tabla_reportes_pan.getModel();
+PrecioCosto findPrecioCosto;      
+PrecioVenta findPrecioVenta;
+ProduccionPan finProduccionPan;
+       
+PrecioCostoJpaController pjcontroller = new PrecioCostoJpaController(entityManager1.getEntityManagerFactory());
+PrecioVentaJpaController pjVenta = new PrecioVentaJpaController(entityManager1.getEntityManagerFactory());
+ProduccionPanJpaController pjProdu =new ProduccionPanJpaController(entityManager1.getEntityManagerFactory());
+findPrecioCosto = pjcontroller.findPrecioCosto(combo_tipo_pan.getSelectedIndex() + 1);
+        findPrecioVenta = pjVenta.findPrecioVenta(combo_tipo_pan.getSelectedIndex() + 1);
+        finProduccionPan=pjProdu.findProduccionPan(combo_tipo_pan.getSelectedIndex() + 1);
+        Date date = new Date();// se trajo la fecha del sistema
+        Date fecha_inicio = JX_fecha_inicial.getDate();
+        Date fecha_final = JX_fecha_final.getDate();
+        Date fecha_pro=(finProduccionPan.getPpanFechaIngreso());
+        double Kilos_producidos=(finProduccionPan.getPpanProduccion());
+        int valor_costo = (findPrecioCosto.getCostValor());          
+        int valor_venta = (findPrecioVenta.getPrecvValor());//se busco valores relacionados con precio venta       
+        int resta_valores = (valor_venta - valor_costo);//se resto el valor venta de pan y costo pan 
+        double kilos_resultado=(valor_venta*Kilos_producidos)-(valor_costo*Kilos_producidos);
+        double porcentaje = (resta_valores * 100 / valor_venta);// se saco el porcentaje  de rentabilidad        
+ try
+        {
+            if (fecha_pro.after(fecha_inicio)&& fecha_pro.before(fecha_final)) 
+{
+            mode.addRow(new Object[]{date, valor_costo, valor_venta, "%" + porcentaje, kilos_resultado});                      
+}else{
+                JOptionPane.showMessageDialog(null,"No ahi produccion En las fechas indicadas");        
+}     
+  }catch(NullPointerException e){
+            JOptionPane.showMessageDialog(null," No se admiten campos vacios ");
+  }catch(ArrayIndexOutOfBoundsException e){
+            JOptionPane.showMessageDialog(null," Verifique Campos en la Base de datos ");
+    }
+ 
+    }
+       
+    public void cargar_Combo() {
+        List<Producto> prod = query1.getResultList(); // se obtienen los productos y almcenan en lista
+        combo_tipo_pan.removeAllItems();//se limpia el combobox
+        for (Producto p : prod) {
+            // se recorre
+            combo_tipo_pan.addItem(p.getProdNombre());//se muestra en el combobox  
+        }
+    }
+    private void Clear_Table1(){
+        DefaultTableModel mode = (DefaultTableModel) jt_tabla_reportes_pan.getModel();
+        for (int i = 0; i < jt_tabla_reportes_pan.getRowCount(); i++) {
+        mode.removeRow(i);
+        i-=1;
+        }
+        }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox combo_tipopan;
+    private com.toedter.calendar.JDateChooser JX_fecha_final;
+    private com.toedter.calendar.JDateChooser JX_fecha_inicial;
+    private javax.swing.JButton bt_mostrar_reporte;
+    private javax.swing.JComboBox combo_tipo_pan;
+    private javax.persistence.EntityManager entityManager1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JLabel jl_FechaFinal;
     private javax.swing.JLabel jl_FechaInicio;
-    private javax.swing.JTextField jt_FechaFinal_CostoPan;
-    private javax.swing.JTextField jt_FechaInicio_CostoPan;
-    private javax.swing.JTable jt_tabla_CostoPan;
+    private javax.swing.JTable jt_tabla_reportes_pan;
+    private javax.persistence.Query query1;
     // End of variables declaration//GEN-END:variables
 }

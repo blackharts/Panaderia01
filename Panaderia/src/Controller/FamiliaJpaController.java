@@ -23,7 +23,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author luisa
+ * @author KevinRoss
  */
 public class FamiliaJpaController implements Serializable {
 

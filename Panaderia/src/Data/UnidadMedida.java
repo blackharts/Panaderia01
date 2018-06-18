@@ -23,17 +23,18 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author luisa
+ * @author KevinRoss
  */
 @Entity
 @Table(name = "unidad_medida")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "UnidadMedida.findAll", query = "SELECT u FROM UnidadMedida u"),
-    @NamedQuery(name = "UnidadMedida.findByUnidId", query = "SELECT u FROM UnidadMedida u WHERE u.unidId = :unidId"),
-    @NamedQuery(name = "UnidadMedida.findByUnidCodigo", query = "SELECT u FROM UnidadMedida u WHERE u.unidCodigo = :unidCodigo"),
-    @NamedQuery(name = "UnidadMedida.findByUnidDescripcion", query = "SELECT u FROM UnidadMedida u WHERE u.unidDescripcion = :unidDescripcion")})
+    @NamedQuery(name = "UnidadMedida.findAll", query = "SELECT u FROM UnidadMedida u")
+    , @NamedQuery(name = "UnidadMedida.findByUnidId", query = "SELECT u FROM UnidadMedida u WHERE u.unidId = :unidId")
+    , @NamedQuery(name = "UnidadMedida.findByUnidCodigo", query = "SELECT u FROM UnidadMedida u WHERE u.unidCodigo = :unidCodigo")
+    , @NamedQuery(name = "UnidadMedida.findByUnidDescripcion", query = "SELECT u FROM UnidadMedida u WHERE u.unidDescripcion = :unidDescripcion")})
 public class UnidadMedida implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,6 +47,8 @@ public class UnidadMedida implements Serializable {
     @Basic(optional = false)
     @Column(name = "unid_descripcion")
     private String unidDescripcion;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ppanUnidadMedida")
+    private Collection<ProduccionPan> produccionPanCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "prodUnidadmedida")
     private Collection<Producto> productoCollection;
 
@@ -84,6 +87,15 @@ public class UnidadMedida implements Serializable {
 
     public void setUnidDescripcion(String unidDescripcion) {
         this.unidDescripcion = unidDescripcion;
+    }
+
+    @XmlTransient
+    public Collection<ProduccionPan> getProduccionPanCollection() {
+        return produccionPanCollection;
+    }
+
+    public void setProduccionPanCollection(Collection<ProduccionPan> produccionPanCollection) {
+        this.produccionPanCollection = produccionPanCollection;
     }
 
     @XmlTransient
