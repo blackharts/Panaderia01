@@ -5,9 +5,12 @@
  */
 package Gui;
 
+import Controller.LineaJpaController;
 import Controller.ProduccionPanJpaController;
+import Controller.ProductoJpaController;
 import Controller.UnidadMedidaJpaController;
 import Data.Familia;
+import Data.Linea;
 import Data.ProduccionPan;
 import Data.Producto;
 import Data.UnidadMedida;
@@ -33,10 +36,8 @@ public class IngresarProdPAn extends javax.swing.JInternalFrame {
 
     /*se utilizar para borar info una vez guardada */
     public IngresarProdPAn() {
-
         initComponents();
-        this.mostrarProducto();
-        /*hace referencia a la tabla*/
+        this.mostrarProduccion();
 
         try {
             List<Producto> p = query_producto.getResultList();
@@ -60,11 +61,74 @@ public class IngresarProdPAn extends javax.swing.JInternalFrame {
         }
     }
 
-    public void mostrarProducto() {
+    void modificarProducto() {
+        ProduccionPanJpaController pruduccion = new ProduccionPanJpaController(entityManager1.getEntityManagerFactory());
+
+        ProduccionPan pp = new ProduccionPan();
+        Producto p = new Producto();
+        try {
+
+            p.setProdId(cb_producto.getSelectedIndex() + 1);
+            /*combobox de producto*/
+
+            UnidadMedida u = new UnidadMedida();
+            u.setUnidId(cb_umedida.getSelectedIndex() + 1);
+            /*combobox de unidad medida */
+
+            Date fecha = new Date();
+            pp.setPpanId(Integer.parseInt(txt_id.getText()));
+            pp.setPpanFechaIngreso(fecha);
+            pp.setPpanProducto(p);
+            pp.setPpanUnidadMedida(u);
+            pp.setPpanProduccion(Double.parseDouble(tf_produccion.getText()));
+
+            int SioNo = JOptionPane.showConfirmDialog(this, "Desea modificar?", "Confirmacion", JOptionPane.YES_NO_OPTION);
+            if (SioNo == 0) {
+                pruduccion.edit(pp);
+                JOptionPane.showMessageDialog(this, "Datos modificados");
+                this.mostrarProduccion();
+            } else {
+                limpiar();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        limpiar();
+        this.mostrarProduccion();
+
+    }
+
+    void eliminarProducto() {
+        try {
+            Integer id = (Integer) tb_produccion.getValueAt(tb_produccion.getSelectedRow(), 0);
+            ProduccionPanJpaController prd = new ProduccionPanJpaController(entityManager1.getEntityManagerFactory());
+            int SioNo = JOptionPane.showConfirmDialog(this, "Desea eliminar?", "Confirmacion", JOptionPane.YES_NO_OPTION);
+            if (SioNo == 0) {
+                if (id != null) {
+                    prd.destroy(id);
+                    this.mostrarProduccion();
+                    JOptionPane.showMessageDialog(null, "Se ha eliminado el id: " + id);
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "No ha seleccionado un producto");
+                }
+
+            } else {
+                limpiar();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        limpiar();
+        mostrarProduccion();
+
+    }
+
+    public void mostrarProduccion() {
         /* hace referencia a mostrar los ingreso diario en la tabla */
         try {
 
-            String[] columnas = {"Id", "Producto", "UnidadMedida", "Cantidad", "Fecha"};
+            String[] columnas = {"Id", "Producto", "Unidad Medida", "Cantidad", "Fecha"};
             Object[] obj = new Object[5];
             DefaultTableModel tabla = new DefaultTableModel(null, columnas);
             ProduccionPan p = new ProduccionPan();
@@ -102,16 +166,21 @@ public class IngresarProdPAn extends javax.swing.JInternalFrame {
         query_producto = java.beans.Beans.isDesignTime() ? null : entityManager1.createQuery("SELECT p FROM Producto p");
         query_unidadmedida = java.beans.Beans.isDesignTime() ? null : entityManager1.createQuery("SELECT u FROM UnidadMedida u");
         query1 = java.beans.Beans.isDesignTime() ? null : entityManager1.createQuery("SELECT T FROM ProduccionPan T");
-        jPanel1 = new javax.swing.JPanel();
-        txt_producto = new javax.swing.JLabel();
-        txt_unidadmedida = new javax.swing.JLabel();
-        txt_cantidad = new javax.swing.JLabel();
-        cb_producto = new javax.swing.JComboBox();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
+        jPanel3 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        txt_id = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        cb_producto = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
         cb_umedida = new javax.swing.JComboBox<>();
+        Cantidad = new javax.swing.JLabel();
         tf_produccion = new javax.swing.JTextField();
+        jPanel6 = new javax.swing.JPanel();
         bt_guardar = new javax.swing.JButton();
-        bt_modificar = new javax.swing.JButton();
         bt_eliminar = new javax.swing.JButton();
+        bt_modificar = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_produccion = new javax.swing.JTable();
 
@@ -120,148 +189,149 @@ public class IngresarProdPAn extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setTitle("Ingreso Produccion Diaria");
 
-        jPanel1.setLayout(new java.awt.GridLayout(3, 3, 10, 10));
+        jPanel3.setLayout(new java.awt.GridLayout(4, 2, 10, 10));
 
-        txt_producto.setText("Producto ");
-        jPanel1.add(txt_producto);
+        jLabel2.setText("Id");
+        jPanel3.add(jLabel2);
 
-        txt_unidadmedida.setText("Unidad Medida");
-        jPanel1.add(txt_unidadmedida);
+        txt_id.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel3.add(txt_id);
 
-        txt_cantidad.setText("Cantidad");
-        jPanel1.add(txt_cantidad);
+        jLabel4.setText("Producto");
+        jPanel3.add(jLabel4);
 
-        cb_producto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cb_productoActionPerformed(evt);
-            }
-        });
-        jPanel1.add(cb_producto);
+        jPanel3.add(cb_producto);
 
-        jPanel1.add(cb_umedida);
-        jPanel1.add(tf_produccion);
+        jLabel5.setText("Unidad Medida");
+        jPanel3.add(jLabel5);
+
+        jPanel3.add(cb_umedida);
+
+        Cantidad.setText("CANTIDAD");
+        jPanel3.add(Cantidad);
+        jPanel3.add(tf_produccion);
+
+        jPanel6.setLayout(new java.awt.GridLayout(3, 1, 20, 20));
 
         bt_guardar.setText("Guardar");
+        bt_guardar.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
         bt_guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_guardarActionPerformed(evt);
             }
         });
-        jPanel1.add(bt_guardar);
-
-        bt_modificar.setText("Modificar");
-        jPanel1.add(bt_modificar);
+        jPanel6.add(bt_guardar);
 
         bt_eliminar.setText("Eliminar Seleccionado");
+        bt_eliminar.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
         bt_eliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_eliminarActionPerformed(evt);
             }
         });
-        jPanel1.add(bt_eliminar);
+        jPanel6.add(bt_eliminar);
 
+        bt_modificar.setText("Actualizar");
+        bt_modificar.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
+        bt_modificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_modificarActionPerformed(evt);
+            }
+        });
+        jPanel6.add(bt_modificar);
+
+        jPanel1.setLayout(new java.awt.GridLayout());
+
+        tb_produccion.setBorder(new javax.swing.border.MatteBorder(null));
         tb_produccion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Título 1", "Título 2", "Título 3", "Título 4", "Título 5"
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tb_produccion.setToolTipText("");
+        tb_produccion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tb_produccionMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tb_produccion);
+
+        jPanel1.add(jScrollPane1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 575, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(86, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+                .addGap(5, 5, 5))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cb_productoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_productoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cb_productoActionPerformed
-
     private void bt_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_guardarActionPerformed
-        /*hace referencia a guardar datos en la tabla*/
-        try {
-            ProduccionPanJpaController pruduccion = new ProduccionPanJpaController(entityManager1.getEntityManagerFactory());
-
-            ProduccionPan pp = new ProduccionPan();
-            Producto p = new Producto();
-            p.setProdId(cb_producto.getSelectedIndex() + 1);
-            /*combobox de producto*/
-
-            UnidadMedida u = new UnidadMedida();
-            u.setUnidId(cb_umedida.getSelectedIndex() + 1);
-            /*combobox de unidad medida */
-
-            Date fecha = new Date();
-            pp.setPpanFechaIngreso(fecha);
-            pp.setPpanProducto(p);
-            pp.setPpanUnidadMedida(u);
-            pp.setPpanProduccion(Double.parseDouble(tf_produccion.getText()));
-
-            pruduccion.create(pp);
-            JOptionPane.showMessageDialog(null, "Se ha insertado datos");
-            this.limpiar();
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
-
 
     }//GEN-LAST:event_bt_guardarActionPerformed
 
     private void bt_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_eliminarActionPerformed
-        try {
-            ProduccionPan p = (ProduccionPan) tb_produccion.getValueAt(tb_produccion.getSelectedRow(), 0);
-            ProduccionPanJpaController.destroy(p.get());
-            JOptionPane.showMessageDialog(null, "Datos Eliminado Correctamente");
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
+        this.eliminarProducto();
     }//GEN-LAST:event_bt_eliminarActionPerformed
+
+    private void bt_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_modificarActionPerformed
+        this.modificarProducto();
+    }//GEN-LAST:event_bt_modificarActionPerformed
+
+    private void tb_produccionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_produccionMouseClicked
+        int fila = this.tb_produccion.getSelectedRow();
+        this.txt_id.setText(String.valueOf(this.tb_produccion.getValueAt(fila, 0)));
+        this.cb_producto.setSelectedItem(String.valueOf(this.tb_produccion.getValueAt(fila, 1)));
+        this.cb_umedida.setSelectedItem(String.valueOf(this.tb_produccion.getValueAt(fila, 2)));
+        this.tf_produccion.setText(String.valueOf(this.tb_produccion.getValueAt(fila, 3)));
+    }//GEN-LAST:event_tb_produccionMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Cantidad;
     private javax.swing.JButton bt_eliminar;
     private javax.swing.JButton bt_guardar;
     private javax.swing.JButton bt_modificar;
-    private javax.swing.JComboBox cb_producto;
+    private javax.swing.JComboBox<String> cb_producto;
     private javax.swing.JComboBox<String> cb_umedida;
     private javax.persistence.EntityManager entityManager1;
+    private javax.swing.Box.Filler filler1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.persistence.Query query1;
     private javax.persistence.Query query_producto;
     private javax.persistence.Query query_unidadmedida;
     private javax.swing.JTable tb_produccion;
     private javax.swing.JTextField tf_produccion;
-    private javax.swing.JLabel txt_cantidad;
-    private javax.swing.JLabel txt_producto;
-    private javax.swing.JLabel txt_unidadmedida;
+    private javax.swing.JLabel txt_id;
     // End of variables declaration//GEN-END:variables
 }
