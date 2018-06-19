@@ -22,12 +22,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author luisa
  */
-public class VisualizarCostosPan extends javax.swing.JInternalFrame {
+public class MostrarCostosPan extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form VisualizarCostos
      */
-    public VisualizarCostosPan() {
+    public MostrarCostosPan() {
         initComponents();
         
         cargar_Combo();
@@ -38,15 +38,15 @@ public class VisualizarCostosPan extends javax.swing.JInternalFrame {
             min.set(Calendar.YEAR,2015);  
             min.set(Calendar.MONTH,12);  
             min.set(Calendar.DATE,12); 
-            JX_fecha_inicial.setMinSelectableDate(min.getTime());
-            JX_fecha_final.setMinSelectableDate(min.getTime());
+            tf_fecha_inicial.setMinSelectableDate(min.getTime());
+            tf_fecha_final.setMinSelectableDate(min.getTime());
             
         Calendar max = Calendar.getInstance();  
         max.set(Calendar.YEAR,2020);    
         max.set(Calendar.MONTH,12);    
         max.set(Calendar.DATE,31);    
-        JX_fecha_final.setMaxSelectableDate(new Date());
-        JX_fecha_inicial.setMaxSelectableDate(new Date());
+        tf_fecha_final.setMaxSelectableDate(new Date());
+        tf_fecha_inicial.setMaxSelectableDate(new Date());
 
     }
 
@@ -63,41 +63,42 @@ public class VisualizarCostosPan extends javax.swing.JInternalFrame {
         query1 = java.beans.Beans.isDesignTime() ? null : entityManager1.createQuery("select e  from Producto e");
         jPanel1 = new javax.swing.JPanel();
         jl_FechaInicio = new javax.swing.JLabel();
-        JX_fecha_inicial = new com.toedter.calendar.JDateChooser();
+        tf_fecha_inicial = new com.toedter.calendar.JDateChooser();
         jl_FechaFinal = new javax.swing.JLabel();
-        JX_fecha_final = new com.toedter.calendar.JDateChooser();
+        tf_fecha_final = new com.toedter.calendar.JDateChooser();
         jLabel3 = new javax.swing.JLabel();
-        combo_tipo_pan = new javax.swing.JComboBox();
+        cb_tipo_pan = new javax.swing.JComboBox();
         jScrollPane2 = new javax.swing.JScrollPane();
         jt_tabla_reportes_pan = new javax.swing.JTable();
+        jPanel2 = new javax.swing.JPanel();
         bt_mostrar_reporte = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        bt_eliminar_reporte = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setTitle("Reportes de Rentablidad Pan");
 
-        jPanel1.setLayout(new java.awt.GridLayout(3, 2, 20, 20));
+        jPanel1.setLayout(new java.awt.GridLayout(3, 2, 10, 10));
 
         jl_FechaInicio.setText("Fecha Inicial:");
         jPanel1.add(jl_FechaInicio);
-        jPanel1.add(JX_fecha_inicial);
+        jPanel1.add(tf_fecha_inicial);
 
         jl_FechaFinal.setText("Fecha Final:");
         jPanel1.add(jl_FechaFinal);
-        jPanel1.add(JX_fecha_final);
+        jPanel1.add(tf_fecha_final);
 
         jLabel3.setText("Tipo pan:");
         jPanel1.add(jLabel3);
 
-        combo_tipo_pan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        combo_tipo_pan.addActionListener(new java.awt.event.ActionListener() {
+        cb_tipo_pan.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        cb_tipo_pan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                combo_tipo_panActionPerformed(evt);
+                cb_tipo_panActionPerformed(evt);
             }
         });
-        jPanel1.add(combo_tipo_pan);
+        jPanel1.add(cb_tipo_pan);
 
         jt_tabla_reportes_pan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -121,67 +122,64 @@ public class VisualizarCostosPan extends javax.swing.JInternalFrame {
             jt_tabla_reportes_pan.getColumnModel().getColumn(3).setResizable(false);
         }
 
+        jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 50, 5));
+
         bt_mostrar_reporte.setText("Mostrar Reporte");
+        bt_mostrar_reporte.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         bt_mostrar_reporte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_mostrar_reporteActionPerformed(evt);
             }
         });
+        jPanel2.add(bt_mostrar_reporte);
 
-        jButton2.setText("Eliminar Reportes");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        bt_eliminar_reporte.setText("Eliminar Reporte");
+        bt_eliminar_reporte.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bt_eliminar_reporte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                bt_eliminar_reporteActionPerformed(evt);
             }
         });
+        jPanel2.add(bt_eliminar_reporte);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(78, 78, 78)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(97, 97, 97)
-                        .addComponent(bt_mostrar_reporte)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bt_mostrar_reporte)
-                    .addComponent(jButton2))
-                .addGap(28, 28, 28)
+                .addGap(6, 6, 6)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void combo_tipo_panActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_tipo_panActionPerformed
+    private void cb_tipo_panActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_tipo_panActionPerformed
                  bt_mostrar_reporte.setEnabled(true);
-    }//GEN-LAST:event_combo_tipo_panActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        Clear_Table1();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_cb_tipo_panActionPerformed
 
     private void bt_mostrar_reporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_mostrar_reporteActionPerformed
-        datos();
+        this.datos();
     }//GEN-LAST:event_bt_mostrar_reporteActionPerformed
+
+    private void bt_eliminar_reporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_eliminar_reporteActionPerformed
+        this.Clear_Table1();
+    }//GEN-LAST:event_bt_eliminar_reporteActionPerformed
     public void datos() {
 DefaultTableModel mode = (DefaultTableModel) jt_tabla_reportes_pan.getModel();
 PrecioCosto findPrecioCosto;      
@@ -191,12 +189,12 @@ ProduccionPan finProduccionPan;
 PrecioCostoJpaController pjcontroller = new PrecioCostoJpaController(entityManager1.getEntityManagerFactory());
 PrecioVentaJpaController pjVenta = new PrecioVentaJpaController(entityManager1.getEntityManagerFactory());
 ProduccionPanJpaController pjProdu =new ProduccionPanJpaController(entityManager1.getEntityManagerFactory());
-findPrecioCosto = pjcontroller.findPrecioCosto(combo_tipo_pan.getSelectedIndex() + 1);
-        findPrecioVenta = pjVenta.findPrecioVenta(combo_tipo_pan.getSelectedIndex() + 1);
-        finProduccionPan=pjProdu.findProduccionPan(combo_tipo_pan.getSelectedIndex() + 1);
+findPrecioCosto = pjcontroller.findPrecioCosto(cb_tipo_pan.getSelectedIndex() + 1);
+        findPrecioVenta = pjVenta.findPrecioVenta(cb_tipo_pan.getSelectedIndex() + 1);
+        finProduccionPan=pjProdu.findProduccionPan(cb_tipo_pan.getSelectedIndex() + 1);
         Date date = new Date();// se trajo la fecha del sistema
-        Date fecha_inicio = JX_fecha_inicial.getDate();
-        Date fecha_final = JX_fecha_final.getDate();
+        Date fecha_inicio = tf_fecha_inicial.getDate();
+        Date fecha_final = tf_fecha_final.getDate();
         Date fecha_pro=(finProduccionPan.getPpanFechaIngreso());
         double Kilos_producidos=(finProduccionPan.getPpanProduccion());
         int valor_costo = (findPrecioCosto.getCostValor());          
@@ -222,10 +220,10 @@ findPrecioCosto = pjcontroller.findPrecioCosto(combo_tipo_pan.getSelectedIndex()
        
     public void cargar_Combo() {
         List<Producto> prod = query1.getResultList(); // se obtienen los productos y almcenan en lista
-        combo_tipo_pan.removeAllItems();//se limpia el combobox
+        cb_tipo_pan.removeAllItems();//se limpia el combobox
         for (Producto p : prod) {
             // se recorre
-            combo_tipo_pan.addItem(p.getProdNombre());//se muestra en el combobox  
+            cb_tipo_pan.addItem(p.getProdNombre());//se muestra en el combobox  
         }
     }
     private void Clear_Table1(){
@@ -238,18 +236,19 @@ findPrecioCosto = pjcontroller.findPrecioCosto(combo_tipo_pan.getSelectedIndex()
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.toedter.calendar.JDateChooser JX_fecha_final;
-    private com.toedter.calendar.JDateChooser JX_fecha_inicial;
+    private javax.swing.JButton bt_eliminar_reporte;
     private javax.swing.JButton bt_mostrar_reporte;
-    private javax.swing.JComboBox combo_tipo_pan;
+    private javax.swing.JComboBox cb_tipo_pan;
     private javax.persistence.EntityManager entityManager1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel jl_FechaFinal;
     private javax.swing.JLabel jl_FechaInicio;
     private javax.swing.JTable jt_tabla_reportes_pan;
     private javax.persistence.Query query1;
+    private com.toedter.calendar.JDateChooser tf_fecha_final;
+    private com.toedter.calendar.JDateChooser tf_fecha_inicial;
     // End of variables declaration//GEN-END:variables
 }

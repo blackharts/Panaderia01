@@ -2,16 +2,16 @@
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
-    <Component class="javax.persistence.EntityManager" name="entityManager1">
+    <Component class="javax.persistence.EntityManager" name="entityManager">
       <Properties>
         <Property name="persistenceUnit" type="java.lang.String" value="pu"/>
       </Properties>
     </Component>
-    <Component class="javax.persistence.Query" name="query1">
+    <Component class="javax.persistence.Query" name="q_usuario">
       <Properties>
         <Property name="query" type="java.lang.String" value="SELECT u FROM Usuario u"/>
         <Property name="entityManager" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$EMProperty$EntityManagerEditor">
-          <ComponentRef name="entityManager1"/>
+          <ComponentRef name="entityManager"/>
         </Property>
       </Properties>
     </Component>
@@ -61,15 +61,18 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
+              <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="pf_pass_login" max="32767" attributes="0"/>
-                      <Component id="tf_usu_login" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jl_pass_login" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jSeparator1" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jSeparator2" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jPanel2" alignment="0" pref="225" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="pf_pass_login" max="32767" attributes="0"/>
+                          <Component id="tf_usu_login" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txt_pass_login" alignment="0" max="32767" attributes="0"/>
+                          <Component id="separador" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jSeparator2" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jPanel2" alignment="0" pref="225" max="32767" attributes="0"/>
+                      </Group>
+                      <Component id="txt_ingresar" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -79,11 +82,13 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
+                  <Component id="txt_ingresar" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="tf_usu_login" min="-2" pref="24" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jSeparator1" min="-2" pref="12" max="-2" attributes="0"/>
+                  <Component id="separador" min="-2" pref="12" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jl_pass_login" min="-2" pref="14" max="-2" attributes="0"/>
+                  <Component id="txt_pass_login" min="-2" pref="14" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                   <Component id="pf_pass_login" min="-2" pref="20" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -105,7 +110,6 @@
               <Color blue="4b" green="49" red="44" type="rgb"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="Administrativo"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
@@ -114,7 +118,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tf_usu_loginActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JSeparator" name="jSeparator1">
+        <Component class="javax.swing.JSeparator" name="separador">
         </Component>
         <Component class="javax.swing.JPasswordField" name="pf_pass_login">
           <Properties>
@@ -128,7 +132,6 @@
               <Color blue="4b" green="49" red="44" type="rgb"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="abc"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
@@ -142,44 +145,66 @@
         </Component>
         <Component class="javax.swing.JSeparator" name="jSeparator2">
         </Component>
-        <Component class="javax.swing.JLabel" name="jl_pass_login">
+        <Component class="javax.swing.JLabel" name="txt_pass_login">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Contrase&#xf1;a:"/>
+            <Property name="text" type="java.lang.String" value="Ingresar Contrase&#xf1;a:"/>
           </Properties>
         </Component>
         <Container class="javax.swing.JPanel" name="jPanel2">
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
             <Property name="columns" type="int" value="0"/>
+            <Property name="horizontalGap" type="int" value="5"/>
             <Property name="rows" type="int" value="3"/>
+            <Property name="verticalGap" type="int" value="5"/>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JToggleButton" name="btn_acceder">
+            <Component class="javax.swing.JToggleButton" name="bt_acceder">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Acceder"/>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.SoftBevelBorderInfo">
+                    <BevelBorder/>
+                  </Border>
+                </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_accederActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bt_accederActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btn_nuevo_usuario">
+            <Component class="javax.swing.JButton" name="bt_nuevo_usuario">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Nuevo Usuario"/>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.SoftBevelBorderInfo">
+                    <BevelBorder/>
+                  </Border>
+                </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_nuevo_usuarioActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bt_nuevo_usuarioActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JToggleButton" name="btn_salir">
+            <Component class="javax.swing.JToggleButton" name="bt_salir">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Salir"/>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.SoftBevelBorderInfo">
+                    <BevelBorder/>
+                  </Border>
+                </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_salirActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bt_salirActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
         </Container>
+        <Component class="javax.swing.JLabel" name="txt_ingresar">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Ingresar Usuario:"/>
+          </Properties>
+        </Component>
       </SubComponents>
     </Container>
   </SubComponents>

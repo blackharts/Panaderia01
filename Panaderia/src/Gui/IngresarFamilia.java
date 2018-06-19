@@ -12,12 +12,12 @@ import java.util.Iterator;
  *
  * @author yo
  */
-public class FamiliaArticulo extends javax.swing.JInternalFrame {
+public class IngresarFamilia extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form FamiliaArticulo
      */
-    public FamiliaArticulo() {
+    public IngresarFamilia() {
         initComponents();
     List<Linea> productos = codigo_linea.getResultList(); // se obtienen los productos y almcenan en lista
         jcombo_codigolinea.removeAllItems();//se limpia el combobox
@@ -42,7 +42,7 @@ public class FamiliaArticulo extends javax.swing.JInternalFrame {
         codigo_linea = java.beans.Beans.isDesignTime() ? null : entityManager1.createQuery("select c from Linea c");
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jcombo_codigolinea = new javax.swing.JComboBox<>();
+        jcombo_codigolinea = new javax.swing.JComboBox<String>();
         tf_descrip_F = new javax.swing.JTextField();
         Guardar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -56,7 +56,7 @@ public class FamiliaArticulo extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Descripción Familia");
 
-        jcombo_codigolinea.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcombo_codigolinea.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jcombo_codigolinea.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcombo_codigolineaActionPerformed(evt);

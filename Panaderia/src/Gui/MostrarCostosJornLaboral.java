@@ -17,12 +17,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author luisa
  */
-public class VisualizarCostosJornLabor extends javax.swing.JInternalFrame {
+public class MostrarCostosJornLaboral extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form VisualizarCostos
      */
-    public VisualizarCostosJornLabor() {
+    public MostrarCostosJornLaboral() {
         initComponents();
     }
 
@@ -43,16 +43,18 @@ public class VisualizarCostosJornLabor extends javax.swing.JInternalFrame {
         jd_fecha_inicial = new com.toedter.calendar.JDateChooser();
         jl_FechaFinal = new javax.swing.JLabel();
         jd_fecha_final = new com.toedter.calendar.JDateChooser();
-        bt_mostrar_report = new javax.swing.JToggleButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tb_costos_jornada = new javax.swing.JTable();
+        jPanel2 = new javax.swing.JPanel();
+        bt_mostrar_reporte = new javax.swing.JButton();
+        bt_eliminar_reporte = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setTitle("Costos Jornada Laboral");
 
-        jPanel1.setLayout(new java.awt.GridLayout(2, 2, 20, 20));
+        jPanel1.setLayout(new java.awt.GridLayout(2, 2, 10, 10));
 
         jl_FechaInicio.setText("Fecha Inicial:");
         jPanel1.add(jl_FechaInicio);
@@ -61,13 +63,6 @@ public class VisualizarCostosJornLabor extends javax.swing.JInternalFrame {
         jl_FechaFinal.setText("Fecha Final:");
         jPanel1.add(jl_FechaFinal);
         jPanel1.add(jd_fecha_final);
-
-        bt_mostrar_report.setText("Mostrar reporte");
-        bt_mostrar_report.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_mostrar_reportActionPerformed(evt);
-            }
-        });
 
         tb_costos_jornada.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -94,43 +89,42 @@ public class VisualizarCostosJornLabor extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(tb_costos_jornada);
 
+        jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 50, 5));
+
+        bt_mostrar_reporte.setText("Mostrar Reporte");
+        bt_mostrar_reporte.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel2.add(bt_mostrar_reporte);
+
+        bt_eliminar_reporte.setText("Eliminar Reporte");
+        bt_eliminar_reporte.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel2.add(bt_eliminar_reporte);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(79, 79, 79))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(157, 157, 157)
-                        .addComponent(bt_mostrar_report)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16)
-                .addComponent(bt_mostrar_report)
-                .addGap(18, 18, 18)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void bt_mostrar_reportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_mostrar_reportActionPerformed
-        // TODO add your handling code here:
-        crearReporte();
-    }//GEN-LAST:event_bt_mostrar_reportActionPerformed
     private void mostrarTabla(){
     DefaultTableModel report = (DefaultTableModel) tb_costos_jornada.getModel();
     PrecioCosto costo;
@@ -152,9 +146,11 @@ private void crearReporte(){
         
 }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JToggleButton bt_mostrar_report;
+    private javax.swing.JButton bt_eliminar_reporte;
+    private javax.swing.JButton bt_mostrar_reporte;
     private javax.persistence.EntityManager entityManagerJornada;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private com.toedter.calendar.JDateChooser jd_fecha_final;
     private com.toedter.calendar.JDateChooser jd_fecha_inicial;

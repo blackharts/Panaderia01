@@ -14,12 +14,12 @@ import javax.swing.JOptionPane;
  *
  * @author kalbl
  */
-public class RecetaFrame extends javax.swing.JInternalFrame {
+public class IngresarReceta extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form RecetaFrame
      */
-    public RecetaFrame() {
+    public IngresarReceta() {
         initComponents();
         List<Producto> productos = producto_final.getResultList(); // se obtienen los productos y almcenan en lista
         List<Producto> insumo = ingreso_insumo.getResultList();
@@ -47,7 +47,7 @@ public class RecetaFrame extends javax.swing.JInternalFrame {
         ingreso_insumo = java.beans.Beans.isDesignTime() ? null : entityManager1.createQuery("select p from Producto p");
         jl_receta = new javax.swing.JLabel();
         jl_ProductoFinal = new javax.swing.JLabel();
-        jcombo_prod_final = new javax.swing.JComboBox<>();
+        jcombo_prod_final = new javax.swing.JComboBox<String>();
         jl_Estado = new javax.swing.JLabel();
         tf_estado = new javax.swing.JTextField();
         jl_IngresoInsumo = new javax.swing.JLabel();
@@ -58,7 +58,7 @@ public class RecetaFrame extends javax.swing.JInternalFrame {
         tf_cantidad = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla_receta = new javax.swing.JTable();
-        jcombo_insert_insumos = new javax.swing.JComboBox<>();
+        jcombo_insert_insumos = new javax.swing.JComboBox<String>();
         jButton2 = new javax.swing.JButton();
 
         setClosable(true);
@@ -70,7 +70,7 @@ public class RecetaFrame extends javax.swing.JInternalFrame {
 
         jl_ProductoFinal.setText("ProducotFinal");
 
-        jcombo_prod_final.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcombo_prod_final.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jcombo_prod_final.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcombo_prod_finalActionPerformed(evt);
@@ -111,7 +111,7 @@ public class RecetaFrame extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(tabla_receta);
 
-        jcombo_insert_insumos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcombo_insert_insumos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jcombo_insert_insumos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcombo_insert_insumosActionPerformed(evt);

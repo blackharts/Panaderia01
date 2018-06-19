@@ -35,25 +35,25 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        entityManager1 = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("PanaderiaPU").createEntityManager();
-        query1 = java.beans.Beans.isDesignTime() ? null : entityManager1.createQuery("SELECT u FROM Usuario u");
+        entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("PanaderiaPU").createEntityManager();
+        q_usuario = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT u FROM Usuario u");
         jPanel1 = new javax.swing.JPanel();
         tf_usu_login = new javax.swing.JTextField();
-        jSeparator1 = new javax.swing.JSeparator();
+        separador = new javax.swing.JSeparator();
         pf_pass_login = new javax.swing.JPasswordField();
         jSeparator2 = new javax.swing.JSeparator();
-        jl_pass_login = new javax.swing.JLabel();
+        txt_pass_login = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        btn_acceder = new javax.swing.JToggleButton();
-        btn_nuevo_usuario = new javax.swing.JButton();
-        btn_salir = new javax.swing.JToggleButton();
+        bt_acceder = new javax.swing.JToggleButton();
+        bt_nuevo_usuario = new javax.swing.JButton();
+        bt_salir = new javax.swing.JToggleButton();
+        txt_ingresar = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         tf_usu_login.setBackground(new java.awt.Color(214, 217, 223));
         tf_usu_login.setForeground(new java.awt.Color(68, 73, 75));
         tf_usu_login.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tf_usu_login.setText("Administrativo");
         tf_usu_login.setBorder(null);
         tf_usu_login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -65,7 +65,6 @@ public class Login extends javax.swing.JFrame {
         pf_pass_login.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
         pf_pass_login.setForeground(new java.awt.Color(68, 73, 75));
         pf_pass_login.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        pf_pass_login.setText("abc");
         pf_pass_login.setBorder(null);
         pf_pass_login.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         pf_pass_login.addActionListener(new java.awt.event.ActionListener() {
@@ -74,33 +73,38 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        jl_pass_login.setText("Contraseña:");
+        txt_pass_login.setText("Ingresar Contraseña:");
 
-        jPanel2.setLayout(new java.awt.GridLayout(3, 0));
+        jPanel2.setLayout(new java.awt.GridLayout(3, 0, 5, 5));
 
-        btn_acceder.setText("Acceder");
-        btn_acceder.addActionListener(new java.awt.event.ActionListener() {
+        bt_acceder.setText("Acceder");
+        bt_acceder.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bt_acceder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_accederActionPerformed(evt);
+                bt_accederActionPerformed(evt);
             }
         });
-        jPanel2.add(btn_acceder);
+        jPanel2.add(bt_acceder);
 
-        btn_nuevo_usuario.setText("Nuevo Usuario");
-        btn_nuevo_usuario.addActionListener(new java.awt.event.ActionListener() {
+        bt_nuevo_usuario.setText("Nuevo Usuario");
+        bt_nuevo_usuario.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bt_nuevo_usuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_nuevo_usuarioActionPerformed(evt);
+                bt_nuevo_usuarioActionPerformed(evt);
             }
         });
-        jPanel2.add(btn_nuevo_usuario);
+        jPanel2.add(bt_nuevo_usuario);
 
-        btn_salir.setText("Salir");
-        btn_salir.addActionListener(new java.awt.event.ActionListener() {
+        bt_salir.setText("Salir");
+        bt_salir.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bt_salir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_salirActionPerformed(evt);
+                bt_salirActionPerformed(evt);
             }
         });
-        jPanel2.add(btn_salir);
+        jPanel2.add(bt_salir);
+
+        txt_ingresar.setText("Ingresar Usuario:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -108,24 +112,28 @@ public class Login extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pf_pass_login)
-                    .addComponent(tf_usu_login)
-                    .addComponent(jl_pass_login, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jSeparator1)
-                    .addComponent(jSeparator2)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(pf_pass_login)
+                        .addComponent(tf_usu_login)
+                        .addComponent(txt_pass_login, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(separador)
+                        .addComponent(jSeparator2)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE))
+                    .addComponent(txt_ingresar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txt_ingresar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tf_usu_login, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(separador, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jl_pass_login, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txt_pass_login, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addComponent(pf_pass_login, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -155,17 +163,17 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salirActionPerformed
+    private void bt_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_salirActionPerformed
         System.exit(0);
-    }//GEN-LAST:event_btn_salirActionPerformed
+    }//GEN-LAST:event_bt_salirActionPerformed
 
-    private void btn_accederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_accederActionPerformed
+    private void bt_accederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_accederActionPerformed
         Usuario usu_logueado = new Usuario();
         String tipo1 = "Administrativo";
         String tipo2 = "Bodeguero";
         String tipo3 = "Gerente";
         
-        ArrayList<Usuario> usuarios = new ArrayList(query1.getResultList());   
+        ArrayList<Usuario> usuarios = new ArrayList(q_usuario.getResultList());   
         for(Usuario a:usuarios){
             if (a.getUsuNombre().equals(tf_usu_login.getText()) && a.getUsuContrasena().equals(pf_pass_login.getText())){            
                 usu_logueado.setUsuId(a.getUsuId());
@@ -176,19 +184,19 @@ public class Login extends javax.swing.JFrame {
         }
         try{        
             if (usu_logueado.getTipoUsuario().equals(tipo1)){
-                MenuAdmin main = new MenuAdmin();
+                MenuAdministrador main = new MenuAdministrador();
                 main.show();
                 this.hide();   
                 JOptionPane.showMessageDialog(this,"Bienvenid@ "+usu_logueado.getUsuNombre());
             }               
             else if (usu_logueado.getTipoUsuario().equals(tipo2)){
-                MenuAdminBodega main = new MenuAdminBodega();
+                MenuBodeguero main = new MenuBodeguero();
                 main.show();
                 this.hide();                    
                 JOptionPane.showMessageDialog(this,"Bienvenid@ "+usu_logueado.getUsuNombre());
             }
             else if(usu_logueado.getTipoUsuario().equals(tipo3)){
-                MenuGerenteProduc main = new MenuGerenteProduc();
+                MenuGerente main = new MenuGerente();
                 main.show();
                 this.hide(); 
                 JOptionPane.showMessageDialog(this,"Bienvenid@ "+usu_logueado.getUsuNombre());                    
@@ -197,7 +205,7 @@ public class Login extends javax.swing.JFrame {
         catch(NullPointerException e){
             JOptionPane.showMessageDialog(this,"Error de contraseña o usuario");
         }
-    }//GEN-LAST:event_btn_accederActionPerformed
+    }//GEN-LAST:event_bt_accederActionPerformed
 
     private void pf_pass_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pf_pass_loginActionPerformed
         // TODO add your handling code here:
@@ -207,10 +215,10 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tf_usu_loginActionPerformed
 
-    private void btn_nuevo_usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_nuevo_usuarioActionPerformed
-        NuevoUsuario cr =new NuevoUsuario();
+    private void bt_nuevo_usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_nuevo_usuarioActionPerformed
+        CrearUsuario cr =new CrearUsuario();
          cr.setVisible(true);
-    }//GEN-LAST:event_btn_nuevo_usuarioActionPerformed
+    }//GEN-LAST:event_bt_nuevo_usuarioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -249,17 +257,18 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JToggleButton btn_acceder;
-    private javax.swing.JButton btn_nuevo_usuario;
-    private javax.swing.JToggleButton btn_salir;
-    private javax.persistence.EntityManager entityManager1;
+    private javax.swing.JToggleButton bt_acceder;
+    private javax.swing.JButton bt_nuevo_usuario;
+    private javax.swing.JToggleButton bt_salir;
+    private javax.persistence.EntityManager entityManager;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JLabel jl_pass_login;
     private javax.swing.JPasswordField pf_pass_login;
-    private javax.persistence.Query query1;
+    private javax.persistence.Query q_usuario;
+    private javax.swing.JSeparator separador;
     private javax.swing.JTextField tf_usu_login;
+    private javax.swing.JLabel txt_ingresar;
+    private javax.swing.JLabel txt_pass_login;
     // End of variables declaration//GEN-END:variables
 }
