@@ -32,12 +32,12 @@ import javax.swing.table.TableColumn;
  *
  * @author Alex
  */
-public final class IngresarCosto extends javax.swing.JInternalFrame {
+public final class IngresarPrecioCosto extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form IngresarCostos
      */
-    public IngresarCosto() {
+    public IngresarPrecioCosto() {
         initComponents();
         cargarTabla();
     }

@@ -24,7 +24,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author luisa
  */
-public class IngresarProduccion extends javax.swing.JInternalFrame {
+public class IngresarProduccionPan extends javax.swing.JInternalFrame {
 
     DefaultTableModel tt = new DefaultTableModel();
 
@@ -35,7 +35,7 @@ public class IngresarProduccion extends javax.swing.JInternalFrame {
     }
 
     /*se utilizar para borar info una vez guardada */
-    public IngresarProduccion() {
+    public IngresarProduccionPan() {
         initComponents();
         this.mostrarTabla();
 
@@ -205,9 +205,9 @@ public class IngresarProduccion extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         txt_id = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        cb_producto = new javax.swing.JComboBox<>();
+        cb_producto = new javax.swing.JComboBox<String>();
         jLabel5 = new javax.swing.JLabel();
-        cb_umedida = new javax.swing.JComboBox<>();
+        cb_umedida = new javax.swing.JComboBox<String>();
         Cantidad = new javax.swing.JLabel();
         tf_produccion = new javax.swing.JTextField();
         jPanel6 = new javax.swing.JPanel();
@@ -227,17 +227,19 @@ public class IngresarProduccion extends javax.swing.JInternalFrame {
         jLabel2.setText("Id");
         jPanel3.add(jLabel2);
 
-        txt_id.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txt_id.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel3.add(txt_id);
 
         jLabel4.setText("Producto");
         jPanel3.add(jLabel4);
 
+        cb_producto.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel3.add(cb_producto);
 
         jLabel5.setText("Unidad Medida");
         jPanel3.add(jLabel5);
 
+        cb_umedida.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel3.add(cb_umedida);
 
         Cantidad.setText("Cantidad");
@@ -246,8 +248,9 @@ public class IngresarProduccion extends javax.swing.JInternalFrame {
 
         jPanel6.setLayout(new java.awt.GridLayout(3, 1, 10, 10));
 
+        bt_guardar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         bt_guardar.setText("Insertar");
-        bt_guardar.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
+        bt_guardar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         bt_guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_guardarActionPerformed(evt);
@@ -255,8 +258,9 @@ public class IngresarProduccion extends javax.swing.JInternalFrame {
         });
         jPanel6.add(bt_guardar);
 
+        bt_modificar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         bt_modificar.setText("Modificar");
-        bt_modificar.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
+        bt_modificar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         bt_modificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_modificarActionPerformed(evt);
@@ -264,8 +268,9 @@ public class IngresarProduccion extends javax.swing.JInternalFrame {
         });
         jPanel6.add(bt_modificar);
 
+        bt_eliminar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         bt_eliminar.setText("Eliminar");
-        bt_eliminar.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
+        bt_eliminar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         bt_eliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_eliminarActionPerformed(evt);
@@ -296,20 +301,27 @@ public class IngresarProduccion extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 511, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 122, Short.MAX_VALUE)
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();

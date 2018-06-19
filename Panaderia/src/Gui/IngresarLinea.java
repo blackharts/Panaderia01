@@ -13,13 +13,13 @@ import javax.swing.JOptionPane;
  *
  * @author yo
  */
-public class DescripLinea extends javax.swing.JInternalFrame {
+public class IngresarLinea extends javax.swing.JInternalFrame {
 
     public void limpiar() {
         tf_descrip.setText("");
     }
 
-    public DescripLinea() {
+    public IngresarLinea() {
         initComponents();
     }
 
