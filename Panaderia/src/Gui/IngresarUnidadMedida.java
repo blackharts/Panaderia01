@@ -84,7 +84,7 @@ public class IngresarUnidadMedida extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
-    
+      
     void eliminarUnidadMedida() {
         try {
           
@@ -139,7 +139,7 @@ public class IngresarUnidadMedida extends javax.swing.JInternalFrame {
             int SioNo = JOptionPane.showConfirmDialog(this, "Desea modificar?", "Confirmacion", JOptionPane.YES_NO_OPTION);
             if (SioNo == 0) {
 
-                unid.edit(uni);
+                unid.edit(uni);              
                 JOptionPane.showMessageDialog(this, "Datos modificados");
             } else {
                 limpiar();
