@@ -77,6 +77,7 @@ public class IngresarUnidadMedida extends javax.swing.JInternalFrame {
                 obj[1] = u.getUnidCodigo();
                 obj[2] = u.getUnidDescripcion();
                 tabla.addRow(obj);
+                
             }
             tb_unidadmedida.setModel(tabla);
 
