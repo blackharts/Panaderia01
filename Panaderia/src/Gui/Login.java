@@ -162,8 +162,8 @@ public class Login extends javax.swing.JFrame {
     private void btn_accederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_accederActionPerformed
         Usuario usu_logueado = new Usuario();
         String tipo1 = "Administrativo";
-        String tipo2 = "Gerente";
-        String tipo3 = "Bodegero";
+        String tipo2 = "Bodegero";
+        String tipo3 = "Gerente";
         
         ArrayList<Usuario> usuarios = new ArrayList(query1.getResultList());   
         for(Usuario a:usuarios){
