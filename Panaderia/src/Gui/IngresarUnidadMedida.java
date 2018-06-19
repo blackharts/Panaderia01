@@ -87,7 +87,13 @@ public class IngresarUnidadMedida extends javax.swing.JInternalFrame {
     
     void eliminarUnidadMedida() {
         try {
-            Integer id = (Integer) tb_unidadmedida.getValueAt(tb_unidadmedida.getSelectedRow(), 0);
+          
+             if(jt_codigo.getText().length() == 0 &&jt_descripcion.getText().length() ==0 ){
+                JOptionPane.showMessageDialog(null, "Campos  vacios");
+            
+            }else{
+                 
+                 Integer id = (Integer) tb_unidadmedida.getValueAt(tb_unidadmedida.getSelectedRow(), 0);
             UnidadMedidaJpaController unid = new UnidadMedidaJpaController(entityManager1.getEntityManagerFactory());
             
 
@@ -105,8 +111,12 @@ public class IngresarUnidadMedida extends javax.swing.JInternalFrame {
             } else {
                 limpiar();
             }
+             
+             
+             }
+            
+ 
         } catch (Exception e) {
-             JOptionPane.showMessageDialog(null, "no se a selecionado elemento a eliminar");
             e.printStackTrace();
         }
         limpiar();
@@ -119,8 +129,11 @@ public class IngresarUnidadMedida extends javax.swing.JInternalFrame {
    
         try {
             
+            if(jt_codigo.getText().length() == 0 &&jt_descripcion.getText().length() ==0 ){
+                JOptionPane.showMessageDialog(null, "Campos  vacios");
             
-            uni= unid.findUnidadMedida(Integer.parseInt(lb_id.getText()));
+            }else{
+             uni= unid.findUnidadMedida(Integer.parseInt(lb_id.getText()));
             uni.setUnidCodigo(this.jt_codigo.getText().toString());
             uni.setUnidDescripcion(this.jt_descripcion.getText().toString());
             int SioNo = JOptionPane.showConfirmDialog(this, "Desea modificar?", "Confirmacion", JOptionPane.YES_NO_OPTION);
@@ -131,6 +144,12 @@ public class IngresarUnidadMedida extends javax.swing.JInternalFrame {
             } else {
                 limpiar();
             }
+            
+            
+            }
+            
+            
+           
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "no se a selecionado elemento a modifcar");
             e.printStackTrace();
