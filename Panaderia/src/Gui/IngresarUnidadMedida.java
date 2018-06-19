@@ -41,17 +41,25 @@ public class IngresarUnidadMedida extends javax.swing.JInternalFrame {
         UnidadMedida uni = new UnidadMedida();
 
         try {
-
+            if(jt_codigo.getText().length() == 0 &&jt_descripcion.getText().length() ==0 ){
+                JOptionPane.showMessageDialog(null, "Campos vacios");
+            
+            }else{
+            
             uni.setUnidCodigo(jt_codigo.getText());
             uni.setUnidDescripcion(jt_descripcion.getText());
 
             unid.create(uni);
             JOptionPane.showMessageDialog(null, "Datos Insertados");
+            
+            }   
+            
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
         limpiar();
+        mostrarTabla();
     }
 
     public void mostrarTabla() {
@@ -82,6 +90,7 @@ public class IngresarUnidadMedida extends javax.swing.JInternalFrame {
             Integer id = (Integer) tb_unidadmedida.getValueAt(tb_unidadmedida.getSelectedRow(), 0);
             UnidadMedidaJpaController unid = new UnidadMedidaJpaController(entityManager1.getEntityManagerFactory());
             
+
             int SioNo = JOptionPane.showConfirmDialog(this, "Desea eliminar?", "Confirmacion", JOptionPane.YES_NO_OPTION);
             if (SioNo == 0) {
                 if (id != null) {
@@ -97,6 +106,7 @@ public class IngresarUnidadMedida extends javax.swing.JInternalFrame {
                 limpiar();
             }
         } catch (Exception e) {
+             JOptionPane.showMessageDialog(null, "no se a selecionado elemento a eliminar");
             e.printStackTrace();
         }
         limpiar();
@@ -113,18 +123,16 @@ public class IngresarUnidadMedida extends javax.swing.JInternalFrame {
             uni= unid.findUnidadMedida(Integer.parseInt(lb_id.getText()));
             uni.setUnidCodigo(this.jt_codigo.getText().toString());
             uni.setUnidDescripcion(this.jt_descripcion.getText().toString());
-        
-
             int SioNo = JOptionPane.showConfirmDialog(this, "Desea modificar?", "Confirmacion", JOptionPane.YES_NO_OPTION);
             if (SioNo == 0) {
-                
+
                 unid.edit(uni);
                 JOptionPane.showMessageDialog(this, "Datos modificados");
-                mostrarTabla();
             } else {
                 limpiar();
             }
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "no se a selecionado elemento a modifcar");
             e.printStackTrace();
         }
         limpiar();
@@ -174,7 +182,7 @@ public class IngresarUnidadMedida extends javax.swing.JInternalFrame {
         jPanel2.add(jLabel3);
         jPanel2.add(jt_descripcion);
 
-        jPanel3.setLayout(new java.awt.GridLayout(3, 1, 30, 10));
+        jPanel3.setLayout(new java.awt.GridLayout(3, 1, 20, 20));
 
         bt_insertar.setText("Insertar");
         bt_insertar.addActionListener(new java.awt.event.ActionListener() {
@@ -232,17 +240,18 @@ public class IngresarUnidadMedida extends javax.swing.JInternalFrame {
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(19, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23))
@@ -260,6 +269,7 @@ public class IngresarUnidadMedida extends javax.swing.JInternalFrame {
     private void bt_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_modificarActionPerformed
         // TODO add your handling code here:
            this.modificarProducto();
+           mostrarTabla();
     }//GEN-LAST:event_bt_modificarActionPerformed
 
     private void tb_unidadmedidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_unidadmedidaMouseClicked
