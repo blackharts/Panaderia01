@@ -84,7 +84,7 @@
             <Property name="text" type="java.lang.String" value="ID:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jt_id">
+        <Component class="javax.swing.JLabel" name="lb_id">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>

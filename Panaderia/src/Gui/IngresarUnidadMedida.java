@@ -27,6 +27,8 @@ public class IngresarUnidadMedida extends javax.swing.JInternalFrame {
         initComponents();
         this.mostrarTabla();
     }
+    
+    
 
     void limpiar() {
         jt_codigo.setText("");
@@ -101,29 +103,24 @@ public class IngresarUnidadMedida extends javax.swing.JInternalFrame {
         mostrarTabla();
 
     }
-    
-    
-     void modificarUnidadMedida() {
+     void modificarProducto() {
         UnidadMedidaJpaController unid = new UnidadMedidaJpaController(entityManager1.getEntityManagerFactory());
         UnidadMedida uni = new UnidadMedida();
- 
-        
-      
+   
         try {
             
-            uni.setUnidId(Integer.parseInt(jt_id.getText()));
+            
+            uni= unid.findUnidadMedida(Integer.parseInt(lb_id.getText()));
             uni.setUnidCodigo(this.jt_codigo.getText().toString());
             uni.setUnidDescripcion(this.jt_descripcion.getText().toString());
-            
-            
+        
 
             int SioNo = JOptionPane.showConfirmDialog(this, "Desea modificar?", "Confirmacion", JOptionPane.YES_NO_OPTION);
             if (SioNo == 0) {
+                
                 unid.edit(uni);
-
                 JOptionPane.showMessageDialog(this, "Datos modificados");
-                this.mostrarTabla();
-
+                mostrarTabla();
             } else {
                 limpiar();
             }
@@ -131,9 +128,10 @@ public class IngresarUnidadMedida extends javax.swing.JInternalFrame {
             e.printStackTrace();
         }
         limpiar();
-        this.mostrarTabla();
-
+       mostrarTabla();
     }
+
+    
     
 
     @SuppressWarnings("unchecked")
@@ -144,7 +142,7 @@ public class IngresarUnidadMedida extends javax.swing.JInternalFrame {
         query2 = java.beans.Beans.isDesignTime() ? null : entityManager1.createQuery("SELECT U  FROM UnidadMedida U");
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jt_id = new javax.swing.JTextField();
+        lb_id = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jt_codigo = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -166,7 +164,7 @@ public class IngresarUnidadMedida extends javax.swing.JInternalFrame {
 
         jLabel1.setText("ID:");
         jPanel2.add(jLabel1);
-        jPanel2.add(jt_id);
+        jPanel2.add(lb_id);
 
         jLabel2.setText("Codigo:");
         jPanel2.add(jLabel2);
@@ -261,13 +259,13 @@ public class IngresarUnidadMedida extends javax.swing.JInternalFrame {
 
     private void bt_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_modificarActionPerformed
         // TODO add your handling code here:
-            this.modificarUnidadMedida();
+           this.modificarProducto();
     }//GEN-LAST:event_bt_modificarActionPerformed
 
     private void tb_unidadmedidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_unidadmedidaMouseClicked
         // TODO add your handling code here:
         int fila = this.tb_unidadmedida.getSelectedRow();
-        this.jt_id.setText(String.valueOf(this.tb_unidadmedida.getValueAt(fila, 0)));
+        this.lb_id.setText(String.valueOf(this.tb_unidadmedida.getValueAt(fila, 0)));
         this.jt_codigo.setText(String.valueOf(this.tb_unidadmedida.getValueAt(fila, 1)));
         this.jt_descripcion.setText(String.valueOf(this.tb_unidadmedida.getValueAt(fila, 2)));
         
@@ -293,7 +291,7 @@ public class IngresarUnidadMedida extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jt_codigo;
     private javax.swing.JTextField jt_descripcion;
-    private javax.swing.JTextField jt_id;
+    private javax.swing.JLabel lb_id;
     private javax.persistence.Query query2;
     private javax.swing.JTable tb_unidadmedida;
     // End of variables declaration//GEN-END:variables
