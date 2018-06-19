@@ -15,12 +15,11 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.swing.JComboBox;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author KevinRoss
+ * @author ESTEBAN
  */
 @Entity
 @Table(name = "usuario")
@@ -29,16 +28,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")
     , @NamedQuery(name = "Usuario.findByUsuId", query = "SELECT u FROM Usuario u WHERE u.usuId = :usuId")
     , @NamedQuery(name = "Usuario.findByUsuNombre", query = "SELECT u FROM Usuario u WHERE u.usuNombre = :usuNombre")
-    , @NamedQuery(name = "Usuario.findByUsuContrase\u00f1a", query = "SELECT u FROM Usuario u WHERE u.usuContrase\u00f1a = :usuContrase\u00f1a")})
+    , @NamedQuery(name = "Usuario.findByUsuContrasena", query = "SELECT u FROM Usuario u WHERE u.usuContrasena = :usuContrasena")
+    , @NamedQuery(name = "Usuario.findByTipoUsuario", query = "SELECT u FROM Usuario u WHERE u.tipoUsuario = :tipoUsuario")})
 public class Usuario implements Serializable {
-
-    @Basic(optional = false)
-    @Column(name = "usu_contrasena")
-    private String usuContrasena;
-    @Basic(optional = false)
-    @Column(name = "tipo_usuario")
-    private String tipoUsuario;
-
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -50,8 +42,11 @@ public class Usuario implements Serializable {
     @Column(name = "usu_nombre")
     private String usuNombre;
     @Basic(optional = false)
-    @Column(name = "usu_contrase\u00f1a")
-    private String usuContraseña;
+    @Column(name = "usu_contrasena")
+    private String usuContrasena;
+    @Basic(optional = false)
+    @Column(name = "tipo_usuario")
+    private String tipoUsuario;
 
     public Usuario() {
     }
@@ -60,10 +55,11 @@ public class Usuario implements Serializable {
         this.usuId = usuId;
     }
 
-    public Usuario(Integer usuId, String usuNombre, String usuContraseña) {
+    public Usuario(Integer usuId, String usuNombre, String usuContrasena, String tipoUsuario) {
         this.usuId = usuId;
         this.usuNombre = usuNombre;
-        this.usuContraseña = usuContraseña;
+        this.usuContrasena = usuContrasena;
+        this.tipoUsuario = tipoUsuario;
     }
 
     public Integer getUsuId() {
@@ -82,12 +78,20 @@ public class Usuario implements Serializable {
         this.usuNombre = usuNombre;
     }
 
-    public String getUsuContraseña() {
-        return usuContraseña;
+    public String getUsuContrasena() {
+        return usuContrasena;
     }
 
-    public void setUsuContraseña(String usuContraseña) {
-        this.usuContraseña = usuContraseña;
+    public void setUsuContrasena(String usuContrasena) {
+        this.usuContrasena = usuContrasena;
+    }
+
+    public String getTipoUsuario() {
+        return tipoUsuario;
+    }
+
+    public void setTipoUsuario(String tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
     }
 
     @Override
@@ -114,26 +118,5 @@ public class Usuario implements Serializable {
     public String toString() {
         return "Data.Usuario[ usuId=" + usuId + " ]";
     }
-
-    public String getTipoUsuario() {
-        return tipoUsuario;
-    }
-
-    public void setTipoUsuario(String tipoUsuario) {
-        this.tipoUsuario = tipoUsuario;
-    }
-
-    public void setTipoUsuario(JComboBox<String> cbox_tipo_usuario) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public String getUsuContrasena() {
-        return usuContrasena;
-    }
-
-    public void setUsuContrasena(String usuContrasena) {
-        this.usuContrasena = usuContrasena;
-    }
-
     
 }
