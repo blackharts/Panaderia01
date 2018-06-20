@@ -357,7 +357,7 @@ public final class IngresarPrecioCosto extends javax.swing.JInternalFrame {
     
     public void cargarCosto(PrecioCosto costo) throws SQLException, ClassNotFoundException{
         try {
-            PrecioCostoJpaController pccon = new PrecioCostoJpaController(em3.getEntityManagerFactory());
+            PrecioCostoJpaController pccon = new PrecioCostoJpaController();
             PrecioCosto costocarg = new PrecioCosto();
             costocarg = pccon.findPrecioCosto(costo.getCostId());
             Producto producto = costocarg.getCostProducto();
@@ -394,7 +394,7 @@ public final class IngresarPrecioCosto extends javax.swing.JInternalFrame {
                 costo.setCostValor(valor);
                 Date fecha = new Date();
                 costo.setCostFechaIngreso(fecha);
-                PrecioCostoJpaController cjpacontroller = new PrecioCostoJpaController(em2.getEntityManagerFactory());
+                PrecioCostoJpaController cjpacontroller = new PrecioCostoJpaController();
                 cjpacontroller.create(costo);
                 limpiar();
                 cargarTabla();
@@ -427,7 +427,7 @@ public final class IngresarPrecioCosto extends javax.swing.JInternalFrame {
     private void bt_borrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_borrarActionPerformed
         try {    
             Integer id = (Integer) tb_costos.getValueAt(tb_costos.getSelectedRow(), 0);
-            PrecioCostoJpaController pcjpa = new PrecioCostoJpaController(em.getEntityManagerFactory());
+            PrecioCostoJpaController pcjpa = new PrecioCostoJpaController();
             pcjpa.destroy(id);
             cargarTabla();
             JOptionPane.showMessageDialog(null,"Eliminado! ID: " + id);
@@ -446,7 +446,7 @@ public final class IngresarPrecioCosto extends javax.swing.JInternalFrame {
             Integer id = (Integer) tb_costos.getValueAt(tb_costos.getSelectedRow(), 0);
             PrecioCosto costo = new PrecioCosto();
             costo.setCostId(id);
-            PrecioCostoJpaController pcjpa = new PrecioCostoJpaController(em.getEntityManagerFactory());
+            PrecioCostoJpaController pcjpa = new PrecioCostoJpaController();
             cargarTabla();
             cargarCosto(costo);
             JOptionPane.showMessageDialog(null,"Cargando para editar... " + id);
@@ -474,7 +474,7 @@ public final class IngresarPrecioCosto extends javax.swing.JInternalFrame {
                 costo.setCostProducto(prod);
                 costo.setCostValor(valor);
                 costo.setCostFechaIngreso(fecha);
-                PrecioCostoJpaController cjpacontroller = new PrecioCostoJpaController(em2.getEntityManagerFactory());
+                PrecioCostoJpaController cjpacontroller = new PrecioCostoJpaController();
                 cjpacontroller.edit(costo);
                 cargarTabla();
                 limpiar();

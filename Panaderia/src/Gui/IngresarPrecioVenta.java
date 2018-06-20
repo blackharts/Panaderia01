@@ -346,7 +346,7 @@ public final class IngresarPrecioVenta extends javax.swing.JInternalFrame {
 
     public void cargarCosto(PrecioVenta v) throws SQLException, ClassNotFoundException {
         try {
-            PrecioVentaJpaController pva = new PrecioVentaJpaController(em3.getEntityManagerFactory());
+            PrecioVentaJpaController pva = new PrecioVentaJpaController();
             PrecioVenta prv = new PrecioVenta();
             prv = pva.findPrecioVenta(prv.getPrecvId());
             Producto producto = prv.getPrecvProducto();
@@ -383,7 +383,7 @@ public final class IngresarPrecioVenta extends javax.swing.JInternalFrame {
                 v.setPrecvValor(valor);
                 Date fecha = new Date();
                 v.setPrecvFechaIngreso(fecha);
-                PrecioVentaJpaController pva = new PrecioVentaJpaController(em2.getEntityManagerFactory());
+                PrecioVentaJpaController pva = new PrecioVentaJpaController();
                 pva.create(v);
                 limpiar();
                 cargarTabla();
@@ -416,7 +416,7 @@ public final class IngresarPrecioVenta extends javax.swing.JInternalFrame {
     private void bt_borrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_borrarActionPerformed
         try {
             Integer id = (Integer) tb_costos.getValueAt(tb_costos.getSelectedRow(), 0);
-            PrecioVentaJpaController pva = new PrecioVentaJpaController(em.getEntityManagerFactory());
+            PrecioVentaJpaController pva = new PrecioVentaJpaController();
             pva.destroy(id);
             cargarTabla();
             JOptionPane.showMessageDialog(null, "Eliminado! ID: " + id);
