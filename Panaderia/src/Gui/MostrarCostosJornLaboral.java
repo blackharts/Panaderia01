@@ -74,6 +74,7 @@ public class MostrarCostosJornLaboral extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
+        setResizable(true);
         setTitle("Costos Jornada Laboral");
 
         jPanel1.setLayout(new java.awt.GridLayout(2, 2, 10, 10));
@@ -136,8 +137,8 @@ public class MostrarCostosJornLaboral extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(70, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGap(70, 70, 70)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
@@ -151,8 +152,8 @@ public class MostrarCostosJornLaboral extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
+                .addGap(44, 44, 44))
         );
 
         pack();
@@ -227,8 +228,8 @@ public class MostrarCostosJornLaboral extends javax.swing.JInternalFrame {
                    
                    report.setValueAt(listaVenta.get(i).getPrecvValor(), i, 2);
                    
-                   utilidad_moneda = (int) report.getValueAt(i, 1)-listaCosto.get(i).getCostValor();
-                   report.setValueAt(utilidad_moneda, i, 3);
+                   utilidad_moneda = (int) report.getValueAt(i, 1) - (int)listaCosto.get(i).getCostValor();
+                   report.setValueAt(utilidad_moneda, i, 4);
                    
                 }
             }catch(Exception e){
