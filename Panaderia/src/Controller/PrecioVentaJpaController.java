@@ -16,6 +16,7 @@ import Data.Producto;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 /**
  *
@@ -23,8 +24,8 @@ import javax.persistence.EntityManagerFactory;
  */
 public class PrecioVentaJpaController implements Serializable {
 
-    public PrecioVentaJpaController(EntityManagerFactory emf) {
-        this.emf = emf;
+    public PrecioVentaJpaController() {
+        this.emf = Persistence.createEntityManagerFactory("PanaderiaPU");
     }
     private EntityManagerFactory emf = null;
 
