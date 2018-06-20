@@ -213,7 +213,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_aboutMenuItemActionPerformed
 
     private void item_menu_ventaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_menu_ventaActionPerformed
-        IngresoPrecioVenta main = new IngresoPrecioVenta();
+        IngresarPrecioVenta main = new IngresarPrecioVenta();
         this.panel.add(main);
         main.show();
     }//GEN-LAST:event_item_menu_ventaActionPerformed
