@@ -5,32 +5,53 @@
  */
 package Gui;
 
-
+import Controller.DetalleRecetaJpaController;
+import Data.DetalleReceta;
 import Data.Producto;
+import Data.Receta;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author kalbl
+ * jaime
  */
 public class IngresarReceta extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form RecetaFrame
-     */
+    DetalleReceta detreceta = new DetalleReceta();
+
     public IngresarReceta() {
         initComponents();
-        List<Producto> productos = producto_final.getResultList(); // se obtienen los productos y almcenan en lista
-        List<Producto> insumo = ingreso_insumo.getResultList();
-        jcombo_prod_final.removeAllItems();//se limpia el combobox
-        jcombo_insert_insumos.removeAllItems();
-        for (Producto p : productos) {// se recorre 
-            jcombo_prod_final.addItem(p.getProdNombre());//se muestra en el combobox    
+        List<Receta> receta = q_nombre_producto.getResultList(); // se obtienen los productos y almcenan en lista
+        List<Producto> producto = q_ingreso_insumo.getResultList();
+
+        cb_prod_final.removeAllItems();//se limpia el combobox
+        cb_insert_insumos.removeAllItems();
+
+        for (Receta r : receta) {// se recorre 
+            cb_prod_final.addItem(r.getReceProducto().getProdNombre());//se muestra en el combobox    
         }
-        for (Producto e : insumo) {
-            jcombo_insert_insumos.addItem(e.getProdNombre());
+        for (Producto p : producto) {
+            cb_insert_insumos.addItem(p.getProdNombre());
         }
+
+    }
+
+    void insertarReceta() {
+        DetalleRecetaJpaController dreceta = new DetalleRecetaJpaController(entityManager1.getEntityManagerFactory());
+        Receta r = new Receta();
+        r.setReceId(cb_prod_final.getSelectedIndex() + 1);
+        Producto p = new Producto();
+        p.setProdId(cb_insert_insumos.getSelectedIndex() + 1);
+
+        detreceta.setDrecReceta(r);
+        detreceta.setDrecProducto(p);
+        detreceta.setDrecCantidad(Integer.parseInt(tf_cantidad_insumos.getText()));
+        dreceta.create(detreceta);
+
+        JOptionPane.showMessageDialog(null, "Datos insertados");
+
     }
 
     /**
@@ -43,82 +64,92 @@ public class IngresarReceta extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         entityManager1 = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("PanaderiaPU").createEntityManager();
-        producto_final = java.beans.Beans.isDesignTime() ? null : entityManager1.createQuery("select p from Producto p");
-        ingreso_insumo = java.beans.Beans.isDesignTime() ? null : entityManager1.createQuery("select p from Producto p");
-        jl_receta = new javax.swing.JLabel();
-        jl_ProductoFinal = new javax.swing.JLabel();
-        jcombo_prod_final = new javax.swing.JComboBox<String>();
-        jl_Estado = new javax.swing.JLabel();
-        tf_estado = new javax.swing.JTextField();
-        jl_IngresoInsumo = new javax.swing.JLabel();
-        jl_UnidadMedida = new javax.swing.JLabel();
-        jl_Cantidad = new javax.swing.JLabel();
-        bt_guardar = new javax.swing.JButton();
-        tf_unidad_medida = new javax.swing.JTextField();
-        tf_cantidad = new javax.swing.JTextField();
+        q_nombre_producto = java.beans.Beans.isDesignTime() ? null : entityManager1.createQuery("select r from Receta r");
+        q_ingreso_insumo = java.beans.Beans.isDesignTime() ? null : entityManager1.createQuery("select p from Producto p");
+        txt_nombre_producto = new javax.swing.JLabel();
+        cb_prod_final = new javax.swing.JComboBox<>();
+        txt_ingreso_insumos = new javax.swing.JLabel();
+        txt_cantidad_insumos = new javax.swing.JLabel();
+        bt_eliminar_fila = new javax.swing.JButton();
+        tf_cantidad_insumos = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabla_receta = new javax.swing.JTable();
-        jcombo_insert_insumos = new javax.swing.JComboBox<String>();
-        jButton2 = new javax.swing.JButton();
+        tb_tabla_receta = new javax.swing.JTable();
+        cb_insert_insumos = new javax.swing.JComboBox<>();
+        bt_guardar_receta = new javax.swing.JButton();
+        bt_agregar = new javax.swing.JButton();
+        txt_gramos = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
-        setTitle("Insumos");
+        setTitle("Detalle de Producto");
 
-        jl_receta.setText("Receta");
+        txt_nombre_producto.setText("Nombre del Producto");
 
-        jl_ProductoFinal.setText("ProducotFinal");
-
-        jcombo_prod_final.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jcombo_prod_final.addActionListener(new java.awt.event.ActionListener() {
+        cb_prod_final.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cb_prod_final.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcombo_prod_finalActionPerformed(evt);
+                cb_prod_finalActionPerformed(evt);
             }
         });
 
-        jl_Estado.setText("Estado");
+        txt_ingreso_insumos.setText("Ingreso de Insumo");
 
-        jl_IngresoInsumo.setText("Ingreso Insumos");
+        txt_cantidad_insumos.setText("Cantidad de Insumos");
 
-        jl_UnidadMedida.setText("Unidad de Medida");
-
-        jl_Cantidad.setText("Cantidad");
-
-        bt_guardar.setText("Guardar");
-        bt_guardar.addActionListener(new java.awt.event.ActionListener() {
+        bt_eliminar_fila.setText("Eliminar Fila");
+        bt_eliminar_fila.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_guardarActionPerformed(evt);
+                bt_eliminar_filaActionPerformed(evt);
             }
         });
 
-        tf_unidad_medida.addActionListener(new java.awt.event.ActionListener() {
+        tf_cantidad_insumos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_unidad_medidaActionPerformed(evt);
+                tf_cantidad_insumosActionPerformed(evt);
             }
         });
 
-        tabla_receta.setModel(new javax.swing.table.DefaultTableModel(
+        tb_tabla_receta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
-                "Insumos", "U. Medida", "Cantidad"
+                "Receta", "Insumo", "Cantidad"
             }
-        ));
-        jScrollPane1.setViewportView(tabla_receta);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
 
-        jcombo_insert_insumos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jcombo_insert_insumos.addActionListener(new java.awt.event.ActionListener() {
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tb_tabla_receta);
+
+        cb_insert_insumos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cb_insert_insumos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcombo_insert_insumosActionPerformed(evt);
+                cb_insert_insumosActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Guardar Receta");
+        bt_guardar_receta.setText("Guardar Receta");
+        bt_guardar_receta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_guardar_recetaActionPerformed(evt);
+            }
+        });
+
+        bt_agregar.setText("Agregar");
+        bt_agregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_agregarActionPerformed(evt);
+            }
+        });
+
+        txt_gramos.setText("KG o unidad");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -127,115 +158,118 @@ public class IngresarReceta extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(233, 233, 233)
-                        .addComponent(jl_receta))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(29, 29, 29)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jl_ProductoFinal)
-                            .addComponent(jl_Estado)
-                            .addComponent(jl_IngresoInsumo)
-                            .addComponent(jcombo_insert_insumos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(27, 27, 27)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jcombo_prod_final, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(tf_estado)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txt_nombre_producto)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(37, 37, 37)
-                                        .addComponent(jl_UnidadMedida))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(51, 51, 51)
-                                        .addComponent(tf_unidad_medida, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(56, 56, 56)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jl_Cantidad)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(tf_cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(45, 45, 45)
-                                        .addComponent(bt_guardar))))))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(cb_insert_insumos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(cb_prod_final, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txt_ingreso_insumos, javax.swing.GroupLayout.Alignment.LEADING))
+                                        .addGap(33, 33, 33)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(tf_cantidad_insumos, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txt_cantidad_insumos))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txt_gramos)))
+                                .addGap(161, 161, 161))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(bt_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(bt_eliminar_fila))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(47, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addGap(57, 57, 57))
+                        .addGap(186, 186, 186)
+                        .addComponent(bt_guardar_receta)))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jl_receta)
-                .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jl_ProductoFinal)
-                    .addComponent(jcombo_prod_final, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jl_Estado)
-                    .addComponent(tf_estado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
+                .addComponent(txt_nombre_producto)
+                .addGap(5, 5, 5)
+                .addComponent(cb_prod_final, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jl_IngresoInsumo)
-                    .addComponent(jl_UnidadMedida)
-                    .addComponent(jl_Cantidad))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(txt_ingreso_insumos)
+                    .addComponent(txt_cantidad_insumos))
+                .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tf_unidad_medida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tf_cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bt_guardar)
-                    .addComponent(jcombo_insert_insumos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cb_insert_insumos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tf_cantidad_insumos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_gramos))
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bt_agregar)
+                    .addComponent(bt_eliminar_fila))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(bt_guardar_receta)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bt_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_guardarActionPerformed
+    private void bt_eliminar_filaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_eliminar_filaActionPerformed
+        DefaultTableModel modelo;
+        int fila = 0;
+        modelo = (DefaultTableModel) this.tb_tabla_receta.getModel();
+        modelo.removeRow(this.tb_tabla_receta.getSelectedRow());
+        fila--;
 
+    }//GEN-LAST:event_bt_eliminar_filaActionPerformed
 
-    }//GEN-LAST:event_bt_guardarActionPerformed
-
-    private void jcombo_prod_finalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcombo_prod_finalActionPerformed
+    private void cb_prod_finalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_prod_finalActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jcombo_prod_finalActionPerformed
+    }//GEN-LAST:event_cb_prod_finalActionPerformed
 
-    private void tf_unidad_medidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_unidad_medidaActionPerformed
+    private void cb_insert_insumosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_insert_insumosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tf_unidad_medidaActionPerformed
+    }//GEN-LAST:event_cb_insert_insumosActionPerformed
 
-    private void jcombo_insert_insumosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcombo_insert_insumosActionPerformed
+    private void bt_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_agregarActionPerformed
+        DefaultTableModel modelo = (DefaultTableModel) tb_tabla_receta.getModel();
+        Object[] fila = new Object[6];
+
+        fila[0] = cb_prod_final.getSelectedItem().toString();
+        fila[1] = cb_insert_insumos.getSelectedItem().toString();
+        fila[2] = tf_cantidad_insumos.getText();
+
+        modelo.addRow(fila);
+
+        tb_tabla_receta.setModel(modelo);
+    }//GEN-LAST:event_bt_agregarActionPerformed
+
+    private void tf_cantidad_insumosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_cantidad_insumosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jcombo_insert_insumosActionPerformed
+    }//GEN-LAST:event_tf_cantidad_insumosActionPerformed
+
+    private void bt_guardar_recetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_guardar_recetaActionPerformed
+        insertarReceta();
+    }//GEN-LAST:event_bt_guardar_recetaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bt_guardar;
+    private javax.swing.JButton bt_agregar;
+    private javax.swing.JButton bt_eliminar_fila;
+    private javax.swing.JButton bt_guardar_receta;
+    private javax.swing.JComboBox<String> cb_insert_insumos;
+    private javax.swing.JComboBox<String> cb_prod_final;
     private javax.persistence.EntityManager entityManager1;
-    private javax.persistence.Query ingreso_insumo;
-    private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JComboBox<String> jcombo_insert_insumos;
-    private javax.swing.JComboBox<String> jcombo_prod_final;
-    private javax.swing.JLabel jl_Cantidad;
-    private javax.swing.JLabel jl_Estado;
-    private javax.swing.JLabel jl_IngresoInsumo;
-    private javax.swing.JLabel jl_ProductoFinal;
-    private javax.swing.JLabel jl_UnidadMedida;
-    private javax.swing.JLabel jl_receta;
-    private javax.persistence.Query producto_final;
-    private javax.swing.JTable tabla_receta;
-    private javax.swing.JTextField tf_cantidad;
-    private javax.swing.JTextField tf_estado;
-    private javax.swing.JTextField tf_unidad_medida;
+    private javax.persistence.Query q_ingreso_insumo;
+    private javax.persistence.Query q_nombre_producto;
+    private javax.swing.JTable tb_tabla_receta;
+    private javax.swing.JTextField tf_cantidad_insumos;
+    private javax.swing.JLabel txt_cantidad_insumos;
+    private javax.swing.JLabel txt_gramos;
+    private javax.swing.JLabel txt_ingreso_insumos;
+    private javax.swing.JLabel txt_nombre_producto;
     // End of variables declaration//GEN-END:variables
 }
