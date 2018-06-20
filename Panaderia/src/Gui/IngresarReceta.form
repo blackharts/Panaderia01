@@ -7,15 +7,15 @@
         <Property name="persistenceUnit" type="java.lang.String" value="pu"/>
       </Properties>
     </Component>
-    <Component class="javax.persistence.Query" name="producto_final">
+    <Component class="javax.persistence.Query" name="q_nombre_producto">
       <Properties>
-        <Property name="query" type="java.lang.String" value="select p from Producto p"/>
+        <Property name="query" type="java.lang.String" value="select r from Receta r"/>
         <Property name="entityManager" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$EMProperty$EntityManagerEditor">
           <ComponentRef name="entityManager1"/>
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.persistence.Query" name="ingreso_insumo">
+    <Component class="javax.persistence.Query" name="q_ingreso_insumo">
       <Properties>
         <Property name="query" type="java.lang.String" value="select p from Producto p"/>
         <Property name="entityManager" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$EMProperty$EntityManagerEditor">
@@ -28,7 +28,7 @@
     <Property name="closable" type="boolean" value="true"/>
     <Property name="iconifiable" type="boolean" value="true"/>
     <Property name="maximizable" type="boolean" value="true"/>
-    <Property name="title" type="java.lang.String" value="Insumos"/>
+    <Property name="title" type="java.lang.String" value="Detalle de Producto"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -50,112 +50,87 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="233" max="-2" attributes="0"/>
-                      <Component id="jl_receta" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jl_ProductoFinal" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jl_Estado" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jl_IngresoInsumo" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jcombo_insert_insumos" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jcombo_prod_final" max="32767" attributes="0"/>
-                                  <Component id="tf_estado" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="txt_nombre_producto" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="cb_insert_insumos" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
+                                          <Component id="cb_prod_final" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
+                                          <Component id="txt_ingreso_insumos" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Component id="tf_cantidad_insumos" min="-2" pref="101" max="-2" attributes="0"/>
+                                          <Component id="txt_cantidad_insumos" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="txt_gramos" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
+                              <EmptySpace min="-2" pref="161" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                                      <Component id="jl_UnidadMedida" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
-                                      <Component id="tf_unidad_medida" min="-2" pref="63" max="-2" attributes="0"/>
-                                  </Group>
+                          <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="bt_agregar" min="-2" pref="89" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="bt_eliminar_fila" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jl_Cantidad" min="-2" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="tf_cantidad" min="-2" pref="40" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-                                      <Component id="bt_guardar" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
+                              <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="186" max="-2" attributes="0"/>
+                      <Component id="bt_guardar_receta" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="47" max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-              <Component id="jButton2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
+              <EmptySpace pref="31" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jl_receta" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jl_ProductoFinal" min="-2" max="-2" attributes="0"/>
-                  <Component id="jcombo_prod_final" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jl_Estado" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="tf_estado" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
+              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+              <Component id="txt_nombre_producto" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+              <Component id="cb_prod_final" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jl_IngresoInsumo" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jl_UnidadMedida" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jl_Cantidad" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txt_ingreso_insumos" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txt_cantidad_insumos" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="tf_unidad_medida" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="tf_cantidad" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="bt_guardar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jcombo_insert_insumos" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cb_insert_insumos" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tf_cantidad_insumos" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txt_gramos" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" min="-2" pref="128" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="bt_agregar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="bt_eliminar_fila" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jButton2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="47" max="32767" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" pref="128" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="bt_guardar_receta" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="jl_receta">
+    <Component class="javax.swing.JLabel" name="txt_nombre_producto">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Receta"/>
+        <Property name="text" type="java.lang.String" value="Nombre del Producto"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jl_ProductoFinal">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="ProducotFinal"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JComboBox" name="jcombo_prod_final">
+    <Component class="javax.swing.JComboBox" name="cb_prod_final">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="4">
@@ -167,48 +142,34 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jcombo_prod_finalActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_prod_finalActionPerformed"/>
       </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JLabel" name="jl_Estado">
+    <Component class="javax.swing.JLabel" name="txt_ingreso_insumos">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Estado"/>
+        <Property name="text" type="java.lang.String" value="Ingreso de Insumo"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="tf_estado">
-    </Component>
-    <Component class="javax.swing.JLabel" name="jl_IngresoInsumo">
+    <Component class="javax.swing.JLabel" name="txt_cantidad_insumos">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Ingreso Insumos"/>
+        <Property name="text" type="java.lang.String" value="Cantidad de Insumos"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jl_UnidadMedida">
+    <Component class="javax.swing.JButton" name="bt_eliminar_fila">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Unidad de Medida"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jl_Cantidad">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Cantidad"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="bt_guardar">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Guardar"/>
+        <Property name="text" type="java.lang.String" value="Eliminar Fila"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bt_guardarActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bt_eliminar_filaActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="tf_unidad_medida">
+    <Component class="javax.swing.JTextField" name="tf_cantidad_insumos">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tf_unidad_medidaActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tf_cantidad_insumosActionPerformed"/>
       </Events>
-    </Component>
-    <Component class="javax.swing.JTextField" name="tf_cantidad">
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>
@@ -217,13 +178,13 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="tabla_receta">
+        <Component class="javax.swing.JTable" name="tb_tabla_receta">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="3" rowCount="4">
-                <Column editable="true" title="Insumos" type="java.lang.Object"/>
-                <Column editable="true" title="U. Medida" type="java.lang.Object"/>
-                <Column editable="true" title="Cantidad" type="java.lang.Object"/>
+              <Table columnCount="3" rowCount="0">
+                <Column editable="true" title="Receta" type="java.lang.String"/>
+                <Column editable="true" title="Insumo" type="java.lang.String"/>
+                <Column editable="true" title="Cantidad" type="java.lang.String"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -252,7 +213,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JComboBox" name="jcombo_insert_insumos">
+    <Component class="javax.swing.JComboBox" name="cb_insert_insumos">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="4">
@@ -264,15 +225,31 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jcombo_insert_insumosActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_insert_insumosActionPerformed"/>
       </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="bt_guardar_receta">
       <Properties>
         <Property name="text" type="java.lang.String" value="Guardar Receta"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bt_guardar_recetaActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="bt_agregar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Agregar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bt_agregarActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="txt_gramos">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="KG o unidad"/>
       </Properties>
     </Component>
   </SubComponents>
