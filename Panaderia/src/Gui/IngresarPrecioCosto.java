@@ -313,7 +313,7 @@ public final class IngresarPrecioCosto extends javax.swing.JInternalFrame {
         CrearModelo2();
         try {
             System.out.println("Cargando tabla...");
-            PrecioCostoJpaController costocontroller = new PrecioCostoJpaController(em.getEntityManagerFactory());
+            PrecioCostoJpaController costocontroller = new PrecioCostoJpaController();
             Object A[]=null;
             List<PrecioCosto>Listacosto;
             Listacosto=costocontroller.findPrecioCostoEntities();
