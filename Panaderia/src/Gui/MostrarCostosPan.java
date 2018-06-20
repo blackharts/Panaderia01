@@ -117,10 +117,6 @@ public class MostrarCostosPan extends javax.swing.JInternalFrame {
             }
         });
         jScrollPane2.setViewportView(jt_tabla_reportes_pan);
-        if (jt_tabla_reportes_pan.getColumnModel().getColumnCount() > 0) {
-            jt_tabla_reportes_pan.getColumnModel().getColumn(0).setResizable(false);
-            jt_tabla_reportes_pan.getColumnModel().getColumn(3).setResizable(false);
-        }
 
         jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 50, 5));
 
