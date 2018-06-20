@@ -254,5 +254,5 @@ public class UnidadMedidaJpaController implements Serializable {
             em.close();
         }
     }
-    
+   
 }
