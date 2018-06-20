@@ -31,8 +31,8 @@ public class IngresarUnidadMedida extends javax.swing.JInternalFrame {
     
 
     void limpiar() {
-        jt_codigo.setText("");
-        jt_descripcion.setText("");
+        tf_codigo.setText("");
+        tf_descripcion.setText("");
     }
 
     void guardarUnidadMedida() {
@@ -41,13 +41,13 @@ public class IngresarUnidadMedida extends javax.swing.JInternalFrame {
         UnidadMedida uni = new UnidadMedida();
 
         try {
-            if(jt_codigo.getText().length() == 0 &&jt_descripcion.getText().length() ==0 ){
+            if(tf_codigo.getText().length() == 0 &&tf_descripcion.getText().length() ==0 ){
                 JOptionPane.showMessageDialog(null, "Campos vacios");
             
             }else{
             
-            uni.setUnidCodigo(jt_codigo.getText());
-            uni.setUnidDescripcion(jt_descripcion.getText());
+            uni.setUnidCodigo(tf_codigo.getText());
+            uni.setUnidDescripcion(tf_descripcion.getText());
 
             unid.create(uni);
             JOptionPane.showMessageDialog(null, "Datos Insertados");
@@ -89,7 +89,7 @@ public class IngresarUnidadMedida extends javax.swing.JInternalFrame {
     void eliminarUnidadMedida() {
         try {
           
-             if(jt_codigo.getText().length() == 0 &&jt_descripcion.getText().length() ==0 ){
+             if(tf_codigo.getText().length() == 0 &&tf_descripcion.getText().length() ==0 ){
                 JOptionPane.showMessageDialog(null, "Campos  vacios");
             
             }else{
@@ -130,13 +130,13 @@ public class IngresarUnidadMedida extends javax.swing.JInternalFrame {
    
         try {
             
-            if(jt_codigo.getText().length() == 0 &&jt_descripcion.getText().length() ==0 ){
+            if(tf_codigo.getText().length() == 0 &&tf_descripcion.getText().length() ==0 ){
                 JOptionPane.showMessageDialog(null, "Campos  vacios");
             
             }else{
-             uni= unid.findUnidadMedida(Integer.parseInt(lb_id.getText()));
-            uni.setUnidCodigo(this.jt_codigo.getText().toString());
-            uni.setUnidDescripcion(this.jt_descripcion.getText().toString());
+             uni= unid.findUnidadMedida(Integer.parseInt(txt_id.getText()));
+            uni.setUnidCodigo(this.tf_codigo.getText().toString());
+            uni.setUnidDescripcion(this.tf_descripcion.getText().toString());
             int SioNo = JOptionPane.showConfirmDialog(this, "Desea modificar?", "Confirmacion", JOptionPane.YES_NO_OPTION);
             if (SioNo == 0) {
 
@@ -170,16 +170,15 @@ public class IngresarUnidadMedida extends javax.swing.JInternalFrame {
         query2 = java.beans.Beans.isDesignTime() ? null : entityManager1.createQuery("SELECT U  FROM UnidadMedida U");
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        lb_id = new javax.swing.JLabel();
+        txt_id = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jt_codigo = new javax.swing.JTextField();
+        tf_codigo = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jt_descripcion = new javax.swing.JTextField();
+        tf_descripcion = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         bt_insertar = new javax.swing.JButton();
         bt_modificar = new javax.swing.JButton();
         bt_eliminar = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_unidadmedida = new javax.swing.JTable();
 
@@ -188,23 +187,26 @@ public class IngresarUnidadMedida extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setTitle("Unidad de Medida");
 
-        jPanel2.setLayout(new java.awt.GridLayout(4, 2, 20, 30));
+        jPanel2.setLayout(new java.awt.GridLayout(3, 2, 5, 5));
 
         jLabel1.setText("ID:");
         jPanel2.add(jLabel1);
-        jPanel2.add(lb_id);
+
+        txt_id.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel2.add(txt_id);
 
         jLabel2.setText("Codigo:");
         jPanel2.add(jLabel2);
-        jPanel2.add(jt_codigo);
+        jPanel2.add(tf_codigo);
 
         jLabel3.setText("Descripcion:");
         jPanel2.add(jLabel3);
-        jPanel2.add(jt_descripcion);
+        jPanel2.add(tf_descripcion);
 
-        jPanel3.setLayout(new java.awt.GridLayout(3, 1, 20, 20));
+        jPanel3.setLayout(new java.awt.GridLayout(3, 1, 5, 5));
 
         bt_insertar.setText("Insertar");
+        bt_insertar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         bt_insertar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_insertarActionPerformed(evt);
@@ -213,6 +215,7 @@ public class IngresarUnidadMedida extends javax.swing.JInternalFrame {
         jPanel3.add(bt_insertar);
 
         bt_modificar.setText("Modificar");
+        bt_modificar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         bt_modificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_modificarActionPerformed(evt);
@@ -221,14 +224,13 @@ public class IngresarUnidadMedida extends javax.swing.JInternalFrame {
         jPanel3.add(bt_modificar);
 
         bt_eliminar.setText("Elimnar");
+        bt_eliminar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         bt_eliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_eliminarActionPerformed(evt);
             }
         });
         jPanel3.add(bt_eliminar);
-
-        jPanel1.setLayout(new java.awt.GridLayout(1, 0));
 
         tb_unidadmedida.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -248,33 +250,30 @@ public class IngresarUnidadMedida extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tb_unidadmedida);
 
-        jPanel1.add(jScrollPane1);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(19, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -295,9 +294,9 @@ public class IngresarUnidadMedida extends javax.swing.JInternalFrame {
     private void tb_unidadmedidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_unidadmedidaMouseClicked
         // TODO add your handling code here:
         int fila = this.tb_unidadmedida.getSelectedRow();
-        this.lb_id.setText(String.valueOf(this.tb_unidadmedida.getValueAt(fila, 0)));
-        this.jt_codigo.setText(String.valueOf(this.tb_unidadmedida.getValueAt(fila, 1)));
-        this.jt_descripcion.setText(String.valueOf(this.tb_unidadmedida.getValueAt(fila, 2)));
+        this.txt_id.setText(String.valueOf(this.tb_unidadmedida.getValueAt(fila, 0)));
+        this.tf_codigo.setText(String.valueOf(this.tb_unidadmedida.getValueAt(fila, 1)));
+        this.tf_descripcion.setText(String.valueOf(this.tb_unidadmedida.getValueAt(fila, 2)));
         
     }//GEN-LAST:event_tb_unidadmedidaMouseClicked
 
@@ -315,15 +314,14 @@ public class IngresarUnidadMedida extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jt_codigo;
-    private javax.swing.JTextField jt_descripcion;
-    private javax.swing.JLabel lb_id;
     private javax.persistence.Query query2;
     private javax.swing.JTable tb_unidadmedida;
+    private javax.swing.JTextField tf_codigo;
+    private javax.swing.JTextField tf_descripcion;
+    private javax.swing.JLabel txt_id;
     // End of variables declaration//GEN-END:variables
 
 }
