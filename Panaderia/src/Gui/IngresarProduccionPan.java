@@ -61,7 +61,7 @@ public class IngresarProduccionPan extends javax.swing.JInternalFrame {
         }
         this.mostrarTabla();    }
 
-    void modificarProducto() {
+    void modificarProduccionPan() {
         ProduccionPanJpaController pruduccion = new ProduccionPanJpaController(entityManager1.getEntityManagerFactory());
 
         ProduccionPan pp = new ProduccionPan();
@@ -100,7 +100,7 @@ public class IngresarProduccionPan extends javax.swing.JInternalFrame {
 
     }
 
-    void eliminarProducto() {
+    void eliminarProduccionPan() {
         try {
             Integer id = (Integer) tb_produccion.getValueAt(tb_produccion.getSelectedRow(), 0);
             ProduccionPanJpaController prd = new ProduccionPanJpaController(entityManager1.getEntityManagerFactory());
@@ -179,6 +179,7 @@ public class IngresarProduccionPan extends javax.swing.JInternalFrame {
 
             pruduccion.create(pp);
             JOptionPane.showMessageDialog(null, "Datos Insertados");
+            this.mostrarTabla();
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -332,11 +333,11 @@ public class IngresarProduccionPan extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_bt_guardarActionPerformed
 
     private void bt_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_eliminarActionPerformed
-        this.eliminarProducto();
+        this.eliminarProduccionPan();
     }//GEN-LAST:event_bt_eliminarActionPerformed
 
     private void bt_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_modificarActionPerformed
-        this.modificarProducto();
+        this.modificarProduccionPan();
     }//GEN-LAST:event_bt_modificarActionPerformed
 
     private void tb_produccionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_produccionMouseClicked
