@@ -182,8 +182,8 @@ PrecioCosto findPrecioCosto;
 PrecioVenta findPrecioVenta;
 ProduccionPan finProduccionPan;
        
-PrecioCostoJpaController pjcontroller = new PrecioCostoJpaController(entityManager1.getEntityManagerFactory());
-PrecioVentaJpaController pjVenta = new PrecioVentaJpaController(entityManager1.getEntityManagerFactory());
+PrecioCostoJpaController pjcontroller = new PrecioCostoJpaController();
+PrecioVentaJpaController pjVenta = new PrecioVentaJpaController();
 ProduccionPanJpaController pjProdu =new ProduccionPanJpaController(entityManager1.getEntityManagerFactory());
 findPrecioCosto = pjcontroller.findPrecioCosto(cb_tipo_pan.getSelectedIndex() + 1);
         findPrecioVenta = pjVenta.findPrecioVenta(cb_tipo_pan.getSelectedIndex() + 1);

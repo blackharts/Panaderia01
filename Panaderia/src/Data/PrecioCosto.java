@@ -81,10 +81,7 @@ public class PrecioCosto implements Serializable {
     public void setCostValor(int costValor) {
         this.costValor = costValor;
     }
-    
-    public void setCostValor(String costValor) {
-        this.costValor = Integer.parseInt(costValor);
-    }
+
     public Date getCostFechaIngreso() {
         return costFechaIngreso;
     }

@@ -9,6 +9,9 @@ import Controller.PrecioCostoJpaController;
 import Controller.PrecioVentaJpaController;
 import Data.PrecioCosto;
 import Data.PrecioVenta;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -21,14 +24,15 @@ import javax.swing.table.DefaultTableModel;
  */
 public class MostrarCostosJornLaboral extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form VisualizarCostos
-     */
     int subtotal = 0;
     int total = 0;
+    DefaultTableModel report;
+    PrecioCostoJpaController costo = new PrecioCostoJpaController();
+    PrecioVentaJpaController venta = new PrecioVentaJpaController();
   
     public MostrarCostosJornLaboral() {
         initComponents();
+        this.mostrarTabla();
         Calendar min = Calendar.getInstance();  
         min.set(Calendar.YEAR,2015);  
         min.set(Calendar.MONTH,12);  
@@ -156,28 +160,87 @@ public class MostrarCostosJornLaboral extends javax.swing.JInternalFrame {
 
     private void bt_mostrar_reporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_mostrar_reporteActionPerformed
         // TODO add your handling code here:
-        this.mostrarTabla();
+        this.llenarTable();
     }//GEN-LAST:event_bt_mostrar_reporteActionPerformed
 
     private void bt_eliminar_reporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_eliminar_reporteActionPerformed
         this.eliminarReporte();
     }//GEN-LAST:event_bt_eliminar_reporteActionPerformed
+   
     private void mostrarTabla(){
-    DefaultTableModel report = (DefaultTableModel) tb_costos_jornada.getModel();
-    
-    PrecioCostoJpaController jpa_costo = new PrecioCostoJpaController(entityManagerJornada.getEntityManagerFactory());
-    PrecioVentaJpaController jpa_venta = new PrecioVentaJpaController(entityManagerJornada.getEntityManagerFactory());
-    Date date = new Date();// se trajo la fecha del sistema
-    Date fecha_inicio = jd_fecha_inicial.getDate();
-    Date fecha_final = jd_fecha_final.getDate();
-    PrecioCosto costo = null ;
-    PrecioVenta venta = null;
-    
+   
+        try {
+        report = (new DefaultTableModel(
+        null, new String [] {
+        "Fecha","Precio Costo",
+        "Precio Venta","Rent. Porcentual","Rent. Monetaria"}){
+        Class[] types = new Class [] {
+        java.lang.String.class,
+        java.lang.String.class,
+        java.lang.String.class,
+        java.lang.String.class,
+        java.lang.String.class
+        };
+        boolean[] canEdit = new boolean [] {
+        false,false,false,false
+        };
+        @Override
+        public Class getColumnClass(int columnIndex) {
+        return types [columnIndex];
+        }
+        @Override
+        public boolean isCellEditable(int rowIndex, int colIndex){
+        return canEdit [colIndex];
+        }
+        });
+        tb_costos_jornada.setModel(report);
+        } catch (Exception e) {
+        JOptionPane.showMessageDialog(null,e.toString()+"error2");
+        }
+        }
             
+    private void llenarTable(){
         
+            try
+            {Object list[]=null;
+                List <PrecioCosto> listaCosto ;
+                List <PrecioVenta> listaVenta;
+                listaCosto = costo.findPrecioCostoEntities();
+                listaVenta = venta.findPrecioVentaEntities();
+                Date fecha_inicio = jd_fecha_inicial.getDate();
+                Date fecha_final = jd_fecha_final.getDate();
+                Date fecha_costo;
+                Date fecha_venta;
+                for (int i = 0; i < listaCosto.size(); i++) {
+                  report.addRow(list);
+                  if (fecha_inicio.before(fecha_inicio)&& fecha_final.after(fecha_final)) {
+                  report.setValueAt(listaCosto.get(i).getCostValor(), i, 1);  
+                  }}
+                for (int i = 0; i < listaVenta.size(); i++) {
+                   report.addRow(list);
+                   
+                   if (fecha_inicio.after(fecha_inicio)&& fecha_final.before(fecha_final)) {
+                   report.setValueAt(listaVenta.get(i).getPrecvValor(), i, 2);
+                }}
+            }catch(Exception e){
+             JOptionPane.showMessageDialog(null,e.toString()+"error2");
+            }
+        }
         
+    
+    private void sumarTabla(){
+            double total = 0;
+            double aux = 0;
+            if(tb_costos_jornada.getRowCount()>0){
+                for (int i = 0; i < tb_costos_jornada.getRowCount(); i++) {
+                    aux = Double.parseDouble(tb_costos_jornada.getValueAt(i, 3).toString());
+                    total+=aux;
+        }
+        
+        }
+    
     }
-private void eliminarReporte(){
+    private void eliminarReporte(){
         DefaultTableModel reports = (DefaultTableModel) tb_costos_jornada.getModel();
         for (int i = 0; i < tb_costos_jornada.getRowCount(); i++) {
         reports.removeRow(i);
