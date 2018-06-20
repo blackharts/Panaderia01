@@ -13,12 +13,12 @@ import java.util.logging.Logger;
  *
  * @author Alex
  */
-public class MenuAdminBodega extends javax.swing.JFrame {
+public class MenuBodeguero extends javax.swing.JFrame {
 
     /**
      * Creates new form AdministradorBodega
      */
-    public MenuAdminBodega() {
+    public MenuBodeguero() {
         initComponents();
     }
 
@@ -33,37 +33,49 @@ public class MenuAdminBodega extends javax.swing.JFrame {
 
         panel = new javax.swing.JDesktopPane();
         menuBar = new javax.swing.JMenuBar();
-        j_menu_bar_1_bodeda = new javax.swing.JMenu();
-        item_menu_salir = new javax.swing.JMenuItem();
+        j_menu_bar_1_administrador = new javax.swing.JMenu();
+        it_volver = new javax.swing.JMenuItem();
+        it_salir = new javax.swing.JMenuItem();
         j_menu_bar_2_bodega = new javax.swing.JMenu();
         item_menu_costo = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1080, 720));
+
+        panel.setBackground(new java.awt.Color(0, 153, 153));
+        panel.setPreferredSize(new java.awt.Dimension(1080, 720));
 
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
         panelLayout.setHorizontalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 795, Short.MAX_VALUE)
+            .addGap(0, 1080, Short.MAX_VALUE)
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 499, Short.MAX_VALUE)
+            .addGap(0, 720, Short.MAX_VALUE)
         );
 
-        j_menu_bar_1_bodeda.setMnemonic('f');
-        j_menu_bar_1_bodeda.setText("Menu");
+        j_menu_bar_1_administrador.setText("Menu");
 
-        item_menu_salir.setMnemonic('x');
-        item_menu_salir.setText("Salir");
-        item_menu_salir.addActionListener(new java.awt.event.ActionListener() {
+        it_volver.setText("Volver al Login");
+        it_volver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                item_menu_salirActionPerformed(evt);
+                it_volverActionPerformed(evt);
             }
         });
-        j_menu_bar_1_bodeda.add(item_menu_salir);
+        j_menu_bar_1_administrador.add(it_volver);
 
-        menuBar.add(j_menu_bar_1_bodeda);
+        it_salir.setMnemonic('x');
+        it_salir.setText("Salir");
+        it_salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                it_salirActionPerformed(evt);
+            }
+        });
+        j_menu_bar_1_administrador.add(it_salir);
+
+        menuBar.add(j_menu_bar_1_administrador);
 
         j_menu_bar_2_bodega.setMnemonic('e');
         j_menu_bar_2_bodega.setText("Articulos");
@@ -85,34 +97,34 @@ public class MenuAdminBodega extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void item_menu_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_menu_salirActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_item_menu_salirActionPerformed
-
     private void item_menu_costoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_menu_costoActionPerformed
-        IngresarCosto Ing = new IngresarCosto();
+        IngresarPrecioCosto Ing = new IngresarPrecioCosto();
         this.panel.add(Ing);
         Ing.show();
-        try {
-            Ing.cbUnidadMedida();
-            Ing.cbFamilia();
-            Ing.cbLinea();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MenuAdminBodega.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(MenuAdminBodega.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }//GEN-LAST:event_item_menu_costoActionPerformed
+
+    private void it_volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_it_volverActionPerformed
+        Login l = new Login();
+        l.setVisible(true);
+    }//GEN-LAST:event_it_volverActionPerformed
+
+    private void it_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_it_salirActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_it_salirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -131,28 +143,30 @@ public class MenuAdminBodega extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MenuAdminBodega.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuBodeguero.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MenuAdminBodega.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuBodeguero.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MenuAdminBodega.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuBodeguero.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MenuAdminBodega.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuBodeguero.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenuAdminBodega().setVisible(true);
+                new MenuBodeguero().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem it_salir;
+    private javax.swing.JMenuItem it_volver;
     private javax.swing.JMenuItem item_menu_costo;
-    private javax.swing.JMenuItem item_menu_salir;
-    private javax.swing.JMenu j_menu_bar_1_bodeda;
+    private javax.swing.JMenu j_menu_bar_1_administrador;
     private javax.swing.JMenu j_menu_bar_2_bodega;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JDesktopPane panel;

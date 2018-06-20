@@ -9,12 +9,12 @@ package Gui;
  *
  * @author luisa
  */
-public class MenuGerenteProduc extends javax.swing.JFrame {
+public class MenuGerente extends javax.swing.JFrame {
 
     /**
      * Creates new form MenuGerenteProduc
      */
-    public MenuGerenteProduc() {
+    public MenuGerente() {
         initComponents();
     }
 
@@ -29,12 +29,17 @@ public class MenuGerenteProduc extends javax.swing.JFrame {
 
         panel = new javax.swing.JDesktopPane();
         menuBar = new javax.swing.JMenuBar();
+        j_menu_bar_1_administrador = new javax.swing.JMenu();
+        it_volver = new javax.swing.JMenuItem();
+        it_salir = new javax.swing.JMenuItem();
         j_menu_bar_1_gerente = new javax.swing.JMenu();
         item_menu_costoPan = new javax.swing.JMenuItem();
         item_menu_salir = new javax.swing.JMenuItem();
         deleteMenuItem = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        panel.setBackground(new java.awt.Color(0, 153, 153));
 
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
@@ -44,8 +49,29 @@ public class MenuGerenteProduc extends javax.swing.JFrame {
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
+            .addGap(0, 281, Short.MAX_VALUE)
         );
+
+        j_menu_bar_1_administrador.setText("Menu");
+
+        it_volver.setText("Volver al Login");
+        it_volver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                it_volverActionPerformed(evt);
+            }
+        });
+        j_menu_bar_1_administrador.add(it_volver);
+
+        it_salir.setMnemonic('x');
+        it_salir.setText("Salir");
+        it_salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                it_salirActionPerformed(evt);
+            }
+        });
+        j_menu_bar_1_administrador.add(it_salir);
+
+        menuBar.add(j_menu_bar_1_administrador);
 
         j_menu_bar_1_gerente.setMnemonic('e');
         j_menu_bar_1_gerente.setText("Visualizar");
@@ -100,16 +126,25 @@ public class MenuGerenteProduc extends javax.swing.JFrame {
     }//GEN-LAST:event_deleteMenuItemActionPerformed
 
     private void item_menu_costoPanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_menu_costoPanActionPerformed
-        VisualizarCostosPan vis = new VisualizarCostosPan();
+        MostrarCostosPan vis = new MostrarCostosPan();
         this.panel.add(vis);
         vis.show();
     }//GEN-LAST:event_item_menu_costoPanActionPerformed
 
     private void item_menu_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_menu_salirActionPerformed
-     VisualizarCostosJornLabor vis = new VisualizarCostosJornLabor();
+     MostrarCostosJornLaboral vis = new MostrarCostosJornLaboral();
         this.panel.add(vis);
         vis.show();
     }//GEN-LAST:event_item_menu_salirActionPerformed
+
+    private void it_volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_it_volverActionPerformed
+        Login l = new Login();
+        l.setVisible(true);
+    }//GEN-LAST:event_it_volverActionPerformed
+
+    private void it_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_it_salirActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_it_salirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -128,28 +163,32 @@ public class MenuGerenteProduc extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MenuGerenteProduc.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MenuGerenteProduc.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MenuGerenteProduc.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MenuGerenteProduc.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenuGerenteProduc().setVisible(true);
+                new MenuGerente().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem deleteMenuItem;
+    private javax.swing.JMenuItem it_salir;
+    private javax.swing.JMenuItem it_volver;
     private javax.swing.JMenuItem item_menu_costoPan;
     private javax.swing.JMenuItem item_menu_salir;
+    private javax.swing.JMenu j_menu_bar_1_administrador;
     private javax.swing.JMenu j_menu_bar_1_gerente;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JDesktopPane panel;

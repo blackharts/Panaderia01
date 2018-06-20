@@ -9,12 +9,12 @@ package Gui;
  *
  * @author luisa
  */
-public class MenuAdmin extends javax.swing.JFrame {
+public class MenuAdministrador extends javax.swing.JFrame {
 
     /**
      * Creates new form Main
      */
-    public MenuAdmin() {
+    public MenuAdministrador() {
         initComponents();
     }
 
@@ -31,7 +31,8 @@ public class MenuAdmin extends javax.swing.JFrame {
         panel = new javax.swing.JDesktopPane();
         menuBar = new javax.swing.JMenuBar();
         j_menu_bar_1_administrador = new javax.swing.JMenu();
-        item_menu_salir = new javax.swing.JMenuItem();
+        it_volver = new javax.swing.JMenuItem();
+        it_salir = new javax.swing.JMenuItem();
         j_menu_bar_2_administrador = new javax.swing.JMenu();
         item_menu_producto = new javax.swing.JMenuItem();
         item_menu_linea = new javax.swing.JMenuItem();
@@ -53,7 +54,9 @@ public class MenuAdmin extends javax.swing.JFrame {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        panel.setBackground(new java.awt.Color(0, 153, 153));
 
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
@@ -68,14 +71,22 @@ public class MenuAdmin extends javax.swing.JFrame {
 
         j_menu_bar_1_administrador.setText("Menu");
 
-        item_menu_salir.setMnemonic('x');
-        item_menu_salir.setText("Salir");
-        item_menu_salir.addActionListener(new java.awt.event.ActionListener() {
+        it_volver.setText("Volver al Login");
+        it_volver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                item_menu_salirActionPerformed(evt);
+                it_volverActionPerformed(evt);
             }
         });
-        j_menu_bar_1_administrador.add(item_menu_salir);
+        j_menu_bar_1_administrador.add(it_volver);
+
+        it_salir.setMnemonic('x');
+        it_salir.setText("Salir");
+        it_salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                it_salirActionPerformed(evt);
+            }
+        });
+        j_menu_bar_1_administrador.add(it_salir);
 
         menuBar.add(j_menu_bar_1_administrador);
 
@@ -173,9 +184,9 @@ public class MenuAdmin extends javax.swing.JFrame {
         Ing.show();
     }//GEN-LAST:event_item_menu_productoActionPerformed
 
-    private void item_menu_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_menu_salirActionPerformed
-       System.exit(0);
-    }//GEN-LAST:event_item_menu_salirActionPerformed
+    private void it_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_it_salirActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_it_salirActionPerformed
 
     private void item_menu_medidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_menu_medidaActionPerformed
         IngresarUnidadMedida main = new IngresarUnidadMedida();
@@ -184,34 +195,39 @@ public class MenuAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_item_menu_medidaActionPerformed
 
     private void item_menu_lineaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_menu_lineaActionPerformed
-    DescripLinea main = new DescripLinea();
+        IngresarLinea main = new IngresarLinea();
         this.panel.add(main);
         main.show();
     }//GEN-LAST:event_item_menu_lineaActionPerformed
 
     private void item_menu_familiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_menu_familiaActionPerformed
-      FamiliaArticulo main = new FamiliaArticulo();
+        IngresarFamilia main = new IngresarFamilia();
         this.panel.add(main);
         main.show();
     }//GEN-LAST:event_item_menu_familiaActionPerformed
 
     private void aboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMenuItemActionPerformed
-        IngresarProdPAn main = new IngresarProdPAn();
+        IngresarProduccionPan main = new IngresarProduccionPan();
         this.panel.add(main);
         main.show();
     }//GEN-LAST:event_aboutMenuItemActionPerformed
 
     private void item_menu_ventaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_menu_ventaActionPerformed
-        IngresoPrecioVenta main = new  IngresoPrecioVenta();
+        IngresarPrecioVenta main = new IngresarPrecioVenta();
         this.panel.add(main);
         main.show();
     }//GEN-LAST:event_item_menu_ventaActionPerformed
 
     private void contentsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contentsMenuItemActionPerformed
-        RecetaFrame main = new RecetaFrame();
+        IngresarReceta main = new IngresarReceta();
         this.panel.add(main);
         main.show();
     }//GEN-LAST:event_contentsMenuItemActionPerformed
+
+    private void it_volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_it_volverActionPerformed
+        Login l = new Login();
+        l.setVisible(true);
+    }//GEN-LAST:event_it_volverActionPerformed
 
     /**
      * @param args the command line arguments
@@ -230,14 +246,18 @@ public class MenuAdmin extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MenuAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MenuAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MenuAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MenuAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -246,7 +266,7 @@ public class MenuAdmin extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenuAdmin().setVisible(true);
+                new MenuAdministrador().setVisible(true);
             }
         });
     }
@@ -254,11 +274,12 @@ public class MenuAdmin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JMenuItem contentsMenuItem;
+    private javax.swing.JMenuItem it_salir;
+    private javax.swing.JMenuItem it_volver;
     private javax.swing.JMenuItem item_menu_familia;
     private javax.swing.JMenuItem item_menu_linea;
     private javax.swing.JMenuItem item_menu_medida;
     private javax.swing.JMenuItem item_menu_producto;
-    private javax.swing.JMenuItem item_menu_salir;
     private javax.swing.JMenuItem item_menu_venta;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu j_menu_bar_1_administrador;

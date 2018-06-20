@@ -5,8 +5,13 @@
  */
 package Gui;
 
+import Controller.UsuarioJpaController;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import jdk.nashorn.internal.codegen.CompilerConstants;
+import Data.Usuario;
+import java.util.ArrayList;
+
 
 /**
  *
@@ -30,70 +35,78 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("PanaderiaPU").createEntityManager();
+        q_usuario = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT u FROM Usuario u");
         jPanel1 = new javax.swing.JPanel();
-        usuario = new javax.swing.JTextField();
-        jSeparator1 = new javax.swing.JSeparator();
-        pass = new javax.swing.JPasswordField();
+        tf_usu_login = new javax.swing.JTextField();
+        separador = new javax.swing.JSeparator();
+        pf_pass_login = new javax.swing.JPasswordField();
         jSeparator2 = new javax.swing.JSeparator();
-        jLabel2 = new javax.swing.JLabel();
+        txt_pass_login = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        acceder = new javax.swing.JToggleButton();
-        nuevoU = new javax.swing.JButton();
-        salir = new javax.swing.JToggleButton();
+        bt_acceder = new javax.swing.JToggleButton();
+        bt_nuevo_usuario = new javax.swing.JButton();
+        bt_salir = new javax.swing.JToggleButton();
+        txt_ingresar = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        usuario.setBackground(new java.awt.Color(214, 217, 223));
-        usuario.setForeground(new java.awt.Color(68, 73, 75));
-        usuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        usuario.setText("Administrativo");
-        usuario.setBorder(null);
-        usuario.addActionListener(new java.awt.event.ActionListener() {
+        tf_usu_login.setBackground(new java.awt.Color(214, 217, 223));
+        tf_usu_login.setForeground(new java.awt.Color(68, 73, 75));
+        tf_usu_login.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tf_usu_login.setText("kal");
+        tf_usu_login.setBorder(null);
+        tf_usu_login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                usuarioActionPerformed(evt);
+                tf_usu_loginActionPerformed(evt);
             }
         });
 
-        pass.setBackground(new java.awt.Color(214, 217, 223));
-        pass.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
-        pass.setForeground(new java.awt.Color(68, 73, 75));
-        pass.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        pass.setText("abc");
-        pass.setBorder(null);
-        pass.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        pass.addActionListener(new java.awt.event.ActionListener() {
+        pf_pass_login.setBackground(new java.awt.Color(214, 217, 223));
+        pf_pass_login.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
+        pf_pass_login.setForeground(new java.awt.Color(68, 73, 75));
+        pf_pass_login.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        pf_pass_login.setText("abc");
+        pf_pass_login.setBorder(null);
+        pf_pass_login.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        pf_pass_login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                passActionPerformed(evt);
+                pf_pass_loginActionPerformed(evt);
             }
         });
 
-        jLabel2.setText("Contraseña:");
+        txt_pass_login.setText("Ingresar Contraseña:");
 
-        jPanel2.setLayout(new java.awt.GridLayout(3, 0));
+        jPanel2.setLayout(new java.awt.GridLayout(3, 0, 5, 5));
 
-        acceder.setText("Acceder");
-        acceder.addActionListener(new java.awt.event.ActionListener() {
+        bt_acceder.setText("Acceder");
+        bt_acceder.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bt_acceder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                accederActionPerformed(evt);
+                bt_accederActionPerformed(evt);
             }
         });
-        jPanel2.add(acceder);
+        jPanel2.add(bt_acceder);
 
-        nuevoU.setText("Nuevo Usuario");
-        nuevoU.addActionListener(new java.awt.event.ActionListener() {
+        bt_nuevo_usuario.setText("Nuevo Usuario");
+        bt_nuevo_usuario.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bt_nuevo_usuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nuevoUActionPerformed(evt);
+                bt_nuevo_usuarioActionPerformed(evt);
             }
         });
-        jPanel2.add(nuevoU);
+        jPanel2.add(bt_nuevo_usuario);
 
-        salir.setText("Salir");
-        salir.addActionListener(new java.awt.event.ActionListener() {
+        bt_salir.setText("Salir");
+        bt_salir.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bt_salir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                salirActionPerformed(evt);
+                bt_salirActionPerformed(evt);
             }
         });
-        jPanel2.add(salir);
+        jPanel2.add(bt_salir);
+
+        txt_ingresar.setText("Ingresar Usuario:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -101,26 +114,30 @@ public class Login extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pass)
-                    .addComponent(usuario)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jSeparator1)
-                    .addComponent(jSeparator2)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(pf_pass_login)
+                        .addComponent(tf_usu_login)
+                        .addComponent(txt_pass_login, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(separador)
+                        .addComponent(jSeparator2)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE))
+                    .addComponent(txt_ingresar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txt_ingresar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tf_usu_login, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(separador, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txt_pass_login, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
-                .addComponent(pass, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pf_pass_login, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -148,46 +165,62 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
+    private void bt_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_salirActionPerformed
         System.exit(0);
-    }//GEN-LAST:event_salirActionPerformed
+    }//GEN-LAST:event_bt_salirActionPerformed
 
-    private void accederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accederActionPerformed
-        String user = usuario.getText();
-        String contra = pass.getText();
-        if (user.equals("Administrativo") && contra.equals("abc")) {
-            MenuAdmin main = new MenuAdmin();
-            main.show();
-            this.hide();
-        } 
-        else if (user.equals("Admin_bodega") && contra.equals("abc")) {
-            MenuAdminBodega main = new MenuAdminBodega();
-            main.show();
-            this.hide(); 
-        }
+    private void bt_accederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_accederActionPerformed
+        Usuario usu_logueado = new Usuario();
+        String tipo1 = "Administrativo";
+        String tipo2 = "Bodeguero";
+        String tipo3 = "Gerente";
         
-         else if (user.equals("Gerente") && contra.equals("Gerente")) {
-            MenuGerenteProduc main = new MenuGerenteProduc();
-            main.show();
-            this.hide(); 
+        ArrayList<Usuario> usuarios = new ArrayList(q_usuario.getResultList());   
+        for(Usuario a:usuarios){
+            if (a.getUsuNombre().equals(tf_usu_login.getText()) && a.getUsuContrasena().equals(pf_pass_login.getText())){            
+                usu_logueado.setUsuId(a.getUsuId());
+                usu_logueado.setUsuNombre(a.getUsuNombre());
+                usu_logueado.setUsuContrasena(a.getUsuContrasena());
+                usu_logueado.setTipoUsuario(a.getTipoUsuario());
+            }
         }
-        else {
-            JOptionPane.showMessageDialog(this, "Error contraseña o nombre de usuarion incorrecto");
+        try{        
+            if (usu_logueado.getTipoUsuario().equals(tipo1)){
+                MenuAdministrador main = new MenuAdministrador();
+                main.show();
+                this.hide();   
+                JOptionPane.showMessageDialog(this,"Bienvenid@ "+usu_logueado.getUsuNombre());
+            }               
+            else if (usu_logueado.getTipoUsuario().equals(tipo2)){
+                MenuBodeguero main = new MenuBodeguero();
+                main.show();
+                this.hide();                    
+                JOptionPane.showMessageDialog(this,"Bienvenid@ "+usu_logueado.getUsuNombre());
+            }
+            else if(usu_logueado.getTipoUsuario().equals(tipo3)){
+                MenuGerente main = new MenuGerente();
+                main.show();
+                this.hide(); 
+                JOptionPane.showMessageDialog(this,"Bienvenid@ "+usu_logueado.getUsuNombre());                    
+            }         
         }
-    }//GEN-LAST:event_accederActionPerformed
+        catch(NullPointerException e){
+            JOptionPane.showMessageDialog(this,"Error de contraseña o usuario");
+        }
+    }//GEN-LAST:event_bt_accederActionPerformed
 
-    private void passActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passActionPerformed
+    private void pf_pass_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pf_pass_loginActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_passActionPerformed
+    }//GEN-LAST:event_pf_pass_loginActionPerformed
 
-    private void usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuarioActionPerformed
+    private void tf_usu_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_usu_loginActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_usuarioActionPerformed
+    }//GEN-LAST:event_tf_usu_loginActionPerformed
 
-    private void nuevoUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoUActionPerformed
-        NuevoUsuario cr =new NuevoUsuario();
+    private void bt_nuevo_usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_nuevo_usuarioActionPerformed
+        CrearUsuario cr =new CrearUsuario();
          cr.setVisible(true);
-    }//GEN-LAST:event_nuevoUActionPerformed
+    }//GEN-LAST:event_bt_nuevo_usuarioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -226,15 +259,18 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JToggleButton acceder;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JToggleButton bt_acceder;
+    private javax.swing.JButton bt_nuevo_usuario;
+    private javax.swing.JToggleButton bt_salir;
+    private javax.persistence.EntityManager entityManager;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JButton nuevoU;
-    private javax.swing.JPasswordField pass;
-    private javax.swing.JToggleButton salir;
-    private javax.swing.JTextField usuario;
+    private javax.swing.JPasswordField pf_pass_login;
+    private javax.persistence.Query q_usuario;
+    private javax.swing.JSeparator separador;
+    private javax.swing.JTextField tf_usu_login;
+    private javax.swing.JLabel txt_ingresar;
+    private javax.swing.JLabel txt_pass_login;
     // End of variables declaration//GEN-END:variables
 }

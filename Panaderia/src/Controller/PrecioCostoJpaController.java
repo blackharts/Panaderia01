@@ -16,15 +16,16 @@ import Data.Producto;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 /**
  *
- * @author luisa
+ * @author KevinRoss
  */
 public class PrecioCostoJpaController implements Serializable {
 
-    public PrecioCostoJpaController(EntityManagerFactory emf) {
-        this.emf = emf;
+    public PrecioCostoJpaController( ) {
+        this.emf = Persistence.createEntityManagerFactory("PanaderiaPU");
     }
     private EntityManagerFactory emf = null;
 

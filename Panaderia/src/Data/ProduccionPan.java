@@ -24,27 +24,24 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author luisa
+ * @author KevinRoss
  */
 @Entity
 @Table(name = "produccion_pan")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "ProduccionPan.findAll", query = "SELECT p FROM ProduccionPan p"),
-    @NamedQuery(name = "ProduccionPan.findByPpanId", query = "SELECT p FROM ProduccionPan p WHERE p.ppanId = :ppanId"),
-    @NamedQuery(name = "ProduccionPan.findByPpanUnidadMedida", query = "SELECT p FROM ProduccionPan p WHERE p.ppanUnidadMedida = :ppanUnidadMedida"),
-    @NamedQuery(name = "ProduccionPan.findByPpanProduccion", query = "SELECT p FROM ProduccionPan p WHERE p.ppanProduccion = :ppanProduccion"),
-    @NamedQuery(name = "ProduccionPan.findByPpanFechaIngreso", query = "SELECT p FROM ProduccionPan p WHERE p.ppanFechaIngreso = :ppanFechaIngreso")})
+    @NamedQuery(name = "ProduccionPan.findAll", query = "SELECT p FROM ProduccionPan p")
+    , @NamedQuery(name = "ProduccionPan.findByPpanId", query = "SELECT p FROM ProduccionPan p WHERE p.ppanId = :ppanId")
+    , @NamedQuery(name = "ProduccionPan.findByPpanProduccion", query = "SELECT p FROM ProduccionPan p WHERE p.ppanProduccion = :ppanProduccion")
+    , @NamedQuery(name = "ProduccionPan.findByPpanFechaIngreso", query = "SELECT p FROM ProduccionPan p WHERE p.ppanFechaIngreso = :ppanFechaIngreso")})
 public class ProduccionPan implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "ppan_id")
     private Integer ppanId;
-    @Basic(optional = false)
-    @Column(name = "ppan_unidad_medida")
-    private int ppanUnidadMedida;
     @Basic(optional = false)
     @Column(name = "ppan_produccion")
     private double ppanProduccion;
@@ -55,6 +52,9 @@ public class ProduccionPan implements Serializable {
     @JoinColumn(name = "ppan_producto", referencedColumnName = "prod_id")
     @ManyToOne(optional = false)
     private Producto ppanProducto;
+    @JoinColumn(name = "ppan_unidad_medida", referencedColumnName = "unid_id")
+    @ManyToOne(optional = false)
+    private UnidadMedida ppanUnidadMedida;
 
     public ProduccionPan() {
     }
@@ -63,9 +63,8 @@ public class ProduccionPan implements Serializable {
         this.ppanId = ppanId;
     }
 
-    public ProduccionPan(Integer ppanId, int ppanUnidadMedida, double ppanProduccion, Date ppanFechaIngreso) {
+    public ProduccionPan(Integer ppanId, double ppanProduccion, Date ppanFechaIngreso) {
         this.ppanId = ppanId;
-        this.ppanUnidadMedida = ppanUnidadMedida;
         this.ppanProduccion = ppanProduccion;
         this.ppanFechaIngreso = ppanFechaIngreso;
     }
@@ -76,14 +75,6 @@ public class ProduccionPan implements Serializable {
 
     public void setPpanId(Integer ppanId) {
         this.ppanId = ppanId;
-    }
-
-    public int getPpanUnidadMedida() {
-        return ppanUnidadMedida;
-    }
-
-    public void setPpanUnidadMedida(int ppanUnidadMedida) {
-        this.ppanUnidadMedida = ppanUnidadMedida;
     }
 
     public double getPpanProduccion() {
@@ -108,6 +99,14 @@ public class ProduccionPan implements Serializable {
 
     public void setPpanProducto(Producto ppanProducto) {
         this.ppanProducto = ppanProducto;
+    }
+
+    public UnidadMedida getPpanUnidadMedida() {
+        return ppanUnidadMedida;
+    }
+
+    public void setPpanUnidadMedida(UnidadMedida ppanUnidadMedida) {
+        this.ppanUnidadMedida = ppanUnidadMedida;
     }
 
     @Override
