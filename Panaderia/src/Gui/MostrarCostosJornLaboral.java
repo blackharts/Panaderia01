@@ -244,19 +244,7 @@ public class MostrarCostosJornLaboral extends javax.swing.JInternalFrame {
             }
         }
         
-    
-    private void sumarTabla(){
-            double total = 0;
-            double aux = 0;
-            if(tb_costos_jornada.getRowCount()>0){
-                for (int i = 0; i < tb_costos_jornada.getRowCount(); i++) {
-                    aux = Double.parseDouble(tb_costos_jornada.getValueAt(i, 3).toString());
-                    total+=aux;
-        }
-        
-        }
-    
-    }
+   
     private void eliminarReporte(){
         DefaultTableModel reports = (DefaultTableModel) tb_costos_jornada.getModel();
         for (int i = 0; i < tb_costos_jornada.getRowCount(); i++) {

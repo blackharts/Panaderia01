@@ -35,7 +35,6 @@ public class MenuGerente extends javax.swing.JFrame {
         j_menu_bar_1_gerente = new javax.swing.JMenu();
         item_menu_costoPan = new javax.swing.JMenuItem();
         item_menu_salir = new javax.swing.JMenuItem();
-        deleteMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -94,15 +93,6 @@ public class MenuGerente extends javax.swing.JFrame {
         });
         j_menu_bar_1_gerente.add(item_menu_salir);
 
-        deleteMenuItem.setMnemonic('d');
-        deleteMenuItem.setText("Salir");
-        deleteMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteMenuItemActionPerformed(evt);
-            }
-        });
-        j_menu_bar_1_gerente.add(deleteMenuItem);
-
         menuBar.add(j_menu_bar_1_gerente);
 
         setJMenuBar(menuBar);
@@ -120,10 +110,6 @@ public class MenuGerente extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void deleteMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteMenuItemActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_deleteMenuItemActionPerformed
 
     private void item_menu_costoPanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_menu_costoPanActionPerformed
         MostrarCostosPan vis = new MostrarCostosPan();
@@ -183,7 +169,6 @@ public class MenuGerente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem deleteMenuItem;
     private javax.swing.JMenuItem it_salir;
     private javax.swing.JMenuItem it_volver;
     private javax.swing.JMenuItem item_menu_costoPan;

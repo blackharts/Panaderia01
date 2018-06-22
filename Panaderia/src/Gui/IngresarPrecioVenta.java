@@ -147,29 +147,29 @@ public final class IngresarPrecioVenta extends javax.swing.JInternalFrame {
                 tf_codigobarraKeyTyped(evt);
             }
         });
-        jPanel3.add(tf_codigobarra, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 60, -1));
+        jPanel3.add(tf_codigobarra, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 100, -1));
 
         tf_nuevovalor.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tf_nuevovalorKeyTyped(evt);
             }
         });
-        jPanel3.add(tf_nuevovalor, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, 90, -1));
+        jPanel3.add(tf_nuevovalor, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, 100, -1));
 
         tf_marca.setEnabled(false);
         jPanel3.add(tf_marca, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, 100, -1));
 
         tf_formato.setEnabled(false);
-        jPanel3.add(tf_formato, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, 60, -1));
+        jPanel3.add(tf_formato, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, 100, -1));
 
         tf_unidadmedida.setEnabled(false);
-        jPanel3.add(tf_unidadmedida, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, 60, -1));
+        jPanel3.add(tf_unidadmedida, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, 100, -1));
 
         tf_linea.setEnabled(false);
-        jPanel3.add(tf_linea, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 190, 60, -1));
+        jPanel3.add(tf_linea, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 190, 100, -1));
 
         tf_familia.setEnabled(false);
-        jPanel3.add(tf_familia, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 220, 60, -1));
+        jPanel3.add(tf_familia, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 220, 100, -1));
 
         bt_buscar.setText("Buscar p.");
         bt_buscar.setAlignmentX(0.1F);
