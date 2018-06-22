@@ -18,7 +18,9 @@ import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
@@ -31,6 +33,12 @@ public class IngresarFamilia extends javax.swing.JInternalFrame {
     public IngresarFamilia() {
         initComponents();
         this.mostrarFamilia();
+        tb_familia.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        TableColumnModel columnModel = tb_familia.getColumnModel();
+        columnModel.getColumn(0).setPreferredWidth(50);
+        columnModel.getColumn(1).setPreferredWidth(110);
+        columnModel.getColumn(2).setPreferredWidth(110);
+
         List<Linea> productos = q_linea.getResultList(); // se obtienen los productos y almcenan en lista
         cb_codigo_linea.removeAllItems();//se limpia el combobox
         for (Iterator<Linea> it = productos.iterator(); it.hasNext();) {
@@ -40,20 +48,31 @@ public class IngresarFamilia extends javax.swing.JInternalFrame {
         }
 
     }
-    void limpiar(){
-    this.txt_id.setText("");
-    this.cb_codigo_linea.setSelectedIndex(0);
-    this.tf_familia.setText("");
+
+    void limpiar() {
+        this.txt_id.setText("");
+        this.cb_codigo_linea.setSelectedIndex(0);
+        this.tf_familia.setText("");
     }
 
     void insertarFamilia() {
-        FamiliaJpaController fa = new FamiliaJpaController(entityManager1.getEntityManagerFactory());
-        Linea l = new Linea();
-        l.setLineId(this.cb_codigo_linea.getSelectedIndex() + 1);
-        f.setFamiLinea(l);
-        f.setFamiNombre(this.tf_familia.getText().toString());
-        fa.create(f);
-        JOptionPane.showMessageDialog(null, "Datos insertados");
+        try {
+            if (tf_familia.getText().length() == 0) {
+                JOptionPane.showMessageDialog(null, "Campos vacios");
+
+            } else {
+                FamiliaJpaController fa = new FamiliaJpaController(entityManager1.getEntityManagerFactory());
+                Linea l = new Linea();
+                l.setLineId(this.cb_codigo_linea.getSelectedIndex() + 1);
+                f.setFamiLinea(l);
+                f.setFamiNombre(this.tf_familia.getText().toString());
+                fa.create(f);
+                JOptionPane.showMessageDialog(null, "Datos insertados");
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
         mostrarFamilia();
         this.limpiar();
     }
@@ -81,51 +100,61 @@ public class IngresarFamilia extends javax.swing.JInternalFrame {
 
     void eliminarFamilia() {
         try {
-            Integer id = (Integer) tb_familia.getValueAt(tb_familia.getSelectedRow(), 0);
-            FamiliaJpaController fa = new FamiliaJpaController(entityManager1.getEntityManagerFactory());
-            int SioNo = JOptionPane.showConfirmDialog(this, "Desea eliminar?", "Confirmacion", JOptionPane.YES_NO_OPTION);
-            if (SioNo == 0) {
-                if (id != null) {
-                    try {
-                        fa.destroy(id);
-                    } catch (NonexistentEntityException | IllegalOrphanException ex) {
-                        Logger.getLogger(IngresarProductos.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    this.mostrarFamilia();
-                    JOptionPane.showMessageDialog(null, "Se ha eliminado el id: " + id);
-
-                } else {
-                    JOptionPane.showMessageDialog(null, "No ha seleccionado un producto");
-                }
+            if (tf_familia.getText().length() == 0) {
+                JOptionPane.showMessageDialog(null, "Campos  vacios");
 
             } else {
+                Integer id = (Integer) tb_familia.getValueAt(tb_familia.getSelectedRow(), 0);
+                FamiliaJpaController fa = new FamiliaJpaController(entityManager1.getEntityManagerFactory());
+                int SioNo = JOptionPane.showConfirmDialog(this, "Desea eliminar?", "Confirmacion", JOptionPane.YES_NO_OPTION);
+                if (SioNo == 0) {
+                    if (id != null) {
+                        try {
+                            fa.destroy(id);
+                        } catch (NonexistentEntityException | IllegalOrphanException ex) {
+                            Logger.getLogger(IngresarProductos.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        this.mostrarFamilia();
+                        JOptionPane.showMessageDialog(null, "Se ha eliminado el id: " + id);
 
+                    } else {
+                        JOptionPane.showMessageDialog(null, "No ha seleccionado un producto");
+                    }
+
+                } else {
+                    this.limpiar();
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         mostrarFamilia();
 
     }
 
     void editarFamilia() {
-        FamiliaJpaController fa = new FamiliaJpaController(entityManager1.getEntityManagerFactory());
+        Familia f = new FamiliaJpaController(entityManager1.getEntityManagerFactory()).findFamilia(Integer.parseInt(txt_id.getText()));
         Linea l = new Linea();
         try {
-            f.setFamiId(Integer.parseInt(this.txt_id.getText()));
-            f.setFamiNombre(this.tf_familia.getText().toString());
-            l.setLineId(this.cb_codigo_linea.getSelectedIndex() + 1);
-            f.setFamiLinea(l);
+            if (tf_familia.getText().length() == 0) {
+                JOptionPane.showMessageDialog(null, "Campos vacios");
 
-            int SioNo = JOptionPane.showConfirmDialog(this, "Desea modificar?", "Confirmacion", JOptionPane.YES_NO_OPTION);
-            if (SioNo == 0) {
-                fa.edit(f);
-                JOptionPane.showMessageDialog(this, "Datos modificados");
-                mostrarFamilia();
-                this.limpiar();
             } else {
-                this.limpiar();
+                f.setFamiId(Integer.parseInt(this.txt_id.getText()));
+                f.setFamiNombre(this.tf_familia.getText().toString());
+                l.setLineId(this.cb_codigo_linea.getSelectedIndex() + 1);
+                f.setFamiLinea(l);
+
+                int SioNo = JOptionPane.showConfirmDialog(this, "Desea modificar?", "Confirmacion", JOptionPane.YES_NO_OPTION);
+                if (SioNo == 0) {
+                    FamiliaJpaController fa = new FamiliaJpaController(entityManager1.getEntityManagerFactory());
+                    fa.edit(f);
+                    JOptionPane.showMessageDialog(this, "Datos modificados");
+                    mostrarFamilia();
+                    this.limpiar();
+                } else {
+                    this.limpiar();
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -151,7 +180,7 @@ public class IngresarFamilia extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         txt_id = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        cb_codigo_linea = new javax.swing.JComboBox<>();
+        cb_codigo_linea = new javax.swing.JComboBox<String>();
         jLabel2 = new javax.swing.JLabel();
         tf_familia = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
@@ -160,26 +189,29 @@ public class IngresarFamilia extends javax.swing.JInternalFrame {
         bt_eliminar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_familia = new javax.swing.JTable();
+        bt_limpiar = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
-        setTitle("Familia Articulo");
+        setResizable(true);
+        setTitle("Familia");
 
         jPanel1.setLayout(new java.awt.GridLayout(3, 2, 10, 10));
 
-        jLabel3.setText("Id");
+        jLabel3.setText("Id:");
         jPanel1.add(jLabel3);
 
-        txt_id.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        txt_id.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.add(txt_id);
 
-        jLabel1.setText("Seleccionar Linea");
+        jLabel1.setText("Seleccionar Linea:");
         jPanel1.add(jLabel1);
 
+        cb_codigo_linea.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(cb_codigo_linea);
 
-        jLabel2.setText("Ingresar Familia");
+        jLabel2.setText("Ingresar Familia:");
         jPanel1.add(jLabel2);
 
         tf_familia.addActionListener(new java.awt.event.ActionListener() {
@@ -189,9 +221,11 @@ public class IngresarFamilia extends javax.swing.JInternalFrame {
         });
         jPanel1.add(tf_familia);
 
-        jPanel2.setLayout(new java.awt.GridLayout(3, 1, 5, 5));
+        jPanel2.setLayout(new java.awt.GridLayout(1, 3, 10, 10));
 
+        bt_insertar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         bt_insertar.setText("Insertar");
+        bt_insertar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         bt_insertar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 bt_insertarMouseClicked(evt);
@@ -199,7 +233,9 @@ public class IngresarFamilia extends javax.swing.JInternalFrame {
         });
         jPanel2.add(bt_insertar);
 
-        bt_editar.setText("Editar");
+        bt_editar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        bt_editar.setText("Modificar");
+        bt_editar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         bt_editar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 bt_editarMouseClicked(evt);
@@ -207,7 +243,9 @@ public class IngresarFamilia extends javax.swing.JInternalFrame {
         });
         jPanel2.add(bt_editar);
 
+        bt_eliminar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         bt_eliminar.setText("Eliminar");
+        bt_eliminar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         bt_eliminar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 bt_eliminarMouseClicked(evt);
@@ -220,7 +258,7 @@ public class IngresarFamilia extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         tb_familia.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -230,31 +268,43 @@ public class IngresarFamilia extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tb_familia);
 
+        bt_limpiar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        bt_limpiar.setText("Limpiar");
+        bt_limpiar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bt_limpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_limpiarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(bt_limpiar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)))
-                .addGap(26, 26, 26)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
-                .addGap(19, 19, 19))
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bt_limpiar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -287,11 +337,16 @@ public class IngresarFamilia extends javax.swing.JInternalFrame {
         this.insertarFamilia();
     }//GEN-LAST:event_bt_insertarMouseClicked
 
+    private void bt_limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_limpiarActionPerformed
+        this.limpiar();
+    }//GEN-LAST:event_bt_limpiarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bt_editar;
     private javax.swing.JButton bt_eliminar;
     private javax.swing.JButton bt_insertar;
+    private javax.swing.JButton bt_limpiar;
     private javax.swing.JComboBox<String> cb_codigo_linea;
     private javax.persistence.EntityManager entityManager1;
     private javax.swing.JLabel jLabel1;

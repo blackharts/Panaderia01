@@ -54,7 +54,6 @@ public class Login extends javax.swing.JFrame {
         tf_usu_login.setBackground(new java.awt.Color(214, 217, 223));
         tf_usu_login.setForeground(new java.awt.Color(68, 73, 75));
         tf_usu_login.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tf_usu_login.setText("kal");
         tf_usu_login.setBorder(null);
         tf_usu_login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -66,7 +65,6 @@ public class Login extends javax.swing.JFrame {
         pf_pass_login.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
         pf_pass_login.setForeground(new java.awt.Color(68, 73, 75));
         pf_pass_login.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        pf_pass_login.setText("abc");
         pf_pass_login.setBorder(null);
         pf_pass_login.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         pf_pass_login.addActionListener(new java.awt.event.ActionListener() {
