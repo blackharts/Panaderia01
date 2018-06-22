@@ -74,6 +74,7 @@ public class MostrarCostosJornLaboral extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
+        setResizable(true);
         setTitle("Costos Jornada Laboral");
 
         jPanel1.setLayout(new java.awt.GridLayout(2, 2, 10, 10));
@@ -136,23 +137,23 @@ public class MostrarCostosJornLaboral extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGap(70, 70, 70)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGap(70, 70, 70))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(31, 31, 31)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
+                .addGap(44, 44, 44))
         );
 
         pack();
@@ -205,23 +206,39 @@ public class MostrarCostosJornLaboral extends javax.swing.JInternalFrame {
             {Object list[]=null;
                 List <PrecioCosto> listaCosto ;
                 List <PrecioVenta> listaVenta;
-                listaCosto = costo.findPrecioCostoEntities();
+                listaCosto  = costo.findPrecioCostoEntities();
                 listaVenta = venta.findPrecioVentaEntities();
+               // int find_costo = costo.findPrecioCostoEntities().iterator().next().getCostValor();
+                //int find_venta = venta.findPrecioVentaEntities().iterator().next().getPrecvValor();
                 Date fecha_inicio = jd_fecha_inicial.getDate();
                 Date fecha_final = jd_fecha_final.getDate();
                 Date fecha_costo;
                 Date fecha_venta;
-                for (int i = 0; i < listaCosto.size(); i++) {
-                  report.addRow(list);
-                  if (fecha_inicio.before(fecha_inicio)&& fecha_final.after(fecha_final)) {
-                  report.setValueAt(listaCosto.get(i).getCostValor(), i, 1);  
-                  }}
-                for (int i = 0; i < listaVenta.size(); i++) {
-                   report.addRow(list);
+                Date date = new Date();
+                     
+                for (int i = 0; i < listaCosto.size(); i++) { 
+                    fecha_costo= listaCosto.get(i).getCostFechaIngreso();
+                    if (fecha_costo.after(fecha_inicio) && fecha_costo.before(fecha_final)) {  
+                    report.addRow(list);
+                    report.setValueAt(listaCosto.get(i).getCostValor(), i, 1);  
+                    report.setValueAt(date, i, 0);
+                    int utilidad_moneda=0;
+                    report.addRow(list);
+                    report.setValueAt(listaVenta.get(i).getPrecvValor(), i, 2);
+                    utilidad_moneda = (int) report.getValueAt(i, 2) -(int)listaCosto.get(i).getCostValor() ;
+                    report.setValueAt(utilidad_moneda, i, 4);
+                    double porcentaje = (utilidad_moneda * 100 / (int) report.getValueAt(i, 2));
+                    report.setValueAt("%  "+porcentaje, i, 3);
+                   }
+                }
+                for (int j = 0; j < listaVenta.size(); j++) {
+                    fecha_venta = listaVenta.get(j).getPrecvFechaIngreso();
+                    if (fecha_venta.after(fecha_inicio) && fecha_venta.before(fecha_final)) {  
                    
-                   if (fecha_inicio.after(fecha_inicio)&& fecha_final.before(fecha_final)) {
-                   report.setValueAt(listaVenta.get(i).getPrecvValor(), i, 2);
-                }}
+
+                    }}
+              
+                    
             }catch(Exception e){
              JOptionPane.showMessageDialog(null,e.toString()+"error2");
             }
