@@ -153,29 +153,29 @@ public final class IngresarPrecioCosto extends javax.swing.JInternalFrame {
                 tf_codigobarraKeyTyped(evt);
             }
         });
-        jPanel3.add(tf_codigobarra, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 60, -1));
+        jPanel3.add(tf_codigobarra, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 100, -1));
 
         tf_nuevovalor.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tf_nuevovalorKeyTyped(evt);
             }
         });
-        jPanel3.add(tf_nuevovalor, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, 90, -1));
+        jPanel3.add(tf_nuevovalor, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, 100, -1));
 
         tf_marca.setEnabled(false);
         jPanel3.add(tf_marca, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, 100, -1));
 
         tf_formato.setEnabled(false);
-        jPanel3.add(tf_formato, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, 60, -1));
+        jPanel3.add(tf_formato, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, 100, -1));
 
         tf_unidadmedida.setEnabled(false);
-        jPanel3.add(tf_unidadmedida, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, 60, -1));
+        jPanel3.add(tf_unidadmedida, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, 100, -1));
 
         tf_linea.setEnabled(false);
-        jPanel3.add(tf_linea, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 190, 60, -1));
+        jPanel3.add(tf_linea, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 190, 100, -1));
 
         tf_familia.setEnabled(false);
-        jPanel3.add(tf_familia, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 220, 60, -1));
+        jPanel3.add(tf_familia, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 220, 100, -1));
 
         bt_buscar.setText("Buscar p.");
         bt_buscar.setAlignmentX(0.1F);
@@ -206,9 +206,7 @@ public final class IngresarPrecioCosto extends javax.swing.JInternalFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(bt_aplicar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(bt_buscar, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(bt_guardar)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(bt_guardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -234,7 +232,7 @@ public final class IngresarPrecioCosto extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
