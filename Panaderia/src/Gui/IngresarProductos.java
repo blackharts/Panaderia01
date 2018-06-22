@@ -5,8 +5,6 @@ package Gui;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
 import Controller.LineaJpaController;
 import Controller.ProductoJpaController;
 import Controller.exceptions.IllegalOrphanException;
@@ -20,7 +18,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
@@ -28,45 +28,48 @@ import javax.swing.table.DefaultTableModel;
  */
 public class IngresarProductos extends javax.swing.JInternalFrame {
 
-    Producto prod = new Producto();
-    
     void limpiar() {
-        jLabel1.setText("");
+        txt_id.setText("");
         tf_nombre.setText("");
         cb_umedida.setSelectedIndex(0);
         tf_marca.setText("");
         tf_formato.setText("");
         cb_linea.setSelectedIndex(0);
         cb_familia.setSelectedIndex(0);
-        this.mostrarProducto();
     }
 
     void insertarProductos() {
         ProductoJpaController prd = new ProductoJpaController(entityManager.getEntityManagerFactory());
-        
+        Producto prod = new Producto();
         Linea l = new Linea();
+        if (tf_nombre.getText().length() == 0 && tf_marca.getText().length() == 0 && tf_formato.getText().length() == 0) {
+            JOptionPane.showMessageDialog(null, "Campos  vacios");
 
-        l.setLineId(cb_linea.getSelectedIndex() + 1);
+        } else {
+            l.setLineId(cb_linea.getSelectedIndex() + 1);
 
-        UnidadMedida u = new UnidadMedida();
-        u.setUnidId(cb_umedida.getSelectedIndex() + 1);
+            UnidadMedida u = new UnidadMedida();
+            u.setUnidId(cb_umedida.getSelectedIndex() + 1);
 
-        Familia f = new Familia();
-        f.setFamiId(cb_familia.getSelectedIndex() + 1);
+            Familia f = new Familia();
+            f.setFamiId(cb_familia.getSelectedIndex() + 1);
 
-        prod.setProdNombre(tf_nombre.getText().toString());
-        prod.setProdUnidadmedida(u);
-        prod.setProdMarca(tf_marca.getText().toString());
-        prod.setProdFormato(tf_formato.getText().toString());
-        prod.setProdLinea(l);
-        prod.setProdFamilia(f);
-        prd.create(prod);
-        JOptionPane.showMessageDialog(null, "Datos insertados");
-        limpiar();
-        mostrarProducto();
+            prod.setProdNombre(tf_nombre.getText().toString());
+            prod.setProdUnidadmedida(u);
+            prod.setProdMarca(tf_marca.getText().toString());
+            prod.setProdFormato(tf_formato.getText().toString());
+            prod.setProdLinea(l);
+            prod.setProdFamilia(f);
+            prd.create(prod);
+            JOptionPane.showMessageDialog(null, "Datos insertados");
+            limpiar();
+            mostrarProducto();
+        }
     }
 
     void mostrarProducto() {
+
+        //entityManager.flush(); // elimina el cache y lo vuelve a conectar
         String[] columnas = {"Id", "Nombre", "U.Medida", "Marca", "Formato", "Linea", "Familia"};
         Object[] obj = new Object[7];
         Producto p = new Producto();
@@ -83,7 +86,6 @@ public class IngresarProductos extends javax.swing.JInternalFrame {
             obj[4] = p.getProdFormato();
             obj[5] = p.getProdLinea().getLineNombre();
             obj[6] = p.getProdFamilia().getFamiNombre();
-
             tabla.addRow(obj);
 
         }
@@ -93,25 +95,30 @@ public class IngresarProductos extends javax.swing.JInternalFrame {
 
     void eliminarProducto() {
         try {
-            Integer id = (Integer) tb_producto.getValueAt(tb_producto.getSelectedRow(), 0);
-            ProductoJpaController prd = new ProductoJpaController(entityManager.getEntityManagerFactory());
-            int SioNo = JOptionPane.showConfirmDialog(this, "Desea eliminar?", "Confirmacion", JOptionPane.YES_NO_OPTION);
-            if (SioNo == 0) {
-                if (id != null) {
-                    try {
-                        prd.destroy(id);
-                    } catch (NonexistentEntityException | IllegalOrphanException ex) {
-                        Logger.getLogger(IngresarProductos.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    this.mostrarProducto();
-                    JOptionPane.showMessageDialog(null, "Se ha eliminado el id: " + id);
-
-                } else {
-                    JOptionPane.showMessageDialog(null, "No ha seleccionado un producto");
-                }
+            if (tf_nombre.getText().length() == 0 && tf_marca.getText().length() == 0 && tf_formato.getText().length() == 0) {
+                JOptionPane.showMessageDialog(null, "Campos  vacios");
 
             } else {
-                limpiar();
+                Integer id = (Integer) tb_producto.getValueAt(tb_producto.getSelectedRow(), 0);
+                ProductoJpaController prd = new ProductoJpaController(entityManager.getEntityManagerFactory());
+                int SioNo = JOptionPane.showConfirmDialog(this, "Desea eliminar?", "Confirmacion", JOptionPane.YES_NO_OPTION);
+                if (SioNo == 0) {
+                    if (id != null) {
+                        try {
+                            prd.destroy(id);
+                        } catch (NonexistentEntityException | IllegalOrphanException ex) {
+                            Logger.getLogger(IngresarProductos.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        this.mostrarProducto();
+                        JOptionPane.showMessageDialog(null, "Se ha eliminado el id: " + id);
+
+                    } else {
+                        JOptionPane.showMessageDialog(null, "No ha seleccionado un producto");
+                    }
+
+                } else {
+                    limpiar();
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -122,43 +129,51 @@ public class IngresarProductos extends javax.swing.JInternalFrame {
     }
 
     void modificarProducto() {
-        ProductoJpaController prd = new ProductoJpaController(entityManager.getEntityManagerFactory());
+        Producto prd = new ProductoJpaController(entityManager.getEntityManagerFactory()).findProducto(Integer.parseInt(txt_id.getText()));
         Linea l = new Linea();
         try {
-            l.setLineId(this.cb_linea.getSelectedIndex() + 1);
+            if (tf_nombre.getText().length() == 0 && tf_marca.getText().length() == 0 && tf_formato.getText().length() == 0) {
+                JOptionPane.showMessageDialog(null, "Campos  vacios");
 
-            UnidadMedida u = new UnidadMedida();
-            u.setUnidId(this.cb_umedida.getSelectedIndex() + 1);
-
-            Familia f = new Familia();
-            f.setFamiId(this.cb_familia.getSelectedIndex() + 1);
-            prod.setProdId(Integer.parseInt(this.jLabel1.getText()));
-            prod.setProdNombre(this.tf_nombre.getText().toString());
-            prod.setProdUnidadmedida(u);
-            prod.setProdMarca(this.tf_marca.getText().toString());
-            prod.setProdFormato(this.tf_formato.getText().toString());
-            prod.setProdLinea(l);
-            prod.setProdFamilia(f);
-
-            int SioNo = JOptionPane.showConfirmDialog(this, "Desea modificar?", "Confirmacion", JOptionPane.YES_NO_OPTION);
-            if (SioNo == 0) {
-                prd.edit(prod);
-                JOptionPane.showMessageDialog(this, "Datos modificados");
-                mostrarProducto();
             } else {
-                limpiar();
+                l.setLineId(this.cb_linea.getSelectedIndex() + 1);
+
+                UnidadMedida u = new UnidadMedida();
+                u.setUnidId(this.cb_umedida.getSelectedIndex() + 1);
+
+                Familia f = new Familia();
+                f.setFamiId(this.cb_familia.getSelectedIndex() + 1);
+                prd.setProdId(Integer.parseInt(this.txt_id.getText()));
+                prd.setProdNombre(this.tf_nombre.getText().toString());
+                prd.setProdUnidadmedida(u);
+                prd.setProdMarca(this.tf_marca.getText().toString());
+                prd.setProdFormato(this.tf_formato.getText().toString());
+                prd.setProdLinea(l);
+                prd.setProdFamilia(f);
+
+                int SioNo = JOptionPane.showConfirmDialog(this, "Desea modificar?", "Confirmacion", JOptionPane.YES_NO_OPTION);
+                if (SioNo == 0) {
+                    ProductoJpaController editar = new ProductoJpaController(entityManager.getEntityManagerFactory());
+                    editar.edit(prd);
+                    this.mostrarProducto();
+                    JOptionPane.showMessageDialog(this, "Datos modificados");
+
+                } else {
+                    limpiar();
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        limpiar();
-        mostrarProducto();
 
     }
 
     public IngresarProductos() {
         initComponents();
         this.mostrarProducto();
+        tb_producto.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        TableColumnModel columnModel = tb_producto.getColumnModel();
+
         List<UnidadMedida> u = q_unidad_medida.getResultList();
         List<Familia> f = q_familia.getResultList();
         List<Linea> l = q_linea.getResultList();
@@ -180,7 +195,7 @@ public class IngresarProductos extends javax.swing.JInternalFrame {
             // se recorre
             cb_linea.addItem(lin.getLineNombre());//se muestra en el combobox  
         }
-        
+
     }
 
     /**
@@ -199,7 +214,7 @@ public class IngresarProductos extends javax.swing.JInternalFrame {
         q_producto = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT p FROM Producto p");
         jPanel1 = new javax.swing.JPanel();
         txt_codigo = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        txt_id = new javax.swing.JLabel();
         txt_nombre = new javax.swing.JLabel();
         tf_nombre = new javax.swing.JTextField();
         txt_umedida = new javax.swing.JLabel();
@@ -218,19 +233,20 @@ public class IngresarProductos extends javax.swing.JInternalFrame {
         bt_eliminar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_producto = new javax.swing.JTable();
+        bt_limpiar = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
-        setTitle("Ingresar Productos");
+        setTitle("Producto");
 
         jPanel1.setLayout(new java.awt.GridLayout(7, 2, 10, 10));
 
         txt_codigo.setText("Id:");
         jPanel1.add(txt_codigo);
 
-        jLabel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel1.add(jLabel1);
+        txt_id.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.add(txt_id);
 
         txt_nombre.setText("Nombre:");
         jPanel1.add(txt_nombre);
@@ -267,7 +283,7 @@ public class IngresarProductos extends javax.swing.JInternalFrame {
         cb_familia.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(cb_familia);
 
-        jPanel2.setLayout(new java.awt.GridLayout(3, 1, 10, 10));
+        jPanel2.setLayout(new java.awt.GridLayout(1, 3, 10, 10));
 
         bt_insertar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         bt_insertar.setText("Insertar");
@@ -301,13 +317,13 @@ public class IngresarProductos extends javax.swing.JInternalFrame {
 
         tb_producto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         tb_producto.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -317,32 +333,39 @@ public class IngresarProductos extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tb_producto);
 
+        bt_limpiar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        bt_limpiar.setText("Limpiar");
+        bt_limpiar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bt_limpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_limpiarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(bt_limpiar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bt_limpiar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -368,7 +391,7 @@ public class IngresarProductos extends javax.swing.JInternalFrame {
 
     private void tb_productoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_productoMouseClicked
         int fila = this.tb_producto.getSelectedRow();
-        this.jLabel1.setText(String.valueOf(this.tb_producto.getValueAt(fila, 0)));
+        this.txt_id.setText(String.valueOf(this.tb_producto.getValueAt(fila, 0)));
         this.tf_nombre.setText(String.valueOf(this.tb_producto.getValueAt(fila, 1)));
         this.cb_umedida.setSelectedItem(String.valueOf(this.tb_producto.getValueAt(fila, 2)));
         this.tf_marca.setText(String.valueOf(this.tb_producto.getValueAt(fila, 3)));
@@ -382,16 +405,20 @@ public class IngresarProductos extends javax.swing.JInternalFrame {
         this.modificarProducto();
     }//GEN-LAST:event_bt_modificarActionPerformed
 
+    private void bt_limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_limpiarActionPerformed
+        this.limpiar();
+    }//GEN-LAST:event_bt_limpiarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bt_eliminar;
     private javax.swing.JButton bt_insertar;
+    private javax.swing.JButton bt_limpiar;
     private javax.swing.JButton bt_modificar;
     private javax.swing.JComboBox cb_familia;
     private javax.swing.JComboBox cb_linea;
     private javax.swing.JComboBox cb_umedida;
     private javax.persistence.EntityManager entityManager;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -406,6 +433,7 @@ public class IngresarProductos extends javax.swing.JInternalFrame {
     private javax.swing.JLabel txt_codigo;
     private javax.swing.JLabel txt_familia;
     private javax.swing.JLabel txt_formato;
+    private javax.swing.JLabel txt_id;
     private javax.swing.JLabel txt_linea;
     private javax.swing.JLabel txt_marca;
     private javax.swing.JLabel txt_nombre;

@@ -42,6 +42,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
         j_menu_bar_3_administrador = new javax.swing.JMenu();
         contentsMenuItem = new javax.swing.JMenuItem();
         aboutMenuItem = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -160,6 +161,14 @@ public class MenuAdministrador extends javax.swing.JFrame {
         });
         j_menu_bar_3_administrador.add(aboutMenuItem);
 
+        jMenuItem1.setText("Ingresar Receta");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        j_menu_bar_3_administrador.add(jMenuItem1);
+
         menuBar.add(j_menu_bar_3_administrador);
 
         setJMenuBar(menuBar);
@@ -219,7 +228,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_item_menu_ventaActionPerformed
 
     private void contentsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contentsMenuItemActionPerformed
-        IngresarReceta main = new IngresarReceta();
+        IngresarInsumosReceta main = new IngresarInsumosReceta();
         this.panel.add(main);
         main.show();
     }//GEN-LAST:event_contentsMenuItemActionPerformed
@@ -228,6 +237,12 @@ public class MenuAdministrador extends javax.swing.JFrame {
         Login l = new Login();
         l.setVisible(true);
     }//GEN-LAST:event_it_volverActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        IngresarReceta main = new IngresarReceta();
+        this.panel.add(main);
+        main.show();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -282,6 +297,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
     private javax.swing.JMenuItem item_menu_producto;
     private javax.swing.JMenuItem item_menu_venta;
     private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenu j_menu_bar_1_administrador;
     private javax.swing.JMenu j_menu_bar_2_administrador;
     private javax.swing.JMenu j_menu_bar_3_administrador;

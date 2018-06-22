@@ -18,7 +18,9 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
@@ -38,59 +40,65 @@ public class IngresarProduccionPan extends javax.swing.JInternalFrame {
     public IngresarProduccionPan() {
         initComponents();
         this.mostrarTabla();
+        tb_produccion.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
         try {
-            List<Producto> p = query_producto.getResultList();
-            List<UnidadMedida> u = query_unidadmedida.getResultList();
+            List<Producto> p = q_producto.getResultList();
+            List<UnidadMedida> u = q_unidadmedida.getResultList();
 
             cb_producto.removeAllItems();/*se limpia el combobox*/
+
             cb_umedida.removeAllItems();/*se limpia el combobox*/
 
             for (Iterator<UnidadMedida> it = u.iterator(); it.hasNext();) {
                 UnidadMedida uni = it.next();
                 cb_umedida.addItem(uni.getUnidDescripcion());/*se muestra en el combobox  */
+
             }
             for (Iterator<Producto> it = p.iterator(); it.hasNext();) {
                 Producto pro = it.next();
                 // se recorre
                 cb_producto.addItem(pro.getProdNombre());/*se muestra en el combobox*/
+
             }
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
-        this.mostrarTabla();    }
+    }
 
     void modificarProduccionPan() {
-        ProduccionPanJpaController pruduccion = new ProduccionPanJpaController(entityManager1.getEntityManagerFactory());
-
-        ProduccionPan pp = new ProduccionPan();
+        ProduccionPan pp = new ProduccionPanJpaController(entityManager1.getEntityManagerFactory()).findProduccionPan(Integer.parseInt(txt_id.getText()));
         Producto p = new Producto();
         try {
-
-            p.setProdId(cb_producto.getSelectedIndex() + 1);
-            /*combobox de producto*/
-
-            UnidadMedida u = new UnidadMedida();
-            u.setUnidId(cb_umedida.getSelectedIndex() + 1);
-            /*combobox de unidad medida */
-
-            Date fecha = new Date();
-            pp.setPpanId(Integer.parseInt(txt_id.getText()));
-            pp.setPpanFechaIngreso(fecha);
-            pp.setPpanProducto(p);
-            pp.setPpanUnidadMedida(u);
-            pp.setPpanProduccion(Double.parseDouble(tf_produccion.getText()));
-
-            int SioNo = JOptionPane.showConfirmDialog(this, "Desea modificar?", "Confirmacion", JOptionPane.YES_NO_OPTION);
-            if (SioNo == 0) {
-                pruduccion.edit(pp);
-
-                JOptionPane.showMessageDialog(this, "Datos modificados");
-                this.mostrarTabla();
+            if (tf_produccion.getText().length() == 0) {
+                JOptionPane.showMessageDialog(null, "Campos  vacios");
 
             } else {
-                limpiar();
+                p.setProdId(cb_producto.getSelectedIndex() + 1);
+                /*combobox de producto*/
+
+                UnidadMedida u = new UnidadMedida();
+                u.setUnidId(cb_umedida.getSelectedIndex() + 1);
+                /*combobox de unidad medida */
+
+                Date fecha = new Date();
+                pp.setPpanId(Integer.parseInt(txt_id.getText()));
+                pp.setPpanFechaIngreso(fecha);
+                pp.setPpanProducto(p);
+                pp.setPpanUnidadMedida(u);
+                pp.setPpanProduccion(Double.parseDouble(tf_produccion.getText()));
+
+                int SioNo = JOptionPane.showConfirmDialog(this, "Desea modificar?", "Confirmacion", JOptionPane.YES_NO_OPTION);
+                if (SioNo == 0) {
+                    ProduccionPanJpaController editar = new ProduccionPanJpaController(entityManager1.getEntityManagerFactory());
+                    editar.edit(pp);
+                    JOptionPane.showMessageDialog(this, "Datos modificados");
+                    this.mostrarTabla();
+
+                } else {
+                    limpiar();
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -102,21 +110,26 @@ public class IngresarProduccionPan extends javax.swing.JInternalFrame {
 
     void eliminarProduccionPan() {
         try {
-            Integer id = (Integer) tb_produccion.getValueAt(tb_produccion.getSelectedRow(), 0);
-            ProduccionPanJpaController prd = new ProduccionPanJpaController(entityManager1.getEntityManagerFactory());
-            int SioNo = JOptionPane.showConfirmDialog(this, "Desea eliminar?", "Confirmacion", JOptionPane.YES_NO_OPTION);
-            if (SioNo == 0) {
-                if (id != null) {
-                    prd.destroy(id);
-                    this.mostrarTabla();
-                    JOptionPane.showMessageDialog(null, "Se ha eliminado el id: " + id);
-
-                } else {
-                    JOptionPane.showMessageDialog(null, "No ha seleccionado un producto");
-                }
+            if (tf_produccion.getText().length() == 0) {
+                JOptionPane.showMessageDialog(null, "Campos  vacios");
 
             } else {
-                limpiar();
+                Integer id = (Integer) tb_produccion.getValueAt(tb_produccion.getSelectedRow(), 0);
+                ProduccionPanJpaController prd = new ProduccionPanJpaController(entityManager1.getEntityManagerFactory());
+                int SioNo = JOptionPane.showConfirmDialog(this, "Desea eliminar?", "Confirmacion", JOptionPane.YES_NO_OPTION);
+                if (SioNo == 0) {
+                    if (id != null) {
+                        prd.destroy(id);
+                        this.mostrarTabla();
+                        JOptionPane.showMessageDialog(null, "Se ha eliminado el id: " + id);
+
+                    } else {
+                        JOptionPane.showMessageDialog(null, "No ha seleccionado un producto");
+                    }
+
+                } else {
+                    limpiar();
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -135,7 +148,7 @@ public class IngresarProduccionPan extends javax.swing.JInternalFrame {
             DefaultTableModel tabla = new DefaultTableModel(null, columnas);
             ProduccionPan p = new ProduccionPan();
 
-            List<ProduccionPan> pro = query1.getResultList();
+            List<ProduccionPan> pro = q_produccion_pan.getResultList();
             /* select * from ProdudcionPan*/
             for (int i = 0; i < pro.size(); i++) {
                 p = (ProduccionPan) pro.get(i);
@@ -163,23 +176,28 @@ public class IngresarProduccionPan extends javax.swing.JInternalFrame {
         Producto p = new Producto();
         Date fecha = new Date();
         try {
+            if (tf_produccion.getText().length() == 0) {
+                JOptionPane.showMessageDialog(null, "Campos  vacios");
 
-            p.setProdId(cb_producto.getSelectedIndex() + 1);
-            /*combobox de producto*/
+            } else {
 
-            UnidadMedida u = new UnidadMedida();
-            u.setUnidId(cb_umedida.getSelectedIndex() + 1);
-            /*combobox de unidad medida */
+                p.setProdId(cb_producto.getSelectedIndex() + 1);
+                /*combobox de producto*/
 
-            pp.setPpanProduccion(Integer.parseInt(tf_produccion.getText()));
-            pp.setPpanFechaIngreso(fecha);
+                UnidadMedida u = new UnidadMedida();
+                u.setUnidId(cb_umedida.getSelectedIndex() + 1);
+                /*combobox de unidad medida */
 
-            pp.setPpanProducto(p);
-            pp.setPpanUnidadMedida(u);
+                pp.setPpanProduccion(Integer.parseInt(tf_produccion.getText()));
+                pp.setPpanFechaIngreso(fecha);
 
-            pruduccion.create(pp);
-            JOptionPane.showMessageDialog(null, "Datos Insertados");
-            this.mostrarTabla();
+                pp.setPpanProducto(p);
+                pp.setPpanUnidadMedida(u);
+
+                pruduccion.create(pp);
+                JOptionPane.showMessageDialog(null, "Datos Insertados");
+                this.mostrarTabla();
+            }
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -198,9 +216,9 @@ public class IngresarProduccionPan extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         entityManager1 = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("PanaderiaPU").createEntityManager();
-        query_producto = java.beans.Beans.isDesignTime() ? null : entityManager1.createQuery("SELECT p FROM Producto p");
-        query_unidadmedida = java.beans.Beans.isDesignTime() ? null : entityManager1.createQuery("SELECT u FROM UnidadMedida u");
-        query1 = java.beans.Beans.isDesignTime() ? null : entityManager1.createQuery("SELECT T FROM ProduccionPan T");
+        q_producto = java.beans.Beans.isDesignTime() ? null : entityManager1.createQuery("SELECT p FROM Producto p");
+        q_unidadmedida = java.beans.Beans.isDesignTime() ? null : entityManager1.createQuery("SELECT u FROM UnidadMedida u");
+        q_produccion_pan = java.beans.Beans.isDesignTime() ? null : entityManager1.createQuery("SELECT T FROM ProduccionPan T");
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -217,11 +235,13 @@ public class IngresarProduccionPan extends javax.swing.JInternalFrame {
         bt_eliminar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_produccion = new javax.swing.JTable();
+        bt_limpiar = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
-        setTitle("Ingreso Produccion Diaria");
+        setTitle("Produccion Diaria");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jPanel3.setLayout(new java.awt.GridLayout(4, 2, 10, 10));
 
@@ -247,7 +267,7 @@ public class IngresarProduccionPan extends javax.swing.JInternalFrame {
         jPanel3.add(Cantidad);
         jPanel3.add(tf_produccion);
 
-        jPanel6.setLayout(new java.awt.GridLayout(3, 1, 10, 10));
+        jPanel6.setLayout(new java.awt.GridLayout(1, 3, 10, 10));
 
         bt_guardar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         bt_guardar.setText("Insertar");
@@ -282,13 +302,13 @@ public class IngresarProduccionPan extends javax.swing.JInternalFrame {
         tb_produccion.setBorder(new javax.swing.border.MatteBorder(null));
         tb_produccion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         tb_produccion.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -298,31 +318,40 @@ public class IngresarProduccionPan extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tb_produccion);
 
+        bt_limpiar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        bt_limpiar.setText("Limpiar");
+        bt_limpiar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bt_limpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_limpiarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(bt_limpiar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 122, Short.MAX_VALUE)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bt_limpiar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -348,11 +377,16 @@ public class IngresarProduccionPan extends javax.swing.JInternalFrame {
         this.tf_produccion.setText(String.valueOf(this.tb_produccion.getValueAt(fila, 3)));
     }//GEN-LAST:event_tb_produccionMouseClicked
 
+    private void bt_limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_limpiarActionPerformed
+        this.limpiar();
+    }//GEN-LAST:event_bt_limpiarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Cantidad;
     private javax.swing.JButton bt_eliminar;
     private javax.swing.JButton bt_guardar;
+    private javax.swing.JButton bt_limpiar;
     private javax.swing.JButton bt_modificar;
     private javax.swing.JComboBox<String> cb_producto;
     private javax.swing.JComboBox<String> cb_umedida;
@@ -364,9 +398,9 @@ public class IngresarProduccionPan extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.persistence.Query query1;
-    private javax.persistence.Query query_producto;
-    private javax.persistence.Query query_unidadmedida;
+    private javax.persistence.Query q_produccion_pan;
+    private javax.persistence.Query q_producto;
+    private javax.persistence.Query q_unidadmedida;
     private javax.swing.JTable tb_produccion;
     private javax.swing.JTextField tf_produccion;
     private javax.swing.JLabel txt_id;
