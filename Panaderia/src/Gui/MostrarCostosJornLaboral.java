@@ -206,38 +206,35 @@ public class MostrarCostosJornLaboral extends javax.swing.JInternalFrame {
             {Object list[]=null;
                 List <PrecioCosto> listaCosto ;
                 List <PrecioVenta> listaVenta;
-                listaCosto = costo.findPrecioCostoEntities();
+                listaCosto  = costo.findPrecioCostoEntities();
                 listaVenta = venta.findPrecioVentaEntities();
+               // int find_costo = costo.findPrecioCostoEntities().iterator().next().getCostValor();
+                //int find_venta = venta.findPrecioVentaEntities().iterator().next().getPrecvValor();
                 Date fecha_inicio = jd_fecha_inicial.getDate();
                 Date fecha_final = jd_fecha_final.getDate();
                 Date fecha_costo;
                 Date fecha_venta;
                 Date date = new Date();
-                int precio_costo=0;
-                
-              
-                   
-                   
-                   
+                     
                 for (int i = 0; i < listaCosto.size(); i++) { 
                     fecha_costo= listaCosto.get(i).getCostFechaIngreso();
                     if (fecha_costo.after(fecha_inicio) && fecha_costo.before(fecha_final)) {  
                     report.addRow(list);
                     report.setValueAt(listaCosto.get(i).getCostValor(), i, 1);  
                     report.setValueAt(date, i, 0);
-                 
+                    int utilidad_moneda=0;
+                    report.addRow(list);
+                    report.setValueAt(listaVenta.get(i).getPrecvValor(), i, 2);
+                    utilidad_moneda = (int) report.getValueAt(i, 2) -(int)listaCosto.get(i).getCostValor() ;
+                    report.setValueAt(utilidad_moneda, i, 4);
+                    double porcentaje = (utilidad_moneda * 100 / (int) report.getValueAt(i, 2));
+                    report.setValueAt("%  "+porcentaje, i, 3);
                    }
                 }
                 for (int j = 0; j < listaVenta.size(); j++) {
                     fecha_venta = listaVenta.get(j).getPrecvFechaIngreso();
                     if (fecha_venta.after(fecha_inicio) && fecha_venta.before(fecha_final)) {  
-                    int utilidad_moneda=0;
-                    report.addRow(list);
-                    report.setValueAt(listaVenta.get(j).getPrecvValor(), j, 2);
-                    utilidad_moneda = (int) report.getValueAt(j, 2) -(int)listaCosto.get(j).getCostValor() ;
-                    report.setValueAt(utilidad_moneda, j, 4);
-                    double porcentaje = (utilidad_moneda * 100 / (int) report.getValueAt(j, 2));
-                    report.setValueAt("%  "+porcentaje, j, 3);
+                   
 
                     }}
               

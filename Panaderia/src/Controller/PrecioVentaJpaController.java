@@ -20,7 +20,7 @@ import javax.persistence.Persistence;
 
 /**
  *
- * @author KevinRoss
+ * @author kalbl
  */
 public class PrecioVentaJpaController implements Serializable {
 
